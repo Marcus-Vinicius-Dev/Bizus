@@ -1,0 +1,8 @@
+WORDPRESS é um CMS (Content Management System - Sistema de Gerenciamento de Conteúdos)
+*******************************************************************************************
+
+no endereço do site em wordpress, acrescentar /wp-admin
+
+
+
+

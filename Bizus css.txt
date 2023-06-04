@@ -1,0 +1,419 @@
+***ESTRUTURA
+
+*{
+	todo html será estilizado
+}
+
+id é #
+class é .
+
+***PADRÃO P/ INICIAR CSS
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html,body{
+	height:100%;
+}
+
+voltar diretório
+class{
+	background-image: url('../imagens/exemplo.jpg');
+}
+
+**CSS EXTERNO:
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html>
+
+**CSS INTERNO
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: linen;
+}
+
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+</style>
+</head>
+<body>
+
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html>
+
+*LAYOUT
+consulte: https://www.w3schools.com/css/css_website_layout.asp
+
+
+*COMENTÁRIOS
+/**/
+
+/*
+Diferença entre id e class?
+id é identity, por exemplo em um ônibus de viagem existem várias poltronas numeradas, elas são as id, só existindo uma poltrona 11 e apenas uma poltrona 35, por exemplo.
+class é a classe, por exemplo o sexo masculino; nesse ônibus provavelmente podem haver vários passageiros do sexo masculino, isso seria classe.
+*/
+
+*SELETORES
+Here, all <p> ELEMENTS on the page will be center-aligned, with a red text color: 
+p {
+  text-align: center;
+  color: red;
+}
+
+The CSS rule below will be applied to the HTML element with id="para1": 
+#para1 {
+  text-align: center;
+  color: red;
+}
+
+In this example all HTML elements with class="center" will be red and center-aligned: 
+.center {
+  text-align: center;
+  color: red;
+}
+
+The CSS rule below will affect every HTML element on the page: 
+* {
+  text-align: center;
+  color: blue;
+}
+
+In this example we have grouped the selectors from the code above: 
+h1, h2, p {
+  text-align: center;
+  color: red;
+}
+
+*CORES
+cofira cores no link https://www.w3schools.com/colors/colors_picker.asp
+<p style="background-color:Tomato;">Lorem ipsum...</p>
+
+*BACKGROUNDS
+background-color
+background-image
+background-repeat
+background-attachment
+background-position
+background
+
+h1 {
+  background-color: green;
+}
+
+div {
+  background-color: lightblue;
+}
+
+p {
+  background-color: yellow;
+}
+
+*BORDERS
+p.dotted {border-style: dotted;}
+p.dashed {border-style: dashed;}
+p.solid {border-style: solid;}
+p.double {border-style: double;}
+p.groove {border-style: groove;}
+p.ridge {border-style: ridge;}
+p.inset {border-style: inset;}
+p.outset {border-style: outset;}
+p.none {border-style: none;}
+p.hidden {border-style: hidden;}
+p.mix {border-style: dotted dashed solid double;}
+
+*MODELO DE CAIXAS
+consulte: https://www.w3schools.com/css/css_boxmodel.asp
+
+*MARGENS
+p {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+*PADDING (PREENCHIMENTO)
+div {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+
+*Height, Width
+The height and width properties may have the following values:
+
+auto - This is default. The browser calculates the height and width
+length - Defines the height/width in px, cm, etc.
+% - Defines the height/width in percent of the containing block
+initial - Sets the height/width to its default value
+inherit - The height/width will be inherited from its parent value
+
+div {
+  height: 100px;
+  width: 500px;
+  background-color: powderblue;
+}
+
+div {
+  height: 200px;
+  width: 50%;
+  background-color: powderblue;
+}
+
+*LINHA DE CONTORNO DA CAIXA (outline)
+p.dotted {outline-style: dotted;}
+p.dashed {outline-style: dashed;}
+p.solid {outline-style: solid;}
+p.double {outline-style: double;}
+p.groove {outline-style: groove;}
+p.ridge {outline-style: ridge;}
+p.inset {outline-style: inset;}
+p.outset {outline-style: outset;}
+
+*LINK
+/* unvisited link */
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+*FLUTUAR
+The float property is used for positioning and formatting content e.g. let an image float left to the text in a container.
+The float property can have one of the following values:
+
+left - The element floats to the left of its container
+right - The element floats to the right of its container
+none - The element does not float (will be displayed just where it occurs in the text). This is default
+inherit - The element inherits the float value of its parent
+In its simplest use, the float property can be used to wrap text around images.
+
+img {
+  float: right;
+}
+
+*DISPLAY
+The display property specifies if/how an element is displayed.
+Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
+
+Examples of block-level elements:
+<div>
+<h1> - <h6>
+<p>
+<form>
+<header>
+<footer>
+<section>
+
+Examples of inline elements:
+<span>
+<a>
+<img>
+
+*SELETOR DESCENDENTE
+There are four different combinators in CSS:
+descendant selector (space)
+child selector (>)
+adjacent sibling selector (+)
+general sibling selector (~)
+
+Child Selector (>)
+The child selector selects all elements that are the children of a specified element.
+The following example selects all <p> elements that are children of a <div> element:
+div > p {
+  background-color: yellow;
+}
+
+*DROPDOWN
+<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+
+<div class="dropdown">
+  <span>Mouse over me</span>
+  <div class="dropdown-content">
+    <p>Hello World!</p>
+  </div>
+</div>
+
+*RESPONSIVIDADE
+consulte: https://www.w3schools.com/css/css_rwd_intro.asp
+
+***DANKICODE
+
+*DICAS RESPONSIVAS
+
+*width, height, margin, padding... definidos em porcentagem, tipo: 10%; 50%; 100%; etc...  ocuparam a tela responsivamente
+
+*width, height, margin, padding... definidos como auto; também são responsivos
+
+*Deixar blocos lado a lado: 
+display: inline-block;
+margin-right: -4px;
+
+*Deixar blocos lado a lado mas com o "esqueminha" de bordas transparentes: 
+box-sizing: border-box;
+border: 5px solid rgba(255, 255, 255, 0);
+*rgba(o a é de opacidade, que no caso é zero, transparente; 1 é opacidade máxima)
+display: inline-block;
+margin-right: -4px;
+
+*Float
+após usar o float no css, lá no html deve haver sempre uma <div class="clear"></div> e no css uma classe .clear{ clear: both;} para desvincular a próxima tag no index.html
+
+*overflow: etc... (para gerenciar o conteúdo dentro do bloco)
+
+*inherit: herdar 
+
+**MANIPULAÇÃO DE OBJETOS
+
+*Editar apenas
+no html escrever <a href="https://google.com.br">limk p/ google</a>
+no css escrever a[href*="google"] {
+	background-color: blue
+} (apenas o links que possuem algum href com o termo google será editado)
+
+a[href~="google"] {
+	background-color: blue
+} (a mesma coisa mas agora no href do html poderá haver espaçamentos entre as palavras digitadas)
+
+a[href^="google"] {
+	background-color: blue
+} (apenas palavras que comecem com google)
+
+a[href$="google"] {
+	background-color: blue
+} (apenas palavras que terminam com google)
+
+**TABELA
+
+no html
+<table>
+	<tr>
+		<td>exemplo</td>
+		<td>exemplo</td>
+		<td>exemplo</td>		
+	</tr>
+</table>
+
+no css
+table {
+	border-collapse: collapse; /*faz com que as bordas da tebela se tornem uma só (se colapsem)*/
+}
+
+*alinhamento vertical
+table {
+	vertical-align: bottom;	
+}
+
+***BACKGROUND
+
+**Fixar menu no topo (ou qualquer outro objeto)
+table {
+	position: fixed;
+}
+
+*Para uma imagem cobrir todo o espaço
+table {
+	background-size: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

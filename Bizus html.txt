@@ -1,0 +1,469 @@
+***************************************************************************************
+HTML - Hyper Text Markup Lenguage (Linguagem de Marcação de Hiper Texto)
+***************************************************************************************
+
+*ESTRUTURA BÁSICA
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<html lang=¨pt-br¨>
+		<meta charset="UTF-8">	
+		<meta name="author" content="Marcus Vinicius Dev">	
+		<title>	Bizus </title>
+		<link rel="stylesheet" href="styles.css"> <!--arquivo .css passa a fazer efeito-->
+		<link rel="icon" type="image/x-icon" href="/images/favicon.ico"> <!--uso de ícone 16x16 px na aba da página-->	
+	</head>
+
+	<body>
+
+	</body>
+	</html>
+
+*ELEMENTOS DO HEAD
+Define the character set used:
+<meta charset="UTF-8">
+
+Define keywords for search engines:
+<meta name="keywords" content="HTML, CSS, JavaScript">
+
+Define a description of your web page:
+<meta name="description" content="Free Web tutorials">
+
+Define the author of a page:
+<meta name="author" content="John Doe">
+
+Refresh document every 30 seconds:
+<meta http-equiv="refresh" content="30">
+
+Setting the viewport to make your website look good on all devices:
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+OUTRAS TAGS DO HEAD:
+Tag	Description
+<head>	Defines information about the document
+<title>	Defines the title of a document
+<base>	Defines a default address or a default target for all links on a page
+<link>	Defines the relationship between a document and an external resource
+<meta>	Defines metadata about an HTML document
+<script> Defines a client-side script
+<style>	Defines style information for a document
+
+*LAYOUT
+Consultar: https://www.w3schools.com/html/html_layout.asp
+<header> - Defines a header for a document or a section
+<nav> - Defines a set of navigation links
+<section> - Defines a section in a document
+<article> - Defines an independent, self-contained content
+<aside> - Defines content aside from the content (like a sidebar)
+<footer> - Defines a footer for a document or a section
+<details> - Defines additional details that the user can open and close on demand
+<summary> - Defines a heading for the <details> element
+
+
+*COMENTÁRIOS
+<!-- Write your comments here -->
+
+*CABEÇALHO
+De <h1> </h1> até <h6> </h6>
+
+*PARÁGRAFO
+<p> </p> (parágrafo abaixo vira outra linha, <span></span> não tem esse efeito, tem que usar <br/>)
+
+*LINK
+<a href="https://www.w3schools.com">This is a link</a>
+<a href="https://www.w3schools.com/" target="_blank">Visit W3Schools!</a>
+The target attribute can have one of the following values:
+"_self" - Default. Opens the document in the same window/tab as it was clicked
+"_blank" - Opens the document in a new window or tab
+"_parent" - Opens the document in the parent frame
+"_top" - Opens the document in the full body of the window
+
+*IMAGEM
+<img src="w3schools.jpg" alt="W3Schools.com" width="104" height="142"> 
+src é a source (fonte)
+alt é alternative (nome alternativo)
+
+*PULA LINHA
+<br/>
+
+*LINHA RISCADA
+<hr>
+
+*MANTÉM A PRÉ-FORMATAÇÃO DO TEXTO 
+<pre> </pre>
+
+*NÍVEL DE BLOCOS DA PÁGINA
+Block-level Elements
+A block-level element always starts on a new line, and the browsers automatically add some space (a margin) before and after the element.
+A block-level element always takes up the full width available (stretches out to the left and right as far as it can).
+Here are the block-level elements in HTML:
+
+<address> <article> <aside> <blockquote> <canvas> <dd> <div> <dl> <dt> <fieldset>
+<figcaption> <figure> <footer> <form> <h1>-<h6> <header> <hr> <li> <main> <nav>
+<noscript> <ol> <p> <pre> <section> <table> <tfoot> <ul> <video>
+
+Inline Elements
+An inline element does not start on a new line.
+An inline element only takes up as much width as necessary.
+
+Here are the inline elements in HTML:
+
+<a> <abbr> <acronym> <b> <bdo> <big> <br/> <button> <cite> <code> <dfn> <em> <i>
+<img> <input> <kbd> <label> <map> <object> <output> <q> <samp> <script>
+<select> <small> <span> <strong> <sub> <sup> <textarea> <time> <tt> <var>
+
+*FORMATAÇÕES
+<b> - Bold text
+<strong> - Important text
+<i> - Italic text
+<em> - Emphasized text
+<mark> - Marked text
+<small> - Smaller text
+<del> - Deleted text
+<ins> - Inserted text
+<sub> - Subscript text
+<sup> - Superscript text
+
+*ESTILOS
+<p style="background-color:tomato;">This is a paragraph.</p>
+Use the style= attribute for styling HTML elements
+background-color= for background color
+color= for text colors
+font-family= for text fonts
+font-size= for text sizes
+text-align= for text alignment
+
+*CORES
+<h1 style="color:Tomato;">Hello World</h1>
+cofira cores no link https://www.w3schools.com/colors/colors_picker.asp
+
+*TABELA
+<table>
+  <tr>
+    <th>Person 1</th>
+    <th>Person 2</th>
+    <th>Person 3</th>
+  </tr>
+  <tr>
+    <td>Emil</td>
+    <td>Tobias</td>
+    <td>Linus</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>14</td>
+    <td>10</td>
+  </tr>
+</table>
+
+Tag	Description
+<table>	Defines a table
+<th>	Defines a header cell in a table
+<tr>	Defines a row in a table
+<td>	Defines a cell in a table
+<caption>	Defines a table caption
+<colgroup>	Specifies a group of one or more columns in a table for formatting
+<col>	Specifies column properties for each column within a <colgroup> element
+<thead>	Groups the header content in a table
+<tbody>	Groups the body content in a table
+<tfoot>	Groups the footer content in a table
+
+Bordas da tabela <!--abaixo deve ser escrito no campo do <head> </head> e dentro de <style> </style>-->
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+
+The following values are allowed:
+
+dotted    
+dashed   
+solid   
+double     
+groove  
+ridge   
+inset    
+outset     
+none     
+hidden
+
+*LISTAS
+ul unordered (bulleted) list
+<ul>
+  <li>Coffee</li>
+  <li>Tea
+    <ul>
+      <li>Black tea</li>
+      <li>Green tea</li>
+    </ul>
+  </li>
+  <li>Milk</li>
+</ul>
+
+Tag	Description
+<ul>	Defines an unordered list
+<ol>	Defines an ordered list
+<li>	Defines a list item
+<dl>	Defines a description list
+<dt>	Defines a term in a description list
+<dd>	Describes the term in a description list
+
+Ordered 
+Type	Description
+type="1"	The list items will be numbered with numbers (default)
+type="A"	The list items will be numbered with uppercase letters
+type="a"	The list items will be numbered with lowercase letters
+type="I"	The list items will be numbered with uppercase roman numbers
+type="i"	The list items will be numbered with lowercase roman numbers
+
+*CLASSES
+The HTML class attribute is used to specify a class for an HTML element.
+Multiple HTML elements can share the same class.
+
+exemplo:
+<head>
+<style>
+.city {
+  background-color: tomato;
+  color: white;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2 class="city">London</h2>
+<p>London is the capital of England.</p>
+
+<h2 class="city">Paris</h2>
+<p>Paris is the capital of France.</p>
+
+<h2 class="city">Tokyo</h2>
+<p>Tokyo is the capital of Japan.</p>
+
+</body>
+
+*ID
+The HTML id attribute is used to specify a unique id for an HTML element.
+You cannot have more than one element with the same id in an HTML document.
+
+exemplo:
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 40px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<h1 id="myHeader">My Header</h1>
+
+</body>
+</html>
+
+**A class name can be used by multiple HTML elements, while an id name must only be used by one HTML element within the page:
+exemplo:
+<style>
+/* Style the element with the id "myHeader" */
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 40px;
+  text-align: center;
+}
+
+/* Style all elements with the class name "city" */
+.city {
+  background-color: tomato;
+  color: white;
+  padding: 10px;
+}
+</style>
+
+<!-- An element with a unique id -->
+<h1 id="myHeader">My Cities</h1>
+
+<!-- Multiple elements with same class -->
+<h2 class="city">London</h2>
+<p>London is the capital of England.</p>
+
+<h2 class="city">Paris</h2>
+<p>Paris is the capital of France.</p>
+
+<h2 class="city">Tokyo</h2>
+<p>Tokyo is the capital of Japan.</p>
+
+*DESIGN RESPONSIVO
+Consultar: https://www.w3schools.com/html/html_responsive.asp
+Exemplo:
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+*CARACTERES, SÍMBLOS, EMOJIS
+consulte: 
+https://www.w3schools.com/html/html_entities.asp
+https://www.w3schools.com/html/html_symbols.asp
+https://www.w3schools.com/html/html_emojis.asp
+
+*FORMULÁRIOS
+exemplo 1
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br/>
+  <input type="text" id="fname" name="fname" value="John"><br/>
+  <label for="lname">Last name:</label><br/>
+  <input type="text" id="lname" name="lname" value="Doe"><br/><br/>
+  <input type="submit" value="Submit">
+</form>
+
+exemplo 2
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br/>
+  <input type="text" id="fname" value="John"><br/><br/>
+  <input type="submit" value="Submit">
+</form>
+
+The HTML <form> Elements
+The HTML <form> element can contain one or more of the following form elements:
+
+<input>
+<label>
+<select>
+<textarea>
+<button>
+<fieldset>
+<legend>
+<datalist>
+<output>
+<option>
+<optgroup>
+
+exemplo3:
+<form action="/action_page.php">
+  <input list="browsers">
+  <datalist id="browsers">
+    <option value="Internet Explorer">
+    <option value="Firefox">
+    <option value="Chrome">
+    <option value="Opera">
+    <option value="Safari">
+  </datalist>
+</form>
+
+*INPUT
+<input type="button">
+<input type="checkbox">
+<input type="color">
+<input type="date">
+<input type="datetime-local">
+<input type="email">
+<input type="file">
+<input type="hidden">
+<input type="image">
+<input type="month">
+<input type="number">
+<input type="password">
+<input type="radio">
+<input type="range">
+<input type="reset">
+<input type="search">
+<input type="submit">
+<input type="tel">
+<input type="text">
+<input type="time">
+<input type="url">
+<input type="week">
+
+placeholder='' deixa algo escrito na caixa texto até o usuário começar a escrever algo
+
+exemplo: 
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br/>
+  <input type="text" id="fname" name="fname" value="John"><br/>
+  <label for="lname">Last name:</label><br/>
+  <input type="text" id="lname" name="lname" value="Doe"><br/><br/>
+  <input type="submit" value="Submit">
+  <input type="reset">
+</form>
+
+*MÍDIA
+Vídeo:
+<video width="320" height="240" controls>
+  <source src="movie.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+
+Áudio:
+<audio controls autoplay muted>
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+Plug-ins:
+<object width="100%" height="500px" data="snippet.html"></object>
+
+<object data="audi.jpeg"></object>
+
+<embed src="audi.jpeg">
+
+*TODAS AS TAGS
+Consulte: https://www.w3schools.com/tags/default.asp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

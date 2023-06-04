@@ -1,0 +1,871 @@
+*COMENTÁRIOS
+// uma linha
+/**/ várias linhas
+
+*SÍMBOLOS
+== é igual
+=== idêntico (valor e tipo)
+!= diferente
+!== não idêntico
+//true && true = true (operador e)
+//true || true || false = true (operador ou)
+// ! (operador negação)
+
+
+*TESTES
+comece com alert('teste') p/ testar se .html se comunica com o js
+
+*JAVASCRIPT EXTERNO
+dentro do projeto:
+<script type="text/javascript" src="js/meu-arquivo.js"></script>
+de uma página da internet
+<script
+  type="text/javascript"
+  src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+*JAVASCRIPT INTERNO (inline)
+<script type="text/javascript">
+  alert('Olá mundo!');
+</script>
+
+*MANIPULAÇÃO
+no html:
+<p id="demo"></p>
+no js:
+document.getElementById("demo").innerHTML = 5 + 6;
+
+no html
+<body>
+<script>
+document.write(5 + 6);
+</script>
+</body>
+
+*ALTURA E LARGURA DA PÁGINA
+os 3 comandos abaixo mostram a altura e largura da tela
+var altura = window.innerHeight
+var largura = window.innerWidth
+console.log(altura, largura) 
+
+*VARIAVEIS
+var exemplo = string, number, boolean, 
+
+var nome = prompt('digite o seu nome: ')
+document.write('<h1>Olá ' + nome + ', tudo bem? Você possui ' + idade + ' anos</h1>')
+
+*ESCREVER NA TELA
+alert(numeroFracionado) //abre um diálogo
+document.write(texto) //objeto que representa o dom
+document.write('<hr />') //linha tracejada
+document.write('<br />') //quebra uma linha
+console.log(numeroInteiro) //usado no processo de debug
+
+*IF ELSE
+if (2 == '2') {
+                document.write('verdadeiro')
+} else {
+                document.write('falso')
+}
+
+**CALCULAR NOTA
+        <script>
+
+           var nota = prompt('Digite a nota do aluno: ')
+           var media = 7
+
+            if (nota >= media) {
+                document.write('Aprovado')
+            } else {
+                document.write('Reprovado')
+            }
+        </script>
+
+**TESTES LÓGICO
+        <script>
+
+            if(2 == 2 && 3 >= 1 && 'a' == 'b'){
+                document.write('Verdadeiro')
+            } else {
+                document.write('Falso')
+
+            }
+            
+            if(2 == 2 || 3 >= 1 || 'a' == 'b'){
+                document.write('Verdadeiro')
+            } else {
+                document.write('Falso')
+
+            }
+            
+            if(!(4 == 2 )){
+                document.write('Verdadeiro')
+            } else {
+                document.write('Falso')
+
+            }
+            
+            //Melhoria no desafio notas de alunos
+            var nota = prompt('Digite a nota do aluno: ')
+            var faltas = prompt('Digite a quantidade de faltas do aluno: ')
+
+            var media = 7
+            var faltas_maximas = 15
+
+            if (nota >= media && faltas <= faltas_maximas) {
+                document.write('Aprovado')
+            } else {
+                document.write('Reprovado')
+            }
+            */
+
+            // operadores ternários
+            // var resultado = <condicao> ? <verdadeiro> : <falso>
+            var nota = prompt('Digite a nota do aluno: ')
+            var faltas = prompt('Digite a quantidade de faltas do aluno: ')
+
+            var media = 7
+            var faltas_maximas = 15
+
+            var resultado = (nota >= media && faltas <= faltas_maximas) ? 'Aprovado' : 'Reprovado'
+            document.write(resultado)
+
+        </script>
+
+*SWITCH
+        <script>
+            //formato geral
+            /*
+            switch (parametro) {
+
+                case 1:
+                //se parametro === 1
+                break
+                
+                case 2:
+                //se parametro === 2
+                break
+
+                default:
+                //se parametro não encontrado
+            }
+            */
+            var parametro = 2
+
+            switch (parametro) {
+
+                case 1:
+                document.write('Parametro 1')
+                break
+                
+                case 2:
+                document.write('Parametro 2')
+                break
+
+                default:
+                document.write('Default')
+            }
+
+        </script>
+
+
+*CONVERSOR DE VALORES
+        <script>
+            var variavel1 = prompt('Digite algum número')
+            var variavel2 = prompt('Digite outro número')
+
+            variavel1 = parseInt(variavel1) //parseInt(exemplo) converte o objeto exemplo em inteiro 
+            variavel2 = parseFloat(variavel2)           
+
+            document.write(variavel1 + variavel2)
+
+            //para transformar um objeto de valor qualquer em string, é só usar, por exemplo: document.write(variavel1.toString() + variavel2.toString())
+    
+        </script>
+
+*IMC
+        <script>
+            var nome = prompt('Digite seu nome: ')
+            var altura = prompt('Digite sua altura em centímetros: ')
+            var peso = prompt('Digite seu peso: ')
+
+            altura = parseFloat(altura)
+            peso = parseFloat(peso)
+            centimetro = altura/100
+            imc = peso/(centimetro*centimetro)
+
+            if (imc < 16) {
+                classificacao = 'Baixo peso muito grave'
+            } else if (imc >= 16 && imc <= 16.99) {
+                classificacao = 'Baixo peso grave '
+            } else if(imc >= 17 && imc <= 18.49) {
+                classificacao = 'Baixo peso '
+            } else if(imc >= 18.50 && imc <= 24.99) {
+                classificacao = 'Peso normal '
+            } else if(imc >= 25 && imc <= 29.99) {
+                classificacao = 'Obesidade grau I '
+            } else if(imc >= 30 && imc <= 34.99) {
+                classificacao = 'Obesidade grau II '
+            } else if(imc >= 35 && imc <= 39.99) {'Obesidade grau III '
+            } else { 
+                classificacao = 'Obesidade grau III '
+            } '</ br>'
+
+            document.write(nome + ' possui índice de massa corporal igual a ' + imc + ', sendo classificado como: ' + classificacao)
+
+        </script>
+
+*MOUSE
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript</title>
+        <script>
+
+        function acao1() {
+            alert('Evento 1')
+        }
+        function acao2() {
+            alert('Evento 2')
+        }
+        function acao3() {
+            alert('Evento 3')
+        }
+        function acao4() {
+            alert('Evento 4')
+        }
+        function acao5() {
+            alert('Evento 5')
+        }
+        
+        </script>
+    </head>
+    <body>
+        <div onclick="acao1()" style="background: #ccc; height: 150px; width: 150px"></div><br />
+        <div ondblclick="acao2()" style="background: #ccc; height: 150px; width: 150px"></div><br />
+        <div onmouseup="acao3()" style="background: #ccc; height: 150px; width: 150px"></div><br />
+        <div onmouseover="acao4()" style="background: #ccc; height: 150px; width: 150px"></div><br />
+        <div onmouseout="acao5()" style="background: #ccc; height: 150px; width: 150px"></div><br />
+    </body>
+</html>
+
+*TECLADO
+
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript</title>
+        <script>
+
+            function acao1() {
+                alert('evento1')
+            }
+        
+        </script>
+    </head>
+    <body>
+
+        <input onkeyup="acao1()" type="text" />
+        <!-- outros eventos: onkeyup, onkeydown, onkeypress -->
+    </body>
+
+*JANELA
+<body onscroll="console.log('evento1')">
+
+        <div style="height: 3000px; width: 125px; background: #ccc;"></div>
+
+</body>
+
+*FORMULÁRIO
+    <body>
+
+        <input onfocus="console.log('teste')" type="text">
+        <!-- onfocus="console.log('teste')" dispara o evento quando a caixa de texto for clicada 
+        onblur="console.log('teste')" evento quando é desclicado (clicado fora da caixa) -->>
+    </body>
+
+
+*DOM INPUT 1
+    <body>
+
+        <input 
+            type="text"
+            placeholder="Digite seu nome"
+            id="nome_usuario"
+            class="campo_texto"
+            name="nome"
+        >
+        <script>
+
+            //console.log(document.getElementById('nome_usuario'))
+            //console.log(document.getElementsByTagName('input'))
+            //console.log(document.getElementsByClassName('campo_texto'))
+            console.log(document.getElementsByName('nome'))
+        </script>
+
+    </body>
+
+*DOM INPUT 2
+<script>
+
+            function distribuiCaracter() {
+                //selecionar o valor digitado o .value ao final "pega" o valor associado ao id
+                var caracter = document.getElementById('entrada').value
+                document.getElementById('entrada').value = '' //inicialmente o campo começa vazio .value = ''
+
+                //limpar espaços em branco nas extremidades da string
+                caracter.trim()
+
+                switch(caracter) { //teste de caracter
+                case '0': //os valores recuperados de elementos html são incorporados como do tipo string por isso '0'
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                //adicionar o caracter no campo referente a números
+                    document.getElementById('apenas_numeros').value += caracter
+                    break;
+                default:
+                //adicionar o caracter no campo referente a letras
+                document.getElementById('apenas_letras').value += caracter
+            }
+
+            }
+
+            
+        </script>
+    </head>
+    <body>
+        <input 
+        type="text" 
+        placeholder="Digite um caracter aqui" 
+        onkeyup="distribuiCaracter()"
+        id="entrada"
+        >
+
+        <hr />
+        <span>Letras:</span>
+        <input type="text" disabled="disabled" id="apenas_letras"/>
+
+        <span>Números:</span>
+        <input type="text" disabled="disabled" id="apenas_numeros"/>
+
+    </body>
+
+
+*DOM ESTILO
+        <script>
+
+            function modificaEstilo(corDeFundo, l, a) {
+
+                document.getElementById('quadrado').style.backgroundColor = corDeFundo
+                document.getElementById('quadrado').style.width = l
+                document.getElementById('quadrado').style.height = a
+            }
+            
+        </script>
+    </head>
+    <body>
+        
+        <h3>Manipulando estilo</h3>
+
+        <button type="button" onclick="modificaEstilo('#FF0000', '200px')">vermelho</button>
+        <button type="button" onclick="modificaEstilo('#00FF00', '150px', '20px')">verde</button>
+        <button type="button" onclick="modificaEstilo('#0000FF', '150px', '200px')">azul</button>
+        <hr />
+        <div style="border: solid 1px #000; width: 100px; height: 100px" id="quadrado"></div>
+        
+    </body>
+
+*DOM CLASSES E ELEMENTOS
+        <style>
+            .estilo1 {
+                background: #FF0000;
+                color: #FFF;
+            }
+            .estilo2 {
+                width: 400px;
+                height: 50px;
+                background-color: #FF0000;
+                text-align: center;
+                font-size: 25px;
+                color: #FFF;
+                padding: 25px;
+            }
+        </style>  
+
+        <script>
+            function modificaClasse() {
+                document.getElementById('mensagem').className = 'estilo2'
+            }
+
+        </script>
+
+    </head>
+    <body>
+        
+        <div id="mensagem" class="estilo1">Mdificando a classe do elemento</div>
+        <hr />
+        <button type="button" onclick="modificaClasse()">Aplicar classe</button>
+        
+    </body>
+
+*ARRAY BÁSICO
+ <script>
+           /*
+            var lista_frutas = new Array()
+
+            lista_frutas[1] = 'Banana'
+            lista_frutas[2] = 'Maçã'
+            lista_frutas['x'] = 'Morango'
+            lista_frutas[4] = 'Uva'
+            */
+
+            var lista_frutas = ['Banana', 'Maçã', 'Morango', 'Uva'] //este Array é uma forma mais enxuta de escrever o mesmo Array comentado acima
+
+            console.log(lista_frutas)
+
+        </script>
+
+*ARRAY MULTIDIMENSIONAL
+
+        <meta charset="utf-8">
+        <title>JavaScript</title>
+        <script>
+           
+           var lista_coisas = Array()
+
+           lista_coisas['frutas'] = Array('Banana', 'Maçã', 'Morango', 'Uva')
+
+           lista_coisas['pessoas'] = ['João', 'José', 'Maria']
+           
+        </script>
+    </head>
+
+
+*ARRAY INCLUIR E EXCLUIR
+<script>
+           var lista_coisas = Array()
+
+           lista_frutas['frutas'] = Array()
+           lista_frutas['pessoas' ]= []
+
+           //inclui elemento no final do array
+           //lista_frutas.push('Uva')
+
+           //inclui elemento no início do array
+           //lista_frutas.unshift('Uva')
+
+           //exclui elemento no final do array
+           //lista_frutas.pop()
+
+           //exclui elemento no início do array
+           //lista_frutas.shift()
+           
+        </script>
+
+*ARRAY PESQUISA
+
+        <script>
+           
+           var lista_frutas = Array()
+
+           lista_frutas[0] = 'Banana'
+           lista_frutas[1] = 'Maçã'
+           lista_frutas[2] = 'Morango'
+           lista_frutas[3] = 'Uva'
+
+           var auxiliar = lista_frutas.indexOf('Banana')
+
+           if (auxiliar === -1) { //indexOf retorna o índice que se encontra o Array, se não existir o elemento de pesquisa, o retorno será -1
+            console.log('elemento não existe')
+           } else {
+            console.log('elemento existe e está na posição ' + auxiliar)
+           }
+
+           
+        </script>
+
+*ARRAY ORDENAÇÃO
+
+        <script>
+           /*
+           var lista_frutas = Array()
+
+           lista_frutas[0] = 'Maçã'
+           lista_frutas[1] = 'Uva'
+           lista_frutas[2] = 'Banana'
+           lista_frutas[3] = 'Morango'
+
+           console.log(lista_frutas.sort) //.sort ordena os elementos em ordem alfabética
+           */
+
+           var lista_frutas = Array()
+
+           lista_frutas[0] = 12
+           lista_frutas[1] = 40
+           lista_frutas[2] = 3
+           lista_frutas[3] = 7
+           lista_frutas[3] = 19
+           lista_frutas[3] = 1
+
+           console.log(lista_frutas.sort(ordenaNumeros)) //.sort ordena os elementos em ordem alfabética e não numérica, por isso foi criada a function abaixo ordenaNumeros
+
+           function ordenaNumeros(a, b) { 
+            return a - b
+            // valores < 0 = a é ordenado antes de b
+            // valores > 0 = b é ordenado antes de a
+            // valores == a ordenado é mantida
+           }
+           
+        </script>
+
+*WHILE
+
+        <script>
+
+            /*
+            var x = 1
+
+            console.log('inicio <br />')
+            
+            while(x <= 10) {
+                document.write(x + '<br />')
+
+                if (x === 9) {
+                    break
+                }
+
+                x ++ //x ++ p/ a aplicação não entrar em um looping
+            }
+
+            console.log('fim <br />')
+            */
+
+            var x = 1
+
+            document.write('inicio <br />')
+            
+            while(x <= 10) {
+
+                x ++ //x ++ foi mudado pra cá p/ não entrar em um looping
+
+                if (x === 5) {
+                    continue //vai pular o 5
+                }
+
+                document.write(x + '<br />')
+                
+            }
+
+            document.write('fim <br />')
+
+        </script>
+
+*DO WHILE
+
+        <script>
+
+            var x = 11 
+            
+            do {
+                document.write(x + '<br /')
+            } while(x <= 10)
+
+        </script>
+
+*FOR
+
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript</title>
+        <script>
+            /*
+            Estrutura do for
+            for(variavel; condicao; controle) {
+                
+            }
+            */
+            for(var x = 10; x >= 0; x--) { //inicia com variavel = 10, verifica se var é >= 0, subtrai 1 e assim sucessivamente até -1
+               document.write(x + '<br />') 
+            }
+           
+        </script>
+
+*LAÇOS 1
+
+        <script>
+            
+           var lista_frutas = Array()
+           
+           lista_frutas[0] = 'Banana'
+           lista_frutas[1] = 'Maçã'
+           lista_frutas[2] = 'Morango'
+           lista_frutas[3] = 'Uva'
+
+           console.log(lista_frutas.length)
+
+           var y = 0
+
+           while(y < lista_frutas.length) {
+            document.write(lista_frutas[y] + '<br / >')
+            y++ 
+           }
+           
+        </script>
+
+*LAÇOS 2
+
+        <script>
+            
+            for(var y = 1; y <= 10; y++){
+
+                for(var x = 1; x <= 10; x++) {
+                document.write(y + ' x ' + x + ' = ' + (y * x) + '<br />')
+                }
+
+                document.write('<hr />')
+            }
+                      
+        </script>
+
+*FOR IN
+
+        <script>
+            /*
+            var listaConvidados = ['Jorge', 'Jamilton', 'José', 'Ana', 'Maria']
+
+            console.log(listaConvidados)
+
+            for(var x in listaConvidados) {//variável x em listaConvidados
+
+                console.log('Índice ' + x + ' listaConvidados[x]')
+                
+            }
+            */
+
+            var listaConvidados = Array()
+
+            listaConvidados['a'] = 'Jorge'
+            listaConvidados[10] = 'Jamilton'
+            listaConvidados['zebra'] = 'José'
+            listaConvidados[-1] = 'Ana'
+            listaConvidados[true] = 'Maria'
+
+            console.log(listaConvidados)
+
+            for(var x in listaConvidados) {//variável x em listaConvidados
+
+                console.log('Índice ' + x + ' listaConvidados[x]')
+
+            }
+
+        </script>
+
+*FOR EACH
+
+        <script>
+            
+            var listaFuncionarios = ['Viviane', 'Rosângela', 'Miguel', 'Lucas', 'Fernanda']
+
+            var f = function(valor, indice) {
+                console.log(valor, indice)
+            }
+
+            listaFuncionarios.forEach(f) 
+
+            /*
+            console.log(listaFuncionarios)
+            document.write(listaFuncionarios[3])
+
+            listaFuncionarios.forEach(function(valor, indice, array) {
+
+            console.log('índice: ' + indice + ' | valor: ' + valor)
+
+            if(valor == 'Lucas') {
+                array[indice] = 'Um novo valor'
+            }
+            
+            })
+
+            console.log(listaFuncionarios)
+            document.write('<br />' listaFuncionarios[3])
+            */
+
+        </script>
+
+*PARAMETROS
+
+        <script>
+            
+            function soma() {
+                var resultado = 0
+                for(var i in arguments) {// arguments retorna o array
+                    resultado += arguments[i] //faz a soma dos arrays 
+                }
+
+                return resultado
+
+            }
+
+            console.log(soma(7, 5, 3.2)) //arrays
+
+        </script>
+
+
+*TRATAMENTO DE ERROS
+
+        <script>          
+            //netflix
+            var video = Array()
+
+            video[1] = Array() //criação do endereço do vídeo no servidor
+            video[1]['nome'] = 'Fullmetal Alchemist'
+            video[1]['categoria'] = 'Anime'
+
+            function getVideo(video) { // função para recuperar esse vídeo do servidor (é qaui que pode ocorrer algum erro durante o acesso do usuário)
+                try {
+                    console.log(video[0]['nome'])
+                    
+                } catch(erro) {
+                    tratarErro(erro)
+                    console.log('Agora sim podemos tratar esse erro')
+                    throw new Error('Houve um erro mas não se preocupe, estamos trabalhando nisso agora!!!')
+
+                } finally {
+                console.log('Sempre passa por aqui (try / catch)') 
+                }
+
+                console.log('A aplicação não morreu')
+            }
+
+            function tratarErro(e) {
+                console.log(e)
+            }
+
+            getVideo(video)
+
+        </script>
+
+*BOM WINDOW
+
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript</title>
+        <script>       
+        
+            var janela
+           
+           function abrirPopUp() {
+            janela = window.open('http://www.google.com','nova_janela', 'width=200, height=100') //o google é apenas um exemplo
+           }
+           function fecharPopUp() {
+            janela.close()
+           }
+
+        </script>
+
+    </head>
+    <body>
+
+        <button onclick="abrirPopUp()">Abrir Janela</button>
+        <button onclick="fecharPopUp()">Fechar Janela</button>
+        <button onclick="window.print()">Imprimir página</button>
+        
+    </body>
+
+*BOM SCREEN
+
+        <script>       
+        
+            var altura = window.screen.availHeight
+            var largura = window.screen.availWidth
+
+            // document.write('A altura do navegador é ' + altura + '<br />')
+            // document.write('A largura do navegador é ' + largura)
+
+            if(largura < 500) {
+                document.write('lógica para impressão do menu versão mobile')
+            } else {
+                document.write('lógica para impressão do menu versão web')
+            }
+
+        </script>
+
+*BOM LOCATION
+
+    <body>
+
+        <button onclick="window.location.href='http://www.google.com' ">Acessar Google</button>
+        <button onclick="window.location.href='http://www.faus.com' ">Acessar Faus</button>
+        
+    </body>
+
+*BOM TIMING
+
+        <script>       
+        
+            //setTimeout(function() {document.write('Teste')}, 2000) // 2000 milissegundos
+
+            //window.location.reload faz um refresh na página, atualizar
+
+            var i = 5
+
+            var x = setInterval(function() {
+                document.write( i ); i-- 
+                if(i === 0) {
+                    clearInterval(x) //encerra a contagem regressiva setInterval
+                }
+            }, 1000) // 1000 milissegundos
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

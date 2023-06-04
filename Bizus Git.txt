@@ -1,0 +1,316 @@
+**********************************************************************************
+GIT = gíria britânica p/ "cabeça dura, teimoso..."
+**********************************************************************************
+Commit = despacho, envio
+diff = diferencial
+branch = ramo
+checkout = conferir
+merge = mesclar, fundir
+fetch = buscar, trazer
+issue = emitir, publicar, exibir
+
+Abrir Visual Studio Code, aba Arquivo, Abrir Pasta, escolher onde irá gravar o repositório (pode criar uma pasta dentro do endereço da memória do pc), 
+seleciona a pasta que aparecerá na tela do VSCode = (Criar um repositório a ser incluído no Git) Aba source control, Initialize Repository = (Mostrar o repositório .git) 
+ctrl + shift + ' = (Abrir terminal no VSCode)
+ctrl + l = (limpar o terminal)
+git status = (status do projeto/arquivo no Git)
+git init = (faz com que o projeto/arquivo comece a ser monitorado pelo Git)
+dir = (mostra os arquivos do projeto)
+pwd = (mostra em qual projeto o terminal está agindo)
+ls = (mostra arquivos do branch que está)
+ls -la = (mostra arquivos inclusive ocultos)
+cd nomedodiretório = (vai para o diretório)
+cd.. = (volta um diretório)
+
+.gitignore = (este arquivo ignora o monitoramento de arquivos pelo Git)
+"escreva na linha do arquivo .gitignore o nome/extensão do arquivo a ser ignorado pelo Git"
+"se ao invés de digitar o nome do arquivo, digitar *extensão, todos os arquivos com essa extensão serão ignorados"
+"ex1:. dentro de .ignore digite *.mp3 e salve ctrl + s (todo arquivo .mp3 deixará de ser monitorado pelo Git)"
+"para excluir pasta, digite **nomedapasta (pasta é diferente de excluir .arquivo)"
+git config user.name "Marcus-Vinicius-Dev" = (Toda vez que criar um repositório)
+git config user.email "marcus.vini.dev@gmail.com" = (Toda vez que criar um repositório)
+git config --global user.email "marcus.vini.dev@gmail.com" = (Para fazer uma configuração global e única, basta fazer este comando)
+git init = (dá início ao monitoramento do projeto mas não dos arquivos dentro do projeto)
+git add nomedoarquivo = (dá início ao monitoramento de arquivos, ou após ser modificado)
+git add . = (adiciona todos os arquivos do projeto no Git)
+git commit -m "escreva uma mensagem sobre a etapa do commit, ex:. primeiro commit"
+git log = (acesso a todos os commits realizados)
+git log -2 = (vê os últimos dois commits) 
+git log -3 = (os três últimos, etc...)
+git log --oneline = (todos os commits de forma resumida)
+git log --before="2022-10-05" = (commits anteriores a 05/10)
+git log --after="2022-10-05" = (commits posteriores a 05/10)
+git log --author="nome do autor do commit" = (commits do autor)
+git checkout códigodocommit = ("viagem no tempo" antes de checkout, dá um git log --oneline e pega o código do commit p/ usar no git checkout e volte p/ o arquivo quando tinha aquele determinado status)
+git checkout master = (retorna ao commit mais recente)
+git mv nomedoarquivo novonomedoarquivo = (renomeia o arquivo p/ outro nome de arquivo)
+git rm nomedoarquivo = (remove o arquivo do Git)
+
+git diff --staged = (mostra todas as alterações do arquivo "bom usar antes de commitar")
+"outro uso do git diff é digitar git log --oneline, copiar o código do commit e colar na frente do comando git diff códigocolado, isso mostrará as mudanças feitas entre o commit master e o copiado e colado"
+"git diff código1..código2 = (mudanças feitas do código1 commit mais antigo ao mais recente escolhido código2)"
+git commit --amend -m "nova mensagem" = (correção do último commit, escreve outra mensagem no lugar da última mensagem e acrescenta novas modificações caso tenham sido feitas)
+git restore --staged nomedoarquivo = (o arquivo volta ao estado anterior, tipo deixa de ser add, ou commited, etc...)
+git reset HEAD --hard (reseta todos os arquivos modificados para o último commit)
+git reset HEAD^ --hard (exclui o último commit para o commit anterior)
+git branch = (mostra quais branchs há no projeto)
+git branch nomedobranch = (cria um novo branch com nome nomedobranch)
+git checkout nomedobranch = (mudar do branch master p/ o branch nomedobranch)
+git branch -d nomedobranch = (deleta o branch com nome nomedobranch, as vezes pede outro comando do tipo: "git branch -D nomedobranch" p/ certificar que vc deseja mesmo deletar o branch)
+git merge nomedobranch = (junta o nomedobranch ao branch master)
+"ao realizar um merge com o branch criado ao branch master, na sequência é possível excluir o branch criado/merged sem a necessidade do comando com D maiúsculo"
+git checkout -b nomedobranch = (cria o branch e já inicia o trabalho nele)
+git clone endereço/arquivo/ = (baixa uma cópia do projeto em outro nó, na máquina de um colaborador)
+git push = (envia as alterações do colaborador p/ o git remoto, tipo upload)
+git fetch = (o colabordor baixa os arquivos criados por outros sem realizar o merge)
+git rebase = (os arquivos baixados pelo fetch agora fazem parte do projeto do colaborador)
+git pull = (git fetch + git rebase juntos)
+git init --bare = (cria um repositório git na máquina do usuário, um arquivo centralizador)
+git tag v1.0 = (ao terminar a primeira fase do softwear, ele recebe a tag de versão 1.0, futuramente após novos commits ele pode receber uma tag v1.5 ou v2.0, etc...)
+git push origin v1.0 = (envia para todos os colabores a mensagem de que o projeto encontra-se na versão 1.0)
+"se os demais colaboradores digitarem <git pull> o status v1.0 aparecerá para eles"
+git tag = (verifica qual a tag atual do projeto)
+git checkout tag v1.0 = (sair do branch master para a tag "lembre que não se pode commitar a partir de uma tag, deve-se estar em um branch para tal")
+git switch -c nomedobranchdatag = (cria um branch com nome nomedobranchdatag após estarmos de checkout na tag)
+
+**********************************************************************************
+GITHUB
+**********************************************************************************
+Criar Repositório
+*No Github internet->repositories->new->Repository name->Description->Public or Private->Create repository 
+*No VSCode->Open Folder->criar pasta com mesmo Repository name->criar file README.md e insira no file #repositories->git init, name, email, etc...
+*No Github internet->repository->aba <>code->caixa2->copia a linha "git remote add origin https://github.com/Marcus-Vinicius-Dev/nomedorepositório.git"
+*no VSCode->digite o código copiado e dê enter->git push -u origin master->preencher o que se pede
+*Pronto->o repositório feito no VSCode aparecerá no Github
+git remote -v = (verifica se há algum repositório remoto registrado)
+git config credential.helper store = (não precisa mais ficar autenticando o git a cada pull)
+git config --global --unset credential.helper = (remove o autenticador global)
+git config --unset credential.helper = (remove o autenticador local)
+
+Adicionar colaborador
+*No Github internet->acessar o repositório->aba settings->manage acess-> invite a collaborator->procurar por nome de usuário, nome completo ou email, pronto, agora é só clonar o projeto e realizar push's e pull's
+
+git checkout -- . = (caso tenha escrito algo de errado em algum arquivo e tenha bugado algo, este comando voltara TODOS os arquivos modificados ao estado anterior "este cmd deve ser feito antes do git add")
+git checkout -- nomedoarquivo = (retorna apenas o arquivo nomedoarquivo ao estado anterior "este cmd deve ser feito antes do git add")
+git checkout HEAD -- . = (retorna todos os arquivos ao estado anterior "este cmd deve ser feito APÓS o git add")
+git checkout HEAD -- nomedoarquivo = (retorna apenas o arquivo nomedoarquivo ao estado anterior "este cmd deve ser feito APÓS o git add")
+git revert IDdocommit = (caso tenha feito o commit de algum arquivo com erro, este cmd pode reverter este commit)
+git reset HEAD~1 = (exclui o histórico do último commit realizado e retorna ao estado do projeto sem esse commit)
+git reset HEAD~2 = (exclui o histórico dos dois últimos commits realizados e retorna ao estado do projeto sem esses commits)
+git reset HEAD~2 = (exclui 3 últimos commits)
+etc...
+
+git push -u origin master (manda os arquivos p/ o repositório remoto)
+git pull origin master = (puxar os arquivos do repositório remoto)
+"após o git pull origin master, utilizar os comandos: ctrl+o, enter, ctrl+x"
+git remote set-url origin endereçourldorepositórionogithub = (autentica que este repositório faça alterações)
+git branch acerto “hash” = (corrige o problema Detached Head, ou seja: ter modificado um commit anterior sem criar um branch)
+
+Issue = (uma tarefa a ser realizada)
+"Ao resolver issue: ao commitar escreva no título do commit algo do tipo "corrigindo erro tal. Closes #1" (este #1 representa o issue de número 1) depois do commit, dê push no clone e o issue do remoto encerrará"
+
+Pull Request = (avisar ao repositório que vc fez alterações a serem analisadas e possivelmente mescladas)
+"é enviado o projeto do meu repositório para o remoto"
+
+git fetch origin pull/3/head:correcao_i2 = ("fetch origin" porque vai baixar do repositório, "pull/3/" de um pull request com id #3, "head:correcao_i2" criação de um branch na minha máquina cahamado correcao_i2 (i2 de issue 2))
+
+Workflow do Github
+"ao receber um pull de um colaborador, devemos criar um branch para testar esse pull (git fetch origin pull/3/head:correcao_i2)"
+
+Criar um site estático no Github
+No Github: Repository-> New Repository-> criar um repositório nomedeusuário.github.io
+*No VSCode: open folder->crie um repositório na sua máquina com mesmo nome nomedeusuário.github.io->open folder->git init-> 
+->git config user.name "Marcus-Vinicius-Dev"->git config user.email "marcus.vini.dev@gmail.com"
+No Github: na aba code do projeto, copiar a linha "git remote add origin https://github.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev.github.io.git"
+*No VSCode: colar a linha "git remote add origin https://github.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev.github.io.git"
+->git remote -v (confere o repositório remoto (fetch) e (push))
+
+Abrir um arquivo dentro do Github
+python -m http.server 8000
+Abrir uma aba no browser e digitar o endereço: localhost:8000
+
+**********************************************************************************
+TAGS MARKDOWN
+**********************************************************************************
+arquivos do tipo nome.md
+
+# = (inicia um título do tipo h1)
+## = (h2)
+### = (h3)
+etc...
+
+underline antes e depois do texto: _exemplo_ = (Itálico)
+*exemplo8 = (itálico de novo)
+**exemplo** = (negrito)
+[texto do link que vai aparecer](https://www.endereçodolink.com "aqui vai um texto quando passa o mouse") = (criar link que aparece texto quando passa o mouse por cima)
+<https://www.endereçodolink.com> = (o próprio texto do link é o link)
+<email@gmail.com.br> = (link de email)
+>nome qualquer = (citação)
+Lista com subitens (abixo)
+* ítem 1
+	* subitem 1
+	* subitem 2
+* ítem 2
+	* subitem 3
+	* subitem 4
+![nome qualquer](imagem.png "title se quiser") = (mostra uma imagem do repositório)
+![nome qualquer](https://www.endereçodolink.com) = (mostra uma imagem da internet)
+
+*Tabela 1
+Produto | Preço
+--------|------
+Playstattion 4 | R$ 1800,00
+Xbox One | R$ 1790,00
+Nintendo Wii | R$ 2130,00
+Atari 2600 | R$ 199,00
+Fósforo | R$ 0,30
+(Acima será gerada uma tabela com Título na primeira linha, e ítens nas demais linhas)
+
+*Tabela 2
+Produto | Preço
+--------|------: (os dois pontos ao final dos traços faz com que na coluna da direita as palavras se alinhem à direita)
+Playstattion 4 | R$ 1800,00
+Xbox One | R$ 1790,00
+Nintendo Wii | R$ 2130,00
+Atari 2600 | R$ 199,00
+Fósforo | R$ 0,30
+(dois pontos antes de | "--:|--" centraliza as palvras da coluna da direita)
+(dois pontos duas vezes antes de | ":--:|--" centraliza as duas colunas)
+
+Mostrar em linguagem de programação
+```python
+def inverte(texto):
+	return texto[::-1]
+	etc...
+```
+(mostra texto colorido em código de programação)
+
+```js
+function escrever_nome(nome){
+	console.log(nome);
+}
+	etc...
+```
+(mostra texto colorido em código de programação)
+
+Lista de tarefas
+- [ ] Acordar
+- [ ] escovar os dentes
+- [x] banho (com x aparecerá marcado como feito)
+- [ ] ~~café da manhã~~ (x aparecerá marcado marcado como feito e ~~riscado~~) 
+
+separador de conteúdo
+---
+
+Referência
+[nomedavariavel1]:conteudo.png = (cria uma variavel com conteúdo conteudo.png)
+[nomedavariavel2]:conteudo.jpg = (cria uma variavel com conteúdo conteudo.jpg)
+[nomedavariavelimagem]:https://www.endereçodaimagem.com = (cria uma variavel com conteúdo https://www.endereçodolink.com)
+etc...
+[textoqueaparecerá][nomedavariavel1]
+[textoqueaparecerá][nomedavariavel2]
+![textoqueaparecerá][nomedavariavelimagem]
+etc..
+
+**********************************************************************************
+README.md
+**********************************************************************************
+# Nome do Projeto
+
+> resumo curto sobre o que o projeto faz (duas linhas no máximo)
+
+Um ou dois parágrafos sobre o projeto e o que ele faz
+
+![imagem.png] colocar uma imagem
+
+## Instalação 
+
+MacOS X e Linux:
+
+```sh (sh é a linguagem shell)
+npm install --save
+```
+Windows:
+```sh 
+nedit autoexec.bat
+```
+## Exemplo de uso
+
+Texto com orientações de como utilizar o programa
+
+## Ambiente de Desenvolvimento 
+
+Descrever como instalar: quais plug ins? quais softwares?? quais configurações
+
+## Histórico de atualizações 
+
+0.2.0 CHANGE: Atualização dos docs tal... (código foi ou não alterado)
+
+0.1.1 CHANGE: removida a função tal...
+      ADD: Adicionada a função tal...
+etc...
+(Obrigado ao @Contribuidor)
+
+0.1.0 
+       * O primeiro lançamento estável
+       * CHANGE: Renomeado de 'Projeto tal' para 'Outro'
+
+0.0.1
+       * Projeto inicial
+
+
+## Meta
+
+Seu nome - [@SeuTwitter](https do twitter) - email@gmail.com
+Distribuido pela licença Veja 'LICENÇA' para mais informações.
+[texto para link do https do projeto no github](link do https do projeto no github)
+
+problema:
+HEAD detached from 
+ A solução para isso seria criar um branch que aponte para o último desses commits e depois fazer um merge com o master. A sequência de comandos seria:
+git checkout -b outra-branch (criando um nova branch que aponta para o commit que o HEAD está apontando)
+git checkout master (voltando para a branch master)
+git merge --no-ff outra-branch (trazendo as alterações da outra branch para o master)
+git branch -d outra-branch (se a branch não for mais necessária, pode ser removida)
+Se você não quiser perder os commits feitos em um detached HEAD, você deve criar uma branch que aponte para eles. Se for executado um checkout em alguma branch, e esses commits ficarem soltos, em algum momento, o garbage collection do git irá removê-los.
+
+
+**********************************************************************************
+GIST (tradução: essência, substância, ponto principal...)
+**********************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
