@@ -31,6 +31,7 @@ git config user.name "Marcus-Vinicius-Dev" = (Toda vez que criar um repositório
 git config user.email "marcus.vini.dev@gmail.com" = (Toda vez que criar um repositório)
 git config --global user.email "marcus.vini.dev@gmail.com" = (Para fazer uma configuração global e única, basta fazer este comando)
 git init = (dá início ao monitoramento do projeto mas não dos arquivos dentro do projeto)
+git clone https://github.com/nome-do-usuario/repositorio.git (clona os arquivos no local onde fez open folder no vscode)
 git add nomedoarquivo = (dá início ao monitoramento de arquivos, ou após ser modificado)
 git add . = (adiciona todos os arquivos do projeto no Git)
 git commit -m "escreva uma mensagem sobre a etapa do commit, ex:. primeiro commit"
