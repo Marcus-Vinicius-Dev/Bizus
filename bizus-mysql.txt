@@ -8,4 +8,10 @@ DESCRIBE nome_da_sua_tabela; Descrição de Tabela
 SHOW TABLE STATUS LIKE 'nome_da_sua_tabela'; Informações sobre uma Tabela
 CREATE DATABASE nome_do_novo_banco_de_dados; Criar um Novo Banco de Dados
 DROP DATABASE nome_do_banco_de_dados; Excluir um Banco de Dados
+DEFAULT CHARACTER SET utf8mb4
+DEFAULT COLLATE utf8mb4_general_ci;
+
+****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
+
+mudanças em bizus-mysql
