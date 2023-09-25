@@ -1,6 +1,5 @@
-****************** COMANDOS PARA O SHELL DO XAMPP ******************
-
-mysql -u root -p Conectar ao Servidor MariaDB/MySQ no shell do xampp
+****************** COMANDOS PARA O MYSQL WORKBENCH ******************
+Ctrl + D Sair do Shell
 CREATE DATABASE nome_do_novo_banco_de_dados; Criar um Novo Banco de Dados
 DROP DATABASE nome_do_banco_de_dados; Excluir um Banco de Dados
 SHOW DATABASES; Listar Bancos de Dados
@@ -24,10 +23,11 @@ add column nome_do_campo varchar(10) after nome-do-campo-a-ser-acrescentado-apó
 add column nome_do_campo int first;  adiciona um campo na primeira posição da tabela acima com inteiro
 alter table nome_da_tabela autoriza e prepara para que haja mudança na tabela
 drop column nome_do_campo elimina um campo na tabela acima
-  
 
-****************** COMANDOS PARA O MYSQL WORKBENCH ******************
-Ctrl + D Sair do Shell
+****************** COMANDOS PARA O SHELL DO XAMPP ******************
+
+mysql -u root -p Conectar ao Servidor MariaDB/MySQ no shell do xampp
+status mostra status
 
 
 ****************** TABELA DE CADASTRO ******************
