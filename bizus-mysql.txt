@@ -14,4 +14,54 @@ DEFAULT COLLATE utf8mb4_general_ci;
 ****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
 
+
+****************** TABELA CADASTRO ******************
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8mb4
+DEFAULT COLLATE utf8mb4_general_ci;
+
+create table pessoas (
+id int not null auto_increment,
+nome varchar(30) not null,
+nascimento date,
+sexo enum('M', 'F'),
+peso decimal(5,2),
+altura decimal(3,2),
+nacionalidade varchar(20) default 'Brasil',
+primary key (id)
+)DEFAULT CHARACTER SET utf8mb4
+DEFAULT COLLATE utf8mb4_general_ci;
+
+
+**** COMENTÁRIO DA TABELA CADASTRO ****
+CREATE DATABASE cadastro: Este comando cria um novo banco de dados chamado "cadastro".
+
+DEFAULT CHARACTER SET utf8mb4: Aqui, você define o conjunto de caracteres padrão para o banco de dados "cadastro" como "utf8mb4". Isso especifica como os caracteres serão armazenados e manipulados no banco de dados. "utf8mb4" é uma escolha comum para suportar uma ampla variedade de caracteres, incluindo emojis.
+
+DEFAULT COLLATE utf8mb4_general_ci: Esta linha define a colação padrão para o banco de dados "cadastro" como "utf8mb4_general_ci". A colação determina como os dados de texto são classificados e comparados. "utf8mb4_general_ci" é uma colação sensível a maiúsculas e minúsculas adequada para muitos casos.
+
+create table pessoas (: Este comando cria uma nova tabela chamada "pessoas".
+
+id int not null auto_increment,: Aqui, você define uma coluna chamada "id" que é do tipo inteiro ("int"), não pode ser nula ("not null") e será incrementada automaticamente à medida que novos registros são inseridos na tabela. Isso cria uma chave primária única.
+
+nome varchar(30) not null,: Esta linha define uma coluna chamada "nome" que é do tipo "varchar" (texto variável) com um comprimento máximo de 30 caracteres. A coluna não pode ser nula.
+
+nascimento date,: Aqui, você cria uma coluna chamada "nascimento" do tipo "date" para armazenar datas de nascimento.
+
+sexo enum('M', 'F'),: Esta linha define uma coluna chamada "sexo" como um campo de enumeração que pode ter os valores 'M' (masculino) ou 'F' (feminino).
+
+peso decimal(5,2),: Aqui, você define uma coluna chamada "peso" como um número decimal com um total de 5 dígitos, dos quais 2 são casas decimais.
+
+altura decimal(3,2),: Esta linha cria uma coluna chamada "altura" como um número decimal com um total de 3 dígitos, dos quais 2 são casas decimais.
+
+nacionalidade varchar(20) default 'Brasil',: Aqui, você define uma coluna chamada "nacionalidade" como um campo de texto variável ("varchar") com um comprimento máximo de 20 caracteres. Ele tem um valor padrão de 'Brasil' se nenhum valor for especificado durante a inserção de dados.
+
+primary key (id): Esta linha define a coluna "id" como a chave primária da tabela "pessoas". A chave primária é usada para identificar exclusivamente cada registro na tabela.
+
+)DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;: No final, você especifica que a tabela "pessoas" deve usar o conjunto de caracteres "utf8mb4" e a colação "utf8mb4_general_ci" como padrão para o armazenamento e manipulação de dados de texto na tabela.
+
+**** FIM DO COMENTÁRIO DA TABELA CADASTRO ****
+****************** FIM DA TABELA CADASTRO ******************
+
+
 mudanças em bizus-mysql
