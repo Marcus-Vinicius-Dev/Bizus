@@ -16,7 +16,7 @@ insert into nome-da-tabela
 values
 (default, 10, 10, 10, 10, 10, 10, 10)      valores acrescentados
 
-
+select * from nome-da-tabela; mostra os dados da tabela
 ****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
 
@@ -68,6 +68,16 @@ primary key (id): Esta linha define a coluna "id" como a chave primária da tabe
 
 **** FIM DO COMENTÁRIO DA TABELA CADASTRO ****
 ****************** FIM DA TABELA CADASTRO ******************
+
+****************** MESMA TABELA CADASTRO ACIMA ******************
+
+insert into pessoas values
+(default, 'Maria', '1950-11-22', 'F', '63', '1.70', 'default'),
+(default, 'Pedro', '1977-11-22', 'M', '80', '1.78', 'Espanha'),
+(default, 'Washington', '1980-11-22', 'M', '85', '1.85', 'EUA')
+
+//inseri três pessoas de uma vez 
+****************** FIM DA TABELA CADASTRO ACIMA ******************
 
 
 mudanças em bizus-mysql
