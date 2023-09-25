@@ -1,6 +1,6 @@
 ****************** COMANDOS PARA O SHELL DO XAMPP ******************
 
-mysql -u root -p Conectar ao Servidor MariaDB/MySQ
+mysql -u root -p Conectar ao Servidor MariaDB/MySQ no shell do xampp
 CREATE DATABASE nome_do_novo_banco_de_dados; Criar um Novo Banco de Dados
 DROP DATABASE nome_do_banco_de_dados; Excluir um Banco de Dados
 SHOW DATABASES; Listar Bancos de Dados
@@ -17,11 +17,20 @@ values
 (default, 10, 10, 10, 10, 10, 10, 10)      valores acrescentados
 
 select * from nome-da-tabela; mostra os dados da tabela
+DESC nome_da_tabela; descreve os parâmetros da tabela
+alter table nome_da_tabela autoriza e prepara para que haja mudança na tabela
+add column nome_do_campo varchar(10); adiciona um campo na tabela acima com caracter variável até 10 caracteres 
+add column nome_do_campo varchar(10) after nome-do-campo-a-ser-acrescentado-após; adiciona um campo na tabela acima com caracter variável até 10 caracteres após o  nome-do-campo-a-ser-acrescentado-após
+add column nome_do_campo int first;  adiciona um campo na primeira posição da tabela acima com inteiro
+alter table nome_da_tabela autoriza e prepara para que haja mudança na tabela
+drop column nome_do_campo elimina um campo na tabela acima
+  
+
 ****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
 
 
-****************** TABELA CADASTRO ******************
+****************** TABELA DE CADASTRO ******************
 CREATE DATABASE cadastro
 DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
@@ -37,7 +46,7 @@ nacionalidade varchar(20) default 'Brasil',
 primary key (id)
 )DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
-
+****************** FIM DA TABELA DE CADASTRO ******************
 
 **** COMENTÁRIO DA TABELA CADASTRO ****
 CREATE DATABASE cadastro: Este comando cria um novo banco de dados chamado "cadastro".
