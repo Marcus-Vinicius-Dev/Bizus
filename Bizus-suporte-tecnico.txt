@@ -1,0 +1,3 @@
+Acesso remoto via Anydesk é gratuito 
+Acesso remoto via TeamViewer é pago
+Acesso remoto via Terminal Service Windows

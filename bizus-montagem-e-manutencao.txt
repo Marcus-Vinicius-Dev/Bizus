@@ -1,0 +1,20 @@
+
+***PEÇAS
+
+*PLACA MÃE:
+Tipos de soquetes: 
+_ LGA (Land Grid Array): Esses soquetes são usados principalmente pela Intel
+_ PGA (Pin Grid Array): Esses soquetes são usados principalmente pela AMD.
+_ BGA (Ball Grid Array): Esses soquetes são soldados diretamente na placa-mãe e não podem ser substituídos
+
+*COOLER/FAN:
+O vento é sempre soprado para onde há as "hastes" na frente das hélices
+
+***SEQUÊNCIA DE INSTALAÇÃO
+
+_ Placa-mãe -> colocar o processador no soquete e fechá-lo -> colocar uma gota de pasta térmica -> afixar o cooler no soquete -> instalar os pentes de memória ->
+_ Gabinete -> instalar a fonte sempre com o fan virado pra baixo passar os cabos pra trás da divisória do gabinete -> pressionar o espelho da placa mãe no fundo do gabinete
+até o fixar com um claque -> parafusar a placa mãe -> instalar o HDD ou SSD -> plugar os cabos (da parte frontal "power, reset, led 1 e led 2" na placa tem as marcações 
+"power sw, reset sw, +pled, -pled") onde os leds precisam ser plugados com o positivo na esquerda e o negativo a esquerda, power e reset não precisa se preocupar com polaridade;
+HD na Sata 1, fan chassi = fan cha)-> pronto
+

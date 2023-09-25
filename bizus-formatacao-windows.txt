@@ -1,0 +1,143 @@
+**Pré formatação
+
+_Ter um pendrive vazio de no mínimo 8GB p/ copiar a ISO Windows 10
+_Site da microsoft para baixar a imagem do windows 10 ISO (ferramenta de criação de mídia) 
+_plugar o pendrive na máquina e executar o MediaCreationTool1903 (os arquivos do ISO irão p/ o pendrive de maneira automática)
+_Clicar em "criar mídia de instalção"
+_desmarcar "Usar as opçoes recomendadas..." e em arquitetura selecionar "Ambas (32bits e 64bits)"
+**Computadores com 32bits de processamento funcionam com no máximo 4GB de RAM
+_Selecionar "Unidade Flash USB"
+_Selecionar o pendrive
+_"baixará o arquivo MediaCreationTool1903 no pendrive selecionado (demora)"
+_Agora tenho o boot do windows 10 (a imagem ISO)
+
+**Formatação:
+_plugar o pendrive no pc a ser formatado
+_ligar e entrar na BIOS
+_Ir até a guia Boot
+_selecionar o pendrive para ser o 1st boot
+_Exit & Save Changes
+*Após a reinicialização do PC ele reiniciará pelo pendrive
+_selecionar windows 64bits
+_em teclado, selecionar "ABNT2"
+_selecionar "Não tenho a chave do produto"
+_escolher windows pro
+_escolher "personalizada: instalar..."
+_excluir partições do pendrive e selecionar o hd a ser formatado e "avançar"
+_Aguardar as instalações
+_clicar em "reiniciar"
+_retirar o pendrive antes de reiniciar
+_o computador reiniciará pelo windows, basta configurar as preferências do windows
+*é bom entrar na bios e mudar o boot do pendrive para o hd
+*ir em windows update e atualizar o que for necessário (boa parte dos drives do pc serão baixados nessas atualizações)
+*desabilitar recursos nas configurações, no ctrl+alt+del, nas configurações de sistemas aba serviços-> ocultar todos os serviços microsoft->desativar tudo->aplicar->ok
+
+**Pós formatação
+_instalar winrar
+_instalar cpu z
+_copiar o modelo da placa mãe e pesquisar os drives no site da fabricante da placa
+__________________________________________________________________________________________________________________________________________________________________________________________
+**Formatação sem backup 
+*Pré formatação 
+_Ter um pendrive vazio de no mínimo 8GB p/ copiar a ISO Windows 10 
+_Site da microsoft para baixar a imagem do windows 10 ISO (ferramenta de criação de mídia) 
+_plugar o pendrive na máquina e executar o MediaCreationTool1903 (os arquivos do ISO irão p/ o pendrive de maneira automática) 
+_Clicar em "criar mídia de instalção" 
+_desmarcar "Usar as opçoes recomendadas..." e em arquitetura selecionar "Ambas (32bits e 64bits)" 
+**Computadores com 32bits de processamento funcionam com no máximo 4GB de RAM 
+_Selecionar "Unidade Flash USB" 
+_Selecionar o pendrive 
+_"baixará o arquivo MediaCreationTool1903 no pendrive selecionado (demora)" 
+_Agora tenho o boot do windows 10 (a imagem ISO) 
+**Formatação: 
+_plugar o pendrive no pc a ser formatado 
+_ligar e entrar na BIOS 
+_Ir até a guia Boot 
+_selecionar o pendrive para ser o 1st boot 
+_Exit & Save Changes 
+*Após a reinicialização do PC ele reiniciará pelo pendrive 
+_selecionar windows 64bits 
+_em teclado, selecionar "ABNT2" 
+_selecionar "Não tenho a chave do produto" 
+_escolher windows pro 
+_escolher "personalizada: instalar..." 
+_excluir partições do pendrive e selecionar o hd a ser formatado e "avançar" 
+_Aguardar as instalações 
+_clicar em "reiniciar" 
+_retirar o pendrive antes de reiniciar 
+_o computador reiniciará pelo windows, basta configurar as preferências do windows 
+*é bom entrar na bios e mudar o boot do pendrive para o hd 
+*ir em windows update e atualizar o que for necessário (boa parte dos drives do pc serão baixados nessas atualizações) 
+*desabilitar recursos nas configurações, no ctrl+alt+del, nas configurações de sistemas aba serviços-> ocultar todos os serviços microsoft->desativar tudo->aplicar->ok 
+**Pós formatação 
+_instalar winrar 
+_instalar cpu z 
+_copiar o modelo da placa mãe e pesquisar os drives no site da fabricante da placa 
+__________________________________________________________________________________________________________________________________________________________________________________________
+**Formatação com backup 
+*Baixar o aplicativo product key para encontrar a chave original do windows
+*Criar e formatar partições (na pesquisa windows)
+_ir em c: e copiar as pastas com os arquivos do cliente (home, talvez público, usuário)
+__________________________________________________________________________________________________________________________________________________________________________________________
+**Formatação sem acesso ao windows do cliente 
+_baixar lazesoft recovery suite
+_password recovery 
+_baixar arquivos (pendrive será formatado p/ receber os arquivos)
+_Plugar o pendrive na CPU do cliente 
+_ligar o computador pela BIOS e dar boot pelo pendrive 
+_entrar em password recovery 
+_reset windows password 
+_escolher o usuário que será resetado 
+_apos os procedimentos o HD não terá mais senha 
+__________________________________________________________________________________________________________________________________________________________________________________________
+Formatação com windows corrompido 
+_desinstalar o HD do cliente e instalar no seu (ficarei com 2 HD)
+_anotar o "nome" dos HDs que fica no Model:
+_dar boot no meu pc
+_boot device prority -> primeiro o meu HD, depois o do cliente 
+_O HD do cliente aparecerá na minha tela com D: ou E: e não terei acesso aos arquivos dele, p/ ter acesso eu clico com o botão direito -> propriedades ->na aba segurança -> avançado -> permissões -> proprietário -> em "digite o nome do objeto a ser selecionado" digite no campo: "nome do meu usuário que pode ser consultado na pasta usuários em painel de controle ou meu computador/HD" -> adicionar -> marcar p/ q o usuário tenha acesso total a pasta ->
+Na aba auditoria -> acrescentar usuário também ->
+Na aba "acesso efetivo" a mesma coisa
+_ copiar as pastas no meu HD
+_voltar com o HD no PC do cliente, formatar a máquina lá 
+_retirar o HD do cliente aós a formatação e instalar no meu para repor os arquivos de um HD p/ o outro (mesclar as pastas de mesmo nomes)
+__________________________________________________________________________________________________________________________________________________________________________________________
+BIOS, UEFI, MBR e GPT
+
+BIOS (Basic Input/Output System): O BIOS é um firmware presente em computadores mais antigos. Ele fornece uma interface básica entre o hardware e o sistema operacional. O BIOS é 
+responsável por inicializar e controlar os componentes de hardware durante o processo de inicialização. Ele usa o esquema de partição MBR para gerenciar os dispositivos de armazenamento e 
+inicializar o sistema operacional.
+
+UEFI (Unified Extensible Firmware Interface): UEFI é uma interface de firmware moderna que substituiu o BIOS em muitos computadores recentes. Ele oferece uma interface mais avançada em 
+comparação com o BIOS, incluindo suporte a dispositivos de armazenamento maiores, tempos de inicialização mais rápidos e recursos de segurança aprimorados. O UEFI utiliza o esquema de 
+partição GPT para gerenciar os dispositivos de armazenamento.
+
+MBR (Master Boot Record): O MBR é um esquema de partição legado usado pelo BIOS. Ele é composto por uma pequena seção no início do dispositivo de armazenamento, contendo o carregador de 
+inicialização (bootloader) e informações da tabela de partição. O MBR é limitado a suportar discos com até 2 terabytes (TB) de capacidade e até 4 partições primárias.
+
+GPT (GUID Partition Table): O GPT é um esquema de partição mais moderno usado pelo UEFI. Ele usa uma tabela de partição GUID (Globally Unique Identifier), que permite suportar discos com 
+capacidades muito maiores (acima de 2 TB) e um número maior de partições (mais de 4). Além disso, o GPT oferece recursos adicionais de integridade e resiliência de dados, como a cópia de 
+backup da tabela de partição em várias localizações do disco. O GPT é mais flexível e recomendado para sistemas operacionais mais recentes.
+
+Em resumo, BIOS e UEFI são interfaces de firmware que controlam o hardware durante a inicialização, enquanto MBR e GPT são esquemas de partição utilizados para gerenciar os dispositivos 
+de armazenamento. O BIOS trabalha com o MBR, enquanto o UEFI trabalha com o GPT, sendo o UEFI e o GPT mais modernos e oferecendo recursos avançados em comparação ao BIOS e MBR.
+
+FIRMWARE
+Firmware é um tipo de software que está incorporado permanentemente em um dispositivo de hardware. É um conjunto de instruções de baixo nível que controla e opera o hardware específico em 
+que está instalado. O firmware atua como uma camada intermediária entre o hardware e o software de nível mais alto, como o sistema operacional.
+
+Ao contrário do software comum, que pode ser facilmente modificado ou atualizado, o firmware é geralmente gravado em uma memória somente leitura (ROM) ou em uma memória de acesso 
+aleatório não volátil (NVRAM), o que significa que suas instruções permanecem estáveis mesmo após o desligamento do dispositivo.
+
+O firmware desempenha um papel fundamental em vários dispositivos eletrônicos, como computadores, smartphones, roteadores, impressoras, câmeras digitais, entre outros. Ele fornece a 
+funcionalidade básica para o funcionamento do dispositivo, incluindo a inicialização, controle de hardware, comunicação e execução de tarefas específicas.
+
+Em resumo, o firmware é um software de baixo nível incorporado em dispositivos de hardware, responsável por controlar e operar o hardware específico do dispositivo. Ele desempenha um 
+papel essencial para o funcionamento adequado de dispositivos eletrônicos.
+
+**(BIOS particiona em MBR) e (UEFI particiona em GPT)
+__________________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
