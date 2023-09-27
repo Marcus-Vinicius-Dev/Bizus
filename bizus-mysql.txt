@@ -17,12 +17,13 @@ values
 
 select * from nome-da-tabela; mostra os dados da tabela
 DESC nome_da_tabela; descreve os parâmetros da tabela
-alter table nome_da_tabela autoriza e prepara para que haja mudança na tabela
+alter table nome_da_tabela; autoriza e prepara para que haja mudança na tabela
 add column nome_do_campo varchar(10); adiciona um campo na tabela acima com caracter variável até 10 caracteres 
 add column nome_do_campo varchar(10) after nome-do-campo-a-ser-acrescentado-após; adiciona um campo na tabela acima com caracter variável até 10 caracteres após o  nome-do-campo-a-ser-acrescentado-após
 add column nome_do_campo int first;  adiciona um campo na primeira posição da tabela acima com inteiro
-alter table nome_da_tabela autoriza e prepara para que haja mudança na tabela
+alter table nome_da_tabela; autoriza e prepara para que haja mudança na tabela
 drop column nome_do_campo elimina um campo na tabela acima
+DELETE FROM nome-da-tabela WHERE id IN (nº da linha, nº da outra linha, etc..); elimina as linhas da tabela
 
 ****************** COMANDOS PARA O SHELL DO XAMPP ******************
 
