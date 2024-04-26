@@ -1,0 +1,36 @@
+Extensões VSCode
+
+Bash IDE
+Better C++ Syntax
+C/C++
+C/C++ Clang Command Adapter
+C/C++ Compile Run
+C/C++ Extension Pack
+C/C++ GNU Global
+C/C++ Runner
+C/C++ Themes
+Clang-Format
+clangd
+CMake
+Cmake Tools
+CodeLLDB
+CS-Script
+Doxygen Documentation Generator
+Git History
+GitLens - Git supercharged
+Include Autocomplete
+learn-liting
+Live Server
+Live superchargedMakefile ToolsMarkdown Preview Enhance
+Portuguese (Brazil) Language Pack for Viusual Studio Code
+PowerShell
+Pylance
+Python
+Python Debugger
+Remote SSH
+Remote SSH: Editing Cofiguration Files
+Remote Explorer
+shell-FormatSQLite Viewer
+Tabnine AI Autocomplete etc...
+Thunder Client
+WSL
