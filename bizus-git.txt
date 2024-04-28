@@ -28,8 +28,8 @@ cd.. = (volta um diretório)
 "ex1:. dentro de .ignore digite *.mp3 e salve ctrl + s (todo arquivo .mp3 deixará de ser monitorado pelo Git)"
 "para excluir pasta, digite **nomedapasta (pasta é diferente de excluir .arquivo)"
 git init = (dá início ao monitoramento do projeto mas não dos arquivos dentro do projeto)
-git config user.name "Marcus-Vinicius-Dev" = (Toda vez que criar um repositório)
-git config user.email "marcus.vini.dev@gmail.com" = (Toda vez que criar um repositório)
+git config user.name "Marcus-Vinicius-Dev"
+git config user.email "marcus.vini.dev@gmail.com"
 git config user.name "Marcus-Vinicius-C-S"
 git config user.email "ciapdivtectic@gmail.com"
 git config --global user.email "marcus.vini.dev@gmail.com" = (Para fazer uma configuração global e única, basta fazer este comando)
