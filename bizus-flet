@@ -1,4 +1,6 @@
 ***** MÍNIMO *******
+navegar até o diretório onde a venv está localizada
+Remove-Item -Recurse -Force venv
 python -m venv venv
 .\venv\Scripts\Activate
 pip install flet
