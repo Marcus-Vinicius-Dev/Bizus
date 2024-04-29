@@ -21,7 +21,9 @@ GitLens - Git supercharged
 Include Autocomplete
 learn-liting
 Live Server
-Live superchargedMakefile ToolsMarkdown Preview Enhance
+Live Share
+Makefile Tools
+Markdown Preview Enhance
 Portuguese (Brazil) Language Pack for Viusual Studio Code
 PowerShell
 Pylance
@@ -30,7 +32,8 @@ Python Debugger
 Remote SSH
 Remote SSH: Editing Cofiguration Files
 Remote Explorer
-shell-FormatSQLite Viewer
+shell-Format
+SQLite Viewer
 Tabnine AI Autocomplete etc...
 Thunder Client
 WSL
