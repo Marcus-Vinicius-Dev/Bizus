@@ -1,0 +1,18 @@
+***** MÍNIMO *******
+python -m venv venv
+.\venv\Scripts\Activate
+pip install flet
+flet --version
+flet run nome-do-arquivo.py (abre uma janela flet)
+flet run --web nome-do-arquivo.py (abre no browser)
+
+***** CRIAR PROJETO FLET ******
+flet create nome-do-projeto (cria um diretório com arquivos básicos, incluindo main.py)
+flet create . (Para criar seu aplicativo Flet no diretório atual)
+
+
+
+
+
+
+
