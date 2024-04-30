@@ -3,6 +3,7 @@ navegar até o diretório onde a venv está localizada
 Remove-Item -Recurse -Force venv
 python -m venv venv
 .\venv\Scripts\Activate
+source venv/Scripts/activate
 pip install flet
 flet --version
 flet run nome-do-arquivo.py (abre uma janela flet)
