@@ -6,6 +6,20 @@ python -m pip install "kivy[base]" kivy_examples
 python -m pip install "kivy[full]" kivy_examples
 python -m pip install --only-binary Pillow "kivy[base]"
 apt-get install libgl1-mesa-glx libgles2-mesa libegl1-mesa libmtdev1
+
 mkdir kivy-deps-build && cd kivy-deps-build
+curl -O https://raw.githubusercontent.com/kivy/kivy/master/tools/build_macos_dependencies.sh -o build_kivy_deps.sh
+curl https://raw.githubusercontent.com/kivy/kivy/master/tools/build_linux_dependencies.sh -o build_kivy_deps.sh
+chmod +x build_kivy_deps.sh
+./build_kivy_deps.sh
+export KIVY_DEPS_ROOT=$(pwd)/kivy-dependencies
+
+python -m pip install "kivy[base]" kivy_examples --no-binary kivy
+python -m pip install "kivy[base] @ https://github.com/kivy/kivy/archive/master.zip"
+python -m pip install --pre "kivy[base]" kivy_examples
+python -m pip install kivy --pre --no-deps --index-url  https://kivy.org/downloads/simple/
+python -m pip install "kivy[base]" --pre --extra-index-url https://kivy.org/downloads/simple/
+pytest kivy/tests
+python kivy_venv\share\kivy-examples\demo\showcase\main.py
 
 
