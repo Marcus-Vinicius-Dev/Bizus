@@ -1,1 +1,11 @@
+Remove-Item -Recurse -Force kivy_venv
+python -m pip install --upgrade pip setuptools virtualenv
+python -m venv kivy_venv
+kivy_venv\Scripts\activate
+python -m pip install "kivy[base]" kivy_examples
+python -m pip install "kivy[full]" kivy_examples
+python -m pip install --only-binary Pillow "kivy[base]"
+apt-get install libgl1-mesa-glx libgles2-mesa libegl1-mesa libmtdev1
+mkdir kivy-deps-build && cd kivy-deps-build
+
 
