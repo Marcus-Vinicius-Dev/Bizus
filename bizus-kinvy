@@ -24,8 +24,8 @@ python -m pip install "kivy[base]" --pre --extra-index-url https://kivy.org/down
 ##################### INSTALAÇÕES ESPECÍFICAS (NÃO OBRIGATÓRIAS) #############################
 
 ##################### TESTES #############################
+python -m pip install pytest
 pytest kivy/tests
-python kivy_venv\share\kivy-examples\demo\showcase\main.py
 ##################### TESTES #############################
 
 
