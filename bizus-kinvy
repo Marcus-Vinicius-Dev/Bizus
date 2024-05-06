@@ -6,7 +6,7 @@ source kivy_venv/Scripts/activate
 python -m pip install "kivy[base]" kivy_examples
 python -m pip install "kivy[full]" kivy_examples
 python -m pip install --only-binary Pillow "kivy[base]"
-apt-get install libgl1-mesa-glx libgles2-mesa libegl1-mesa libmtdev1
+apt-get install libgl1-mesa-glx libgles2-mesa libegl1-mesa libmtdev1  (só Linux)
 
 mkdir kivy-deps-build && cd kivy-deps-build
 curl -O https://raw.githubusercontent.com/kivy/kivy/master/tools/build_macos_dependencies.sh -o build_kivy_deps.sh
