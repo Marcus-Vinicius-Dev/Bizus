@@ -15,12 +15,17 @@ chmod +x build_kivy_deps.sh
 export KIVY_DEPS_ROOT=$(pwd)/kivy-dependencies
 ################################################ SOMENTE PARA MAC OS OU LINUX ######################################################### 
 
+##################### INSTALAÇÕES ESPECÍFICAS (NÃO OBRIGATÓRIAS) #############################
 python -m pip install "kivy[base]" kivy_examples --no-binary kivy
 python -m pip install "kivy[base] @ https://github.com/kivy/kivy/archive/master.zip"
 python -m pip install --pre "kivy[base]" kivy_examples
 python -m pip install kivy --pre --no-deps --index-url  https://kivy.org/downloads/simple/
 python -m pip install "kivy[base]" --pre --extra-index-url https://kivy.org/downloads/simple/
+##################### INSTALAÇÕES ESPECÍFICAS (NÃO OBRIGATÓRIAS) #############################
+
+##################### TESTES #############################
 pytest kivy/tests
 python kivy_venv\share\kivy-examples\demo\showcase\main.py
+##################### TESTES #############################
 
 
