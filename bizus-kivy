@@ -1,4 +1,5 @@
 Remove-Item -Recurse -Force kivy_venv
+rm -rf kivy_venv (no git bash)
 python -m pip install --upgrade pip setuptools virtualenv
 python -m venv kivy_venv
 kivy_venv\Scripts\activate
