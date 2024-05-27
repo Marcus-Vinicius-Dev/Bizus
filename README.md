@@ -1,1 +1,1 @@
-# Anotações das linguagens estudadas
+# Anotações
