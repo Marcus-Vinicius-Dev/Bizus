@@ -8,4 +8,5 @@ git config user.email "marcus.vini.dev@gmail.com"
 python.exe -m pip install --upgrade pip
 pip install django
 django-admin startproject app .
+python manage.py runserver
 
