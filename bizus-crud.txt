@@ -9,4 +9,5 @@ python.exe -m pip install --upgrade pip
 pip install django
 django-admin startproject app .
 python manage.py runserver
+http://127.0.0.1:8000/admin/auth/user/
 
