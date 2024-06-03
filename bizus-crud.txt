@@ -7,8 +7,21 @@ git config user.name "Marcus-Vinicius-Dev"
 git config user.email "marcus.vini.dev@gmail.com"
 python.exe -m pip install --upgrade pip
 pip install django
-django-admin startproject app .
+python -m django --version
+django-admin startproject app .   
 python manage.py startapp core
 python manage.py runserver
 http://127.0.0.1:8000/admin/auth/user/
+
+*Outros comandos Django
+
+pip install django
+python -m django --version
+django-admin startproject nome_do_projeto (Esse comando cria a estrutura de diretórios básica de um novo projeto Django)
+python manage.py startapp nome_do_app (Esse comando cria a estrutura de diretórios básica para um novo aplicativo dentro do seu projeto Django.)
+python manage.py makemigrations (Esse comando verifica as alterações nos modelos e cria os arquivos de migração necessários para atualizar o banco de dados.)
+python manage.py migrate (Esse comando aplica as migrações pendentes ao banco de dados, sincronizando-o com os modelos do Django.)
+python manage.py createsuperuser (Esse comando permite criar um usuário administrador para acessar a interface de administração do Django.)
+
+
 
