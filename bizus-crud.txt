@@ -2,6 +2,7 @@
 
 python -m venv venv
 .\venv\Scripts\Activate
+source venv/Scripts/activate
 git init
 git config user.name "Marcus-Vinicius-Dev"
 git config user.email "marcus.vini.dev@gmail.com"
