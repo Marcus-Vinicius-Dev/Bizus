@@ -17,8 +17,55 @@ source ~/.bashrc (Execute o seguinte comando no Git Bash para aplicar as mudanç
 java -version
 
 Extensões do VSCode:
+Java (Java Platform Extension for Visual Studio Code)
 Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
 Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
 GitLens: Para integração com GitHub e controle de versão
+
+Configurar o VSCode para utilizar o Java
+na tela do VSCode, digitar ctrl + , 
+Na barra de pesquisa de configurações, digite java.configuration.runtimes.
+Clique em Edit in settings.json para abrir o arquivo settings.json
+No código do arquivo, acrescebnte o trecho abaixo de "java.configuration.runtimes": [
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "C:/Users/marcus.silva/jdk-17/jdk-17.0.1+12",
+            "default": true
+        }
+    ]
+}
+Salve o arquivo settings.json (Ctrl + S).
+Feche e reabra o Visual Studio Code
+java -version
+
+Verificar se o VSCode usa o Java do sistema:
+Abra o shell do sistema e digite para verificar:
+echo $env:JAVA_HOME
+echo $env:PATH
+(se não retornar nada então instale conforme abaixo)
+$env:JAVA_HOME = "C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12"
+$env:PATH += ";C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12\bin"
+
 __________________________________________________________________________________________________________________________________________________
+
+#CRIAR UM PROJETO JAVA
+
+No VSCode pressione Ctrl + Shift + P
+digite na barra de procura Java: "Create Java Project"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
