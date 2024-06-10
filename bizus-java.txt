@@ -1,4 +1,4 @@
-*AMBIENTE
+*AMBIENTE TERMINAL GIT BASH
 
 Instalar o JDK Java Development Kit no site da Oracle ou do OpenJDK
 No GitBash, digite
