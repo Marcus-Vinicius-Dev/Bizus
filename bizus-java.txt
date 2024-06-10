@@ -1,6 +1,6 @@
 *AMBIENTE
 
-*Instalar o JDK Java Development Kit no site da Oracle ou do OpenJDK
+Instalar o JDK Java Development Kit no site da Oracle ou do OpenJDK
 No GitBash, digite
 curl -L -O https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1+12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip
 unzip OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip -d ~/jdk-17
@@ -10,10 +10,15 @@ Acrescente no final do esport (utilizando as setas)
 export JAVA_HOME="$HOME/jdk-17/jdk-17.0.1+12"
 export PATH="$JAVA_HOME/bin:$PATH"
 
+Pressione Ctrl + O (isso irá abrir a opção de "Write Out" para salvar o arquivo)
+Pressione Enter para confirmar o nome do arquivo e salvar (não precisa nomear o arquivo)
+
+source ~/.bashrc (Execute o seguinte comando no Git Bash para aplicar as mudanças:)
+java -version
 
 Extensões do VSCode:
 Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
 Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
 GitLens: Para integração com GitHub e controle de versão
-
+__________________________________________________________________________________________________________________________________________________
 
