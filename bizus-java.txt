@@ -53,7 +53,21 @@ ________________________________________________________________________________
 #CRIAR UM PROJETO JAVA
 
 No VSCode pressione Ctrl + Shift + P
-digite na barra de procura Java: "Create Java Project"
+digite na barra de procura "Java: Create Java Project"
+***************************************************************************************
+aparecerão as opções:
+Maven: Maven é uma ferramenta de automação de compilação usada principalmente para projetos Java. Ele gerencia dependências, compilação, testes e distribuição de projetos Java. O Maven usa um arquivo de configuração chamado pom.xml (Project Object Model) para definir a estrutura do projeto, suas dependências e plugins.
+
+Gradle: Assim como o Maven, o Gradle é outra ferramenta de automação de compilação. Ele oferece flexibilidade e desempenho superiores ao Maven. O Gradle também usa um arquivo de configuração, geralmente chamado build.gradle, para definir a estrutura do projeto e suas dependências.
+
+Spring Boot: Spring Boot é um framework Java para criar aplicativos web rapidamente. Ele simplifica o desenvolvimento de aplicativos Spring, fornecendo configurações padrão e simplificando a configuração. Spring Boot é altamente modular e pode ser facilmente integrado com outras tecnologias Java.
+
+Quarkus: Quarkus é um framework Java para construir aplicativos nativos da nuvem. Ele é otimizado para uso em contêineres e fornece inicialização rápida e baixo consumo de memória. Quarkus é particularmente adequado para microserviços e aplicativos em nuvem.
+
+Micronaut: Micronaut é outro framework Java para construir aplicativos em nuvem. Ele é projetado para ser leve, rápido e altamente reflexivo. Micronaut oferece injeção de dependência eficiente, inicialização rápida e suporte a testes integrados.
+
+GraalVM: GraalVM é uma máquina virtual universal que suporta várias linguagens de programação, incluindo Java. Ele oferece desempenho superior e menor consumo de recursos em comparação com outras JVMs tradicionais. GraalVM também pode ser usado para criar aplicativos nativos da nuvem.
+***************************************************************************************
 __________________________________________________________________________________________________________________________________________________
 
 # PROJETOS JAVA
