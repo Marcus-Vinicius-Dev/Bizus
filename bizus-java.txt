@@ -68,6 +68,7 @@ Micronaut: Micronaut é outro framework Java para construir aplicativos em nuvem
 
 GraalVM: GraalVM é uma máquina virtual universal que suporta várias linguagens de programação, incluindo Java. Ele oferece desempenho superior e menor consumo de recursos em comparação com outras JVMs tradicionais. GraalVM também pode ser usado para criar aplicativos nativos da nuvem.
 ***************************************************************************************
+TENTATIVA COM MAVEN
 continue até o projeto ser criado, caso não consiga, faça conforme abaixo:
 
 Não consegui instalar Maven:
@@ -96,6 +97,17 @@ aperte enter
 aperte enter
 7ª pergunta
 reponda y (yes)
+***************************************************************************************
+TENTATIVA COM GRADLE
+
+acesse https://start.spring.io/
+aperte generate 
+gera um arquivo zipado "demo"
+extarir o arquivo na pasta do projeto
+entre na pasta do projeto que foi extraído e digite:
+./gradlew bootRun (instala o gradle)
+$ ./gradlew --version (verifica a instalação)
+
 __________________________________________________________________________________________________________________________________________________
 
 # PROJETOS JAVA
