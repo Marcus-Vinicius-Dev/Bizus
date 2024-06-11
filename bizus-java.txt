@@ -68,6 +68,34 @@ Micronaut: Micronaut é outro framework Java para construir aplicativos em nuvem
 
 GraalVM: GraalVM é uma máquina virtual universal que suporta várias linguagens de programação, incluindo Java. Ele oferece desempenho superior e menor consumo de recursos em comparação com outras JVMs tradicionais. GraalVM também pode ser usado para criar aplicativos nativos da nuvem.
 ***************************************************************************************
+continue até o projeto ser criado, caso não consiga, faça conforme abaixo:
+
+Não consegui instalar Maven:
+mvn -version (cosulte a versão maven)
+se não estiver instalado, entre no site https://maven.apache.org/download.cgi
+e baixe o arquivo apache-maven-3.9.7-bin.zip
+extaria o arquivo em uma pasta C:\Program Files\Oracle\Apache\Maven\
+vá para "Variáveis de Ambiente", clique em variaveis de ambiente, clique em novo e digite nome da variável: MAVEN_HOME e Valor da variável: C:\Arquivos de Programas\Oracle\Apache\maven\apache-maven-3.9.7\bin. No quadro de baixo "Variáveis do Sistema", clique em Path, ao final insira "Novo" e digite o endereço de onde foi extraído o maven, por exemplo: C:\Arquivos de Programas\Oracle\Apache\maven\apache-maven-3.9.7\bin, dê ok em tudo
+No Git Bash digite PATH="/c/Arquivos de Programas/Oracle/Apache/maven/apache-maven-3.9.7/bin:$PATH"
+export PATH 
+mvn -version
+
+criar um projeto Maven
+mvn archetype:generate
+1ª pergunta Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 2154: 
+responda com :web (para filtrar opções que contenham web) enter
+digite a escolha: spring-boot-sample-web-ui-archetype
+2ª pergunta - Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): :
+resposta: 1
+3ª Define value for property 'groupId': 
+com.minhaempresa (troque com.minhaempresa, por exemplo, por com.servidorhttp)
+4ª Define value for property 'artifactId': Define value for property 'artifactId':
+5ª Define value for property 'version' 1.0-SNAPSHOT: :
+aperte enter
+6ª Define value for property 'package' Define value for property 'groupId': com.servidorhttp: :
+aperte enter
+7ª pergunta
+reponda y (yes)
 __________________________________________________________________________________________________________________________________________________
 
 # PROJETOS JAVA
