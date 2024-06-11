@@ -1,0 +1,13 @@
+
+Get-ComputerInfo | Select-Object CsName, OSName, OSArchitecture, WindowsVersion, WindowsBuildLabEx, WindowsProductName
+Get-Host
+Get-ChildItem Env:
+code --version
+$PSVersionTable
+$ShellId
+$PSVersionTable
+git --version
+code --list-extensions --show-versions
+java -version
+python -version
+
