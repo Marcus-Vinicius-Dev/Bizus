@@ -8,3 +8,10 @@ Como fazer snippets vscode?
 snippets interessantes: 
 ambiente: so, terminal, variaveis de ambiente, vscode, extensões vscode, git
 projeto: todos os diretórios e arquivos em recursividade
+
+#SNIPPETS
+
+no VSCode aperte ctrl+shift+p
+pesquise por "Configure User Snippets"
+selecione "Novo Arquivo de Snippets Globais" (para criar um snippet válido para todas as linguagens)
+
