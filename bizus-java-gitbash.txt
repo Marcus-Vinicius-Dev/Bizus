@@ -95,6 +95,15 @@ $env:JAVA_HOME = "C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12"
 $env:PATH += ";C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12\bin"
 ################# CONFIGURAR VSCODE PARA JAVA #################
 
+################# ESTRUTURA DO PROJETO #################
+Java-Servidor-HTTP-Simples/
+├── src/
+│   └── Main.java     (arquivo principal onde você inicia o servidor HTTP)
+├── README.md
+├── .gitignore
+└── pom.xml           (se estiver usando Maven)
+################# ESTRUTURA DO PROJETO #################
+
 
 
 
