@@ -95,6 +95,24 @@ $env:JAVA_HOME = "C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12"
 $env:PATH += ";C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12\bin"
 ################# CONFIGURAR VSCODE PARA JAVA #################
 
+################# BAIXAR O MAVEN #################
+# Navegue até o diretório onde deseja instalar o Maven (por exemplo, C:\Program Files)
+cd /c/Program\ Files
+
+# Baixe o Maven usando o wget (caso esteja disponível no seu Git Bash)
+wget https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz
+
+# Descompacte o arquivo baixado
+tar -xf apache-maven-3.9.7-bin.tar.gz
+
+# Renomeie o diretório para algo mais simples (opcional)
+mv apache-maven-3.9.7 maven
+
+# Adicione o diretório bin do Maven ao seu PATH e configure a variável M2_HOME
+export M2_HOME=/c/Program\ Files/maven
+export PATH=$PATH:$M2_HOME/bin
+################# BAIXAR O MAVEN #################
+
 ################# ESTRUTURA DO PROJETO #################
 Java-Servidor-HTTP-Simples/
 ├── src/
@@ -102,7 +120,26 @@ Java-Servidor-HTTP-Simples/
 ├── README.md
 ├── .gitignore
 └── pom.xml           (se estiver usando Maven)
+
+# Navegue até o diretório recém-criado
+cd Java-Servidor-HTTP-Simples
+
+# Crie os diretórios e arquivos conforme a estrutura especificada
+mkdir -p src
+touch README.md
+touch .gitignore
+crie Main.java e pom.xml manualmente
 ################# ESTRUTURA DO PROJETO #################
+
+################# TESTANDO O PROJETO #################
+pwd (confirmA o caminho absoluto completo para o arquivo Main.java. tIPO: /c/Users/vinic/Desktop/vscode/Java-Servidor-HTTP-Simples/src)
+javac -d /c/Users/vinic/Desktop/vscode/Java-Servidor-HTTP-Simples/bin /c/Users/vinic/Desktop/vscode/Java-Servidor-HTTP-Simples/src/Main.java (Compile o Arquivo Main.java Usando o Caminho Absoluto)
+cd /c/Users/vinic/Desktop/vscode/Java-Servidor-HTTP-Simples/bin (mudA para o diretório bin)
+java com.marcusvinicius.serverhttp.Main (executa o servidor HTTP)
+curl http://localhost:8000 (abra um novo git bash e terá a resposta no terminal)
+ou abra uma aba em um braowser e acesse http://localhost:8000 
+
+################# TESTANDO O PROJETO #################
 
 
 
