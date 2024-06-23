@@ -42,6 +42,56 @@ git --version (versão git)
 code --version (versão vscode)
 ################# INFORMAÇÕES INICIAIS #################
 
+################# AMBIENTE TERMINAL GIT BASH #################
+Instalar o JDK Java Development Kit no site da Oracle ou do OpenJDK
+No GitBash, digite
+curl -L -O https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1+12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip
+unzip OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip -d ~/jdk-17
+nano ~/.bashrc
+
+Acrescente no final do esport (utilizando as setas)
+export JAVA_HOME="$HOME/jdk-17/jdk-17.0.1+12"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+Pressione Ctrl + O (isso irá abrir a opção de "Write Out" para salvar o arquivo)
+Pressione Enter para confirmar o nome do arquivo e salvar (não precisa nomear o arquivo)
+
+source ~/.bashrc (Execute o seguinte comando no Git Bash para aplicar as mudanças:)
+java -version
+
+Extensões do VSCode:
+Java (Java Platform Extension for Visual Studio Code)
+Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
+Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
+GitLens: Para integração com GitHub e controle de versão
+
+Configurar o VSCode para utilizar o Java
+na tela do VSCode, digitar ctrl + , 
+Na barra de pesquisa de configurações, digite java.configuration.runtimes.
+Clique em Edit in settings.json para abrir o arquivo settings.json
+No código do arquivo, acrescebnte o trecho abaixo de "java.configuration.runtimes": [
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-17",
+            "path": "C:/Users/marcus.silva/jdk-17/jdk-17.0.1+12",
+            "default": true
+        }
+    ]
+}
+Salve o arquivo settings.json (Ctrl + S).
+Feche e reabra o Visual Studio Code
+java -version
+
+Verificar se o VSCode usa o Java do sistema:
+Abra o shell do sistema e digite para verificar:
+echo $env:JAVA_HOME
+echo $env:PATH
+(se não retornar nada então instale conforme abaixo)
+$env:JAVA_HOME = "C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12"
+$env:PATH += ";C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12\bin"
+################# AMBIENTE TERMINAL GIT BASH #################
+
 
 
 
