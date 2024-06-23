@@ -1,6 +1,4 @@
-# PROJETOS JAVA
-
-
+################# PROJETOS JAVA #################
 Servidor HTTP Simples: Use a biblioteca com.sun.net.httpserver.HttpServer para criar um servidor HTTP simples que responde a requisições básicas
 
 API REST Simples: Configuração Inicial: Crie um projeto Spring Boot usando Spring Initializr. Adicione dependências para Spring Web.
@@ -35,6 +33,7 @@ Aplicação Completa com Mensageria:
 Kafka ou RabbitMQ: Implemente uma aplicação que use Kafka ou RabbitMQ para mensageria e processamento assíncrono
 
 Sistema de Gerenciamento de Projetos
+################# PROJETOS JAVA #################
 
 ################# INFORMAÇÕES INICIAIS #################
 uname -a (versão windows)
@@ -42,7 +41,15 @@ git --version (versão git)
 code --version (versão vscode)
 ################# INFORMAÇÕES INICIAIS #################
 
-################# AMBIENTE TERMINAL GIT BASH #################
+################# EXTENSÕES #################
+Java (Java Platform Extension for Visual Studio Code)
+Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
+Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
+GitLens: Para integração com GitHub e controle de versão
+REST Client: testa APIs HTTP diretamente do VSCode
+################# EXTENSÕES #################
+
+################# INSTALAR JDK #################
 Instalar o JDK Java Development Kit no site da Oracle ou do OpenJDK
 No GitBash, digite
 curl -L -O https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1+12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip
@@ -58,13 +65,9 @@ Pressione Enter para confirmar o nome do arquivo e salvar (não precisa nomear o
 
 source ~/.bashrc (Execute o seguinte comando no Git Bash para aplicar as mudanças:)
 java -version
+################# INSTALAR JDK #################
 
-Extensões do VSCode:
-Java (Java Platform Extension for Visual Studio Code)
-Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
-Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
-GitLens: Para integração com GitHub e controle de versão
-
+################# CONFIGURAR VSCODE PARA JAVA #################
 Configurar o VSCode para utilizar o Java
 na tela do VSCode, digitar ctrl + , 
 Na barra de pesquisa de configurações, digite java.configuration.runtimes.
@@ -90,7 +93,7 @@ echo $env:PATH
 (se não retornar nada então instale conforme abaixo)
 $env:JAVA_HOME = "C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12"
 $env:PATH += ";C:\Users\marcus.silva\jdk-17\jdk-17.0.1+12\bin"
-################# AMBIENTE TERMINAL GIT BASH #################
+################# CONFIGURAR VSCODE PARA JAVA #################
 
 
 
