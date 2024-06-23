@@ -1,0 +1,48 @@
+# PROJETOS JAVA
+
+
+Servidor HTTP Simples: Use a biblioteca com.sun.net.httpserver.HttpServer para criar um servidor HTTP simples que responde a requisições básicas
+
+API REST Simples: Configuração Inicial: Crie um projeto Spring Boot usando Spring Initializr. Adicione dependências para Spring Web.
+Controladores Simples: Crie controladores que respondem a requisições HTTP GET, POST, PUT e DELETE.
+CRUD Simples: Desenvolva um CRUD (Create, Read, Update, Delete) básico para uma entidade como Produto.
+
+Sistema de Gerenciamento de Tarefas (To-Do List)
+
+Blog Pessoal
+
+Integração com Banco de Dados:
+
+JDBC: Crie uma aplicação que conecta a um banco de dados MySQL ou PostgreSQL usando JDBC para realizar operações CRUD.
+JPA/Hibernate: Migre a aplicação anterior para usar JPA com Hibernate para mapeamento objeto-relacional (ORM).
+API REST Completa com Spring Boot:
+
+Camadas de Serviço e Repositório: Organize a aplicação em camadas (Controlador, Serviço, Repositório) para uma melhor separação de responsabilidades.
+Validação: Adicione validação de dados de entrada usando javax.validation.
+Autenticação e Autorização: Implemente autenticação JWT para proteger suas APIs
+
+E-commerce Simples:
+
+Desenvolva uma aplicação de e-commerce simples com funcionalidades como cadastro de produtos, gerenciamento de carrinho de compras e processamento de pedidos.
+Integração de Pagamento: Simule uma integração com um gateway de pagamento.
+Microservices com Spring Boot:
+
+Divisão da Aplicação: Divida a aplicação em múltiplos serviços independentes (por exemplo, serviço de usuários, serviço de produtos).
+Eureka e Zuul: Use Spring Cloud Netflix Eureka para descoberta de serviço e Zuul para roteamento de API.
+Comunicação entre Microservices: Utilize Feign ou RestTemplate para comunicação entre microserviços.
+Aplicação Completa com Mensageria:
+
+Kafka ou RabbitMQ: Implemente uma aplicação que use Kafka ou RabbitMQ para mensageria e processamento assíncrono
+
+Sistema de Gerenciamento de Projetos
+
+################# INFORMAÇÕES INICIAIS #################
+uname -a (versão windows)
+git --version (versão git)
+code --version (versão vscode)
+################# INFORMAÇÕES INICIAIS #################
+
+
+
+
+
