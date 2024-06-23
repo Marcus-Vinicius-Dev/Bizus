@@ -42,11 +42,11 @@ code --version (versão vscode)
 ################# INFORMAÇÕES INICIAIS #################
 
 ################# EXTENSÕES #################
+GitLens: Para integração com GitHub e controle de versão
 Java (Java Platform Extension for Visual Studio Code)
 Java Extension Pack: Inclui todas as ferramentas necessárias para desenvolvimento em Java no VSCode.
-Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
-GitLens: Para integração com GitHub e controle de versão
 REST Client: testa APIs HTTP diretamente do VSCode
+Spring Boot Extension Pack: Para trabalhar com Spring Boot, uma das principais frameworks para desenvolvimento backend em Java.
 ################# EXTENSÕES #################
 
 ################# INSTALAR JDK #################
