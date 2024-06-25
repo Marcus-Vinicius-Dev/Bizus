@@ -111,6 +111,7 @@ mv apache-maven-3.9.7 maven
 # Adicione o diretório bin do Maven ao seu PATH e configure a variável M2_HOME
 export M2_HOME=/c/Program\ Files/maven
 export PATH=$PATH:$M2_HOME/bin
+mvn -v (versão do maven)
 ################# BAIXAR O MAVEN #################
 
 ################# ESTRUTURA DO PROJETO #################
