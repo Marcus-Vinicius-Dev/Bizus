@@ -62,6 +62,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 Pressione Ctrl + O (isso irá abrir a opção de "Write Out" para salvar o arquivo)
 Pressione Enter para confirmar o nome do arquivo e salvar (não precisa nomear o arquivo)
+Pressione Ctrl + x (para sair do nano)
 
 source ~/.bashrc (Execute o seguinte comando no Git Bash para aplicar as mudanças:)
 java -version
