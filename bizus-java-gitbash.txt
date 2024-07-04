@@ -3,6 +3,7 @@ uname -a
 git --version
 code --version
 java -version
+mvn -v
 
 ################# PROJETOS JAVA #################
 Servidor HTTP Simples: Use a biblioteca com.sun.net.httpserver.HttpServer para criar um servidor HTTP simples que responde a requisições básicas
