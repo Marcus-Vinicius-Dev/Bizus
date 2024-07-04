@@ -3,6 +3,7 @@ Servidor HTTP Simples: Use a biblioteca com.sun.net.httpserver.HttpServer para c
 
 API REST Simples: Configuração Inicial: Crie um projeto Spring Boot usando Spring Initializr. Adicione dependências para Spring Web.
 Controladores Simples: Crie controladores que respondem a requisições HTTP GET, POST, PUT e DELETE.
+
 CRUD Simples: Desenvolva um CRUD (Create, Read, Update, Delete) básico para uma entidade como Produto.
 
 Sistema de Gerenciamento de Tarefas (To-Do List)
