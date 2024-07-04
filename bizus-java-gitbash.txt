@@ -170,6 +170,13 @@ Depois de preencher todos os campos conforme necessário, clique no botão GENER
 
 ################# PROJETO SPRINGBOOT #################
 
+################# COMANDOS SPRINGBOOT #################
+
+./mvnw spring-boot:run (RODAR O PROJETO)
+
+################# COMANDOS SPRINGBOOT #################
+
+
 
 
 
