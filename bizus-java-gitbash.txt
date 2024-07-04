@@ -1,3 +1,9 @@
+OK, criei um repositório github 'https://github.com/Marcus-Vinicius-Dev/EXEMPLO' estou usando terminal git bash e as seguintes configurações:
+uname -a
+git --version
+code --version
+java -version
+
 ################# PROJETOS JAVA #################
 Servidor HTTP Simples: Use a biblioteca com.sun.net.httpserver.HttpServer para criar um servidor HTTP simples que responde a requisições básicas
 
