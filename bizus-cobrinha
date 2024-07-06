@@ -1,0 +1,75 @@
+
+Entre no README.md no repositório do seu status
+Entre no código do repositório
+Entre no GitHub Actions
+Clique no New workflow
+Clique em 'set up a workflow yourself'
+Digite o código abaixo:
+
+##################  CÓDIGO .github/workflows/main.yml  ##################
+name: Generate Snake
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Gera uma nova cobra a cada dia à meia-noite UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Snake
+        uses: Platane/snk@master
+        with:
+          github_user_name: Marcus-Vinicius-Dev
+          outputs: dist/snake.svg
+      - name: Push Snake
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: output
+          force: true
+          directory: dist
+
+##################  CÓDIGO .github/workflows/main.yml  ##################
+
+Adicione a imagem da cobra no seu README.md. Para isso, você pode usar o código a seguir no local onde deseja exibir a cobrinha
+
+##################  CÓDIGO https://github.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/edit/main/README.md  ##################
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://raw.githubusercontent.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/output/github-contribution-grid-snake-dark.svg"
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="https://raw.githubusercontent.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/output/github-contribution-grid-snake.svg"
+  />
+  <img
+    alt="github contribution grid snake animation"
+    src="https://raw.githubusercontent.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/output/github-contribution-grid-snake.svg"
+  />
+</picture>
+
+##################  CÓDIGO https://github.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/edit/main/README.md  ##################
+
+##################  CONFIGURAR TOKEN  ##################
+
+Gerar um Personal Access Token (PAT):
+
+Vá até a página de configurações de tokens no GitHub.
+Clique em "Generate new token".
+Dê um nome ao token (por exemplo, Snake Animation Token).
+Selecione as permissões necessárias (geralmente, repo é suficiente).
+Clique em "Generate token" e copie o token gerado
+Vá até a página de configurações do seu repositório no GitHub: https://github.com/Marcus-Vinicius-Dev/Marcus-Vinicius-Dev/settings/secrets/actions.
+Clique em "New repository secret".
+Nomeie o segredo como GH_PAT.
+Cole o token gerado no campo de valor.
+Clique em "Add secret".
+
+##################  CONFIGURAR TOKEN  ##################
+
+
