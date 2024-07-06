@@ -30,10 +30,11 @@ python manage.py startapp meu_app
 Instalar meu_app em meu_projeto/settings.py:
 INSTALLED_APPS = [
     # outras apps
-    'meu_app',
+    "meu_app",
 ]
 _________________________________________________________________________
-Definir o modelo que representa os dados a manipular - app/models.py
+Definir o modelo que representa os dados a manipular 
+meu_projeto\meu_app\models.py
 from django.db import models
 
 class Usuario(models.Model):
