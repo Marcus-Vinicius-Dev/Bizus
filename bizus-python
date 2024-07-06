@@ -4,7 +4,7 @@ uname -a
 git --version
 code --version
 python --version
-django --version
+python -m django --version
 
 ********* CONFIGURAÇÕES *********
 
