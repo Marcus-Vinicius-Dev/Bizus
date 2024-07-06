@@ -8,4 +8,219 @@ django --version
 
 ********* CONFIGURAÇÕES *********
 
+********* AMBIENTE *********
+
+python -m venv venv
+.\venv\Scripts\Activate
+source venv/Scripts/activate
+git init
+git config user.name "Marcus-Vinicius-Dev"
+git config user.email "marcus.vini.dev@gmail.com"
+python.exe -m pip install --upgrade pip
+pip install django
+python -m django --version
+django-admin startproject meu_projeto
+cd meu_projeto
+python manage.py startapp meu_app
+
+********* AMBIENTE *********
+
+********* BACKEND *********
+
+Instalar meu_app em meu_projeto/settings.py:
+INSTALLED_APPS = [
+    # outras apps
+    'meu_app',
+]
+_________________________________________________________________________
+Definir o modelo que representa os dados a manipular - app/models.py
+from django.db import models
+
+class Usuario(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.nome
+_________________________________________________________________________
+Criar e aplicar as migrações para criar as tabelas no banco de dados:
+python manage.py makemigrations
+python manage.py migrate
+_________________________________________________________________________
+Criar um formulário forms.py em meu_app para facilitar a entrada de dados, meu_app/forms.py:
+from django import forms
+from .models import Usuario
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nome', 'email']
+_________________________________________________________________________
+Implementar as views para as operações CRUD em meu_app/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Usuario
+from .forms import UsuarioForm
+
+# Create (Criar)
+def criar_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_usuarios')
+    else:
+        form = UsuarioForm()
+    return render(request, 'criar_usuario.html', {'form': form})
+
+# Read (Ler)
+def listar_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'listar_usuarios.html', {'usuarios': usuarios})
+
+# Update (Atualizar)
+def atualizar_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_usuarios')
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, 'criar_usuario.html', {'form': form})
+
+# Delete (Deletar)
+def deletar_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('listar_usuarios')
+    return render(request, 'confirmar_delecao.html', {'usuario': usuario})
+_________________________________________________________________________
+Crie o arquivo urls.py em meu_app e adicione as URLs correspondentes às views meu_app/urls.py:
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('usuarios/novo/', views.criar_usuario, name='criar_usuario'),
+    path('usuarios/<int:pk>/editar/', views.atualizar_usuario, name='atualizar_usuario'),
+    path('usuarios/<int:pk>/deletar/', views.deletar_usuario, name='deletar_usuario'),
+]
+_________________________________________________________________________
+Adicione o arquivo urls.py criado às URLs do meu_projeto meu_projeto/urls.py:
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('minha_app.urls')),
+]
+_________________________________________________________________________
+
+********* BACKEND *********
+
+********* FRONTEND *********
+
+Criar a pasta templates na raiz do projeto - meu_projeto/templates/meu_app/
+_________________________________________________________________________
+adicionar o diretório templates/meu_app/ ao DIRS no TEMPLATES no arquivo settings.py:
+# meu_projeto/settings.py
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],  # Adicione esta linha
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+_________________________________________________________________________
+Dentro de templates, criar os arquivos frontend
+├── templates/
+│   ├── meu_app/
+│   │   ├── criar_usuario.html
+│   │   ├── listar_usuarios.html
+│   │   ├── confirmar_delecao.html
+│   ├── base.html
+│   └── static/
+│       ├── css/
+│       │   └── styles.css
+│       ├── js/
+│       │   └── scripts.js
+_________________________________________________________________________
+Escopo mínimo do projeto
+
+meu_projeto/
+├── meu_app/
+│   ├── migrations/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── views.py
+│   └── urls.py
+├── meu_projeto/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── templates/
+│   ├── meu_app/
+│   │   ├── criar_usuario.html
+│   │   ├── listar_usuarios.html
+│   │   ├── confirmar_delecao.html
+│   ├── base.html
+│   └── static/
+│       ├── css/
+│       │   └── styles.css
+│       ├── js/
+│       │   └── scripts.js
+└── manage.py
+_________________________________________________________________________
+O template base (base.html) conterá a estrutura comum a todas as páginas
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Projeto Django</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Meu Projeto</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'listar_usuarios' %}">Usuários</a></li>
+                <li><a href="{% url 'criar_usuario' %}">Criar Usuário</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Meu Projeto</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
+
+********* FRONTEND *********
 
