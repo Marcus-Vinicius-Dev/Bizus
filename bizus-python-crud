@@ -10,6 +10,14 @@ python -m django --version
 
 ********* AMBIENTE *********
 
+Instalar o interpretador Python, acesse: https://www.python.org/downloads/
+no git bash, verifique se foi instalado algum path com nome python com o comando 'echo $PATH' sem aspas
+no power shell é [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::User)
+Verifique/encontre python.exe em C:\Users\vinic\AppData\Local\Programs\Python\Python312 ou similar
+adicione em variaveis de sistema o path C:\Users\vinic\AppData\Local\Programs\Python\Python312
+adicione o caminho manualmente se preciso, no git bash: export PATH=$PATH:/c/Users/vinic/AppData/Local/Programs/Python/Python312/
+no power shell: [Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\vinic\AppData\Local\Programs\Python\Python312\", [EnvironmentVariableTarget]::User)
+python --version
 python -m venv venv
 .\venv\Scripts\Activate
 source venv/Scripts/activate
