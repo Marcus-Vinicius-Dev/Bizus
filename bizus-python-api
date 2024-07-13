@@ -39,4 +39,13 @@ python -m django --version
 django-admin startproject meu_projeto (cria a estrutura inicial do projeto)
 cd meu_projeto
 python manage.py runserver
-python manage.py startapp app_crud (cria uma nova aplicação dentro do projeto)
+python manage.py startapp meu_app (cria uma nova aplicação dentro do projeto)
+
+myproject/settings.py
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'myapp',
+]
+
+
