@@ -41,16 +41,37 @@ pip show djangorestframework
 pip show psycopg2-binary
 django-admin --version
 python -m django --version
-django-admin startproject meu_projeto (cria a estrutura inicial do projeto)
-cd meu_projeto
-python manage.py runserver
-python manage.py startapp meu_app (cria uma nova aplicação dentro do projeto)
+django-admin startproject api (cria a estrutura inicial do projeto)
+cd api
+python manage.py startapp rest (cria uma nova aplicação dentro do projeto)
 
-myproject/settings.py
-INSTALLED_APPS = [
-    ...
-    'rest_framework',
-    'myapp',
-]
+models.py
+# models.py
+
+from django.db import models
+
+class Exemplo(models.Model):
+    campo1 = models.CharField(max_length=100)
+    campo2 = models.IntegerField()
+    # Adicione outros campos conforme necessário
+    
+    def __str__(self):
+        return self.campo1  # Retorna um campo representativo para o objeto
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+Crie um arquivo serializers.py no seu aplicativo para definir serializadores que converterão objetos Python (modelos) em formatos de dados como JSON:
+
+# serializers.py
+
+from rest_framework import serializers
+from .models import Exemplo
+
+class ExemploSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exemplo
+        fields = '__all__'  # Ou especifique os campos que deseja serializar
 
 
