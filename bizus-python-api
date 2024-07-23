@@ -74,4 +74,14 @@ class ExemploSerializer(serializers.ModelSerializer):
         model = Exemplo
         fields = '__all__'  # Ou especifique os campos que deseja serializar
 
+********* AMBIENTE *********
+
+********* API CLIMA *********
+
+Obter chave API Key do site OpenWeatherMap
+pip install django requests
+
+********* API CLIMA *********
+
+
 
