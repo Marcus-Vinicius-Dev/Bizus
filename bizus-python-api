@@ -83,5 +83,12 @@ pip install django requests
 
 ********* API CLIMA *********
 
+********* Sistema de Autenticação e Autorização *********
+
+pip install djangorestframework-simplejwt
+
+
+********* Sistema de Autenticação e Autorização *********
+
 
 
