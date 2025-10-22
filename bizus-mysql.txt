@@ -1,3 +1,20 @@
+****************** CONCEITOS EM DADOS ******************
+Entidade: cria uma entidade CLIENTE que se relaciona com uma entidade PEDIDO. 
+Atributos: A entidade CLIENTE tem os atributos Nome, CPF e Email.
+No modelo conceitual (onde são documentados os requisitos e as regras de negócio através de diagramas) temos as ENTIDADES e ATRIBUTOS
+Já no modelo lógico (onde se descreve como serão armazenados os dados no banco e quais serão seus relacionamentos) os termos se tornam TABELAS e COLUNAS
+
+TIPOS
+char: texto fixo de 1 a 255 caracteres
+varchr: texto variável de 1 a 255 caracteres
+text: texto longo
+int: inteiro
+float: racionais
+date: data
+time: hora
+datatime: data e hora
+****************** CONCEITOS EM DADOS ******************
+
 ****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
 CREATE DATABASE nome_do_novo_banco_de_dados; Criar um Novo Banco de Dados
