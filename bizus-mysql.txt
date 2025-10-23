@@ -1,8 +1,11 @@
+1) em serviços no windows, verificar se o mysql está em execução
+
 ****************** CONCEITOS EM DADOS ******************
 Entidade: cria uma entidade CLIENTE que se relaciona com uma entidade PEDIDO. 
 Atributos: A entidade CLIENTE tem os atributos Nome, CPF e Email.
 No modelo conceitual (onde são documentados os requisitos e as regras de negócio através de diagramas) temos as ENTIDADES e ATRIBUTOS
 Já no modelo lógico (onde se descreve como serão armazenados os dados no banco e quais serão seus relacionamentos) os termos se tornam TABELAS e COLUNAS
+Converter do modelo LÓGICO para o FÍSICO: no brModelo vá em Diagrama -> Comandos -> Converter para físico (e terás o código SQL)
 
 TIPOS
 char: texto fixo de 1 a 255 caracteres
@@ -13,7 +16,28 @@ float: racionais
 date: data
 time: hora
 datatime: data e hora
+
+Instruções DDL (Data Definition Language)
 ****************** CONCEITOS EM DADOS ******************
+
+****************** COMANDOS ******************
+no MySQL Command Line Client (que é o prompt do MySQL)
+
+show databases;
+create database nome_do_banco_de_dados; (cria DB)
+drop database nome_do_banco_de_dados; (exclui DB)
+use nome_do_banco_de_dados; (seleciona DB)
+create table nome_da_tabela;
+drop table nome_da_tabela;
+show tables;
+****************** COMANDOS ******************
+
+
+
+
+
+
+2024
 
 ****************** COMANDOS PARA O MYSQL WORKBENCH ******************
 Ctrl + D Sair do Shell
