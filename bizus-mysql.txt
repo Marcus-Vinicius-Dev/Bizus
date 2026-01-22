@@ -131,11 +131,4 @@ insert into pessoas values
 ****************** FIM DA TABELA CADASTRO ACIMA ******************
 
 
-mudanças em bizus-mysql
 
-22/01/2026
-
-Fazer consultas no db
-select*
-from CEPEA_SAS.DBO.CTG1225
-WHERE cpf = '35146922896'
