@@ -1,0 +1,16 @@
+-- Databricks = Uma plataforma unificada, baseada em nuvem, criada pelos fundadores originais do Apache Spark
+-- Apache Spark = É um framework de processamento distribuído open-source para big data. Permite processar enormes volumes de dados dividindo o trabalho entre múltiplos computadores (cluster). É rápido porque processa dados em memória e suporta várias linguagens (Python, SQL, Scala, R, Java)
+-- Lakehouse = 
+-- Data Warehouse = Sistema otimizado para análise (BI) que armazena dados estruturados de forma organizada em tabelas. Focado em consultas SQL rápidas, mas menos flexível que data lakes
+-- Cluster = 
+-- Clusters Spark = Conjunto de computadores (nós) que trabalham juntos para processar dados no Spark
+-- Spark = 
+-- GCP = Google Cloud Platform - suíte de serviços de nuvem do Google (concorrente da AWS da Amazon e Azure da Microsoft). O Databricks roda sobre GCP, AWS ou Azure.
+-- ETL/ELT = ETL: Extrair → Transformar → Carregar (transforma ANTES de salvar)
+             ELT: Extrair → Carregar → Transformar (carrega dados brutos e transforma DEPOIS)
+             Moderno: ELT é mais comum em cloud.
+             Processos de movimentação e transformação de dados
+-- LLMs = Large Language Models - Modelos de linguagem de grande escala (ex: GPT-4, Claude, Llama). São redes neurais treinadas em textos massivos que geram linguagem natural. No Databricks, você pode fine-tunar LLMs com seus dados corporativos.
+-- Pipelines = Fluxos automatizados de processamento de dados. Exemplo: um pipeline pode buscar novos dados todo dia → limpar → transformar → carregar em uma tabela. No Databricks, há o Delta Live Tables para criar pipelines facilmente.
+-- Deploy = Colocar em produção - significa disponibilizar um modelo de machine learning ou aplicação para uso real pelos usuários finais. No Databricks, você faz deploy de modelos via MLflow ou Model Serving
+-- 
