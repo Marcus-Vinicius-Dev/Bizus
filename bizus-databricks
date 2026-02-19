@@ -195,7 +195,7 @@ Monitoramento de latência e throughput das chamadas
 
 ******************************************* FIM MENU *******************************************
 
-******************************************* COMANDOS *******************************************
+******************************************* TECLAS *******************************************
 
 Ctrl + Enter	Executa a consulta atual ou o trecho selecionado
 Ctrl + Shift + Enter	Executa apenas a linha ou trecho destacado Edição e Formatação
@@ -232,7 +232,7 @@ Shift + End	Selecionar até final da linha
 Ctrl + Shift + Home	Selecionar até início do arquivo
 Ctrl + Shift + End	Selecionar até final do arquivo
 
-******************************************* FIM COMANDOS *******************************************
+******************************************* FIM TECLAS *******************************************
 
 
 
