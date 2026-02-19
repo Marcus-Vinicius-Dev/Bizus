@@ -1,107 +1,34 @@
-**Pré formatação
+*Pré formatação
+1) Fazer Backup dos arquivos
+2) Anote as chaves de licença de softwares pagos
+3) Conecte o carregador e mantenha o notebook ligado à energia elétrica durante todo o processo de formatação
+4) Um pen drive com pelo menos 8GB de espaço. Atenção: todo o conteúdo dele será apagado no processo
 
-_Ter um pendrive vazio de no mínimo 8GB p/ copiar a ISO Windows 10
-_Site da microsoft para baixar a imagem do windows 10 ISO (ferramenta de criação de mídia) 
-_plugar o pendrive na máquina e executar o MediaCreationTool1903 (os arquivos do ISO irão p/ o pendrive de maneira automática)
-_Clicar em "criar mídia de instalção"
-_desmarcar "Usar as opçoes recomendadas..." e em arquitetura selecionar "Ambas (32bits e 64bits)"
-**Computadores com 32bits de processamento funcionam com no máximo 4GB de RAM
-_Selecionar "Unidade Flash USB"
-_Selecionar o pendrive
-_"baixará o arquivo MediaCreationTool1903 no pendrive selecionado (demora)"
-_Agora tenho o boot do windows 10 (a imagem ISO)
+*Formatação
+1) Acesse o menu Iniciar > Configurações (ícone de engrenagem) .
+2) Vá até Sistema e clique em Recuperação .
+3) Clique no botão Restaurar o PC (ou "Redefinir o PC") .
+4) Escolha a opção "Remover tudo" para uma formatação completa .
+5) Selecione "Download da nuvem" para baixar a versão mais recente do Windows ou "Reinstalação local" para usar os arquivos já existentes no seu PC .
+7) Siga as instruções na tela e aguarde. O notebook reiniciará algumas vezes
+8) Fim
 
-**Formatação:
-_plugar o pendrive no pc a ser formatado
-_ligar e entrar na BIOS
-_Ir até a guia Boot
-_selecionar o pendrive para ser o 1st boot
-_Exit & Save Changes
-*Após a reinicialização do PC ele reiniciará pelo pendrive
-_selecionar windows 64bits
-_em teclado, selecionar "ABNT2"
-_selecionar "Não tenho a chave do produto"
-_escolher windows pro
-_escolher "personalizada: instalar..."
-_excluir partições do pendrive e selecionar o hd a ser formatado e "avançar"
-_Aguardar as instalações
-_clicar em "reiniciar"
-_retirar o pendrive antes de reiniciar
-_o computador reiniciará pelo windows, basta configurar as preferências do windows
-*é bom entrar na bios e mudar o boot do pendrive para o hd
-*ir em windows update e atualizar o que for necessário (boa parte dos drives do pc serão baixados nessas atualizações)
-*desabilitar recursos nas configurações, no ctrl+alt+del, nas configurações de sistemas aba serviços-> ocultar todos os serviços microsoft->desativar tudo->aplicar->ok
+*Formatação Total
+1) Crie o Pen Drive Bootável: Em outro computador, baixe a "Ferramenta de Criação de Mídia" no site oficial da Microsoft. Execute-a e siga os passos para criar um pendrive de instalação do Windows 11
+2) Inicie o notebook pelo pendrive de instalação do Windows.
+3) Na primeira tela, clique em "Avançar" e depois em "Reparar o computador" (no canto inferior esquerdo).
+4) Vá em Solução de problemas > Opções avançadas > Prompt de Comando.
+5) Na janela preta, digite os comandos um por um, pressionando Enter após cada linha:
 
-**Pós formatação
-_instalar winrar
-_instalar cpu z
-_copiar o modelo da placa mãe e pesquisar os drives no site da fabricante da placa
-__________________________________________________________________________________________________________________________________________________________________________________________
-**Formatação sem backup 
-*Pré formatação 
-_Ter um pendrive vazio de no mínimo 8GB p/ copiar a ISO Windows 10 
-_Site da microsoft para baixar a imagem do windows 10 ISO (ferramenta de criação de mídia) 
-_plugar o pendrive na máquina e executar o MediaCreationTool1903 (os arquivos do ISO irão p/ o pendrive de maneira automática) 
-_Clicar em "criar mídia de instalção" 
-_desmarcar "Usar as opçoes recomendadas..." e em arquitetura selecionar "Ambas (32bits e 64bits)" 
-**Computadores com 32bits de processamento funcionam com no máximo 4GB de RAM 
-_Selecionar "Unidade Flash USB" 
-_Selecionar o pendrive 
-_"baixará o arquivo MediaCreationTool1903 no pendrive selecionado (demora)" 
-_Agora tenho o boot do windows 10 (a imagem ISO) 
-**Formatação: 
-_plugar o pendrive no pc a ser formatado 
-_ligar e entrar na BIOS 
-_Ir até a guia Boot 
-_selecionar o pendrive para ser o 1st boot 
-_Exit & Save Changes 
-*Após a reinicialização do PC ele reiniciará pelo pendrive 
-_selecionar windows 64bits 
-_em teclado, selecionar "ABNT2" 
-_selecionar "Não tenho a chave do produto" 
-_escolher windows pro 
-_escolher "personalizada: instalar..." 
-_excluir partições do pendrive e selecionar o hd a ser formatado e "avançar" 
-_Aguardar as instalações 
-_clicar em "reiniciar" 
-_retirar o pendrive antes de reiniciar 
-_o computador reiniciará pelo windows, basta configurar as preferências do windows 
-*é bom entrar na bios e mudar o boot do pendrive para o hd 
-*ir em windows update e atualizar o que for necessário (boa parte dos drives do pc serão baixados nessas atualizações) 
-*desabilitar recursos nas configurações, no ctrl+alt+del, nas configurações de sistemas aba serviços-> ocultar todos os serviços microsoft->desativar tudo->aplicar->ok 
-**Pós formatação 
-_instalar winrar 
-_instalar cpu z 
-_copiar o modelo da placa mãe e pesquisar os drives no site da fabricante da placa 
-__________________________________________________________________________________________________________________________________________________________________________________________
-**Formatação com backup 
-*Baixar o aplicativo product key para encontrar a chave original do windows
-*Criar e formatar partições (na pesquisa windows)
-_ir em c: e copiar as pastas com os arquivos do cliente (home, talvez público, usuário)
-__________________________________________________________________________________________________________________________________________________________________________________________
-**Formatação sem acesso ao windows do cliente 
-_baixar lazesoft recovery suite
-_password recovery 
-_baixar arquivos (pendrive será formatado p/ receber os arquivos)
-_Plugar o pendrive na CPU do cliente 
-_ligar o computador pela BIOS e dar boot pelo pendrive 
-_entrar em password recovery 
-_reset windows password 
-_escolher o usuário que será resetado 
-_apos os procedimentos o HD não terá mais senha 
-__________________________________________________________________________________________________________________________________________________________________________________________
-Formatação com windows corrompido 
-_desinstalar o HD do cliente e instalar no seu (ficarei com 2 HD)
-_anotar o "nome" dos HDs que fica no Model:
-_dar boot no meu pc
-_boot device prority -> primeiro o meu HD, depois o do cliente 
-_O HD do cliente aparecerá na minha tela com D: ou E: e não terei acesso aos arquivos dele, p/ ter acesso eu clico com o botão direito -> propriedades ->na aba segurança -> avançado -> permissões -> proprietário -> em "digite o nome do objeto a ser selecionado" digite no campo: "nome do meu usuário que pode ser consultado na pasta usuários em painel de controle ou meu computador/HD" -> adicionar -> marcar p/ q o usuário tenha acesso total a pasta ->
-Na aba auditoria -> acrescentar usuário também ->
-Na aba "acesso efetivo" a mesma coisa
-_ copiar as pastas no meu HD
-_voltar com o HD no PC do cliente, formatar a máquina lá 
-_retirar o HD do cliente aós a formatação e instalar no meu para repor os arquivos de um HD p/ o outro (mesclar as pastas de mesmo nomes)
-__________________________________________________________________________________________________________________________________________________________________________________________
+diskpart 
+list disk (anote o número do disco do seu notebook. Geralmente é o "Disco 0").
+select disk 0 (substitua o 0 pelo número do seu disco, se for diferente) 
+clean all 
+
+6) Agora, espere. Esse processo pode levar várias horas (dependendo do tamanho do disco), pois ele vai escrever zeros em cada setor.
+7) Quando terminar, digite exit e feche o prompt. Agora você pode instalar o Windows novamente.
+
+______________________________________________________________________________________________________________________________________________________
 BIOS, UEFI, MBR e GPT
 
 BIOS (Basic Input/Output System): O BIOS é um firmware presente em computadores mais antigos. Ele fornece uma interface básica entre o hardware e o sistema operacional. O BIOS é 
@@ -136,7 +63,7 @@ Em resumo, o firmware é um software de baixo nível incorporado em dispositivos
 papel essencial para o funcionamento adequado de dispositivos eletrônicos.
 
 **(BIOS particiona em MBR) e (UEFI particiona em GPT)
-__________________________________________________________________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________________________
 
 
 
