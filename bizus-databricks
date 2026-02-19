@@ -195,5 +195,44 @@ Monitoramento de latência e throughput das chamadas
 
 ******************************************* FIM MENU *******************************************
 
+******************************************* COMANDOS *******************************************
+
+Ctrl + Enter	Executa a consulta atual ou o trecho selecionado
+Ctrl + Shift + Enter	Executa apenas a linha ou trecho destacado Edição e Formatação
+Ctrl + Espaço	Autocompletar código (sugere tabelas, colunas, comandos)
+Ctrl + Shift + F	Formatar SQL (organiza indentação)
+Ctrl + F	Localizar texto no editor
+Ctrl + H	Localizar e substituir texto
+Ctrl + Z	Desfazer última ação
+Ctrl + Y	Refazer última ação
+Ctrl + C	Copiar texto selecionado
+Ctrl + V	Colar texto
+Ctrl + X	Recortar texto selecionado
+Ctrl + A	Selecionar todo o texto
+Alt + + (tecla +)	Aumentar tamanho da fonte
+Alt + - (tecla -)	Diminuir tamanho da fonte
+Ctrl + 0	Resetar zoom da fonte
+Ctrl + Shift + P	Abrir paleta de comandos
+Esc + H	Ver lista completa de todos os atalhos
+Esc	Sair de menus ou cancelar ações
+Ctrl + S	Salvar consulta atual
+Ctrl + Shift + S	Salvar como nova consulta
+Ctrl + Tab	Alternar entre abas abertas
+Ctrl + W	Fechar aba atual
+Ctrl + Shift + T	Reabrir última aba fechada
+Home	Ir para início da linha
+End	Ir para final da linha
+Ctrl + Home	Ir para início do arquivo
+Ctrl + End	Ir para final do arquivo
+Ctrl + G	Ir para linha específica
+Shift + Setas	Selecionar caractere por caractere
+Ctrl + Shift + Setas	Selecionar palavra por palavra
+Shift + Home	Selecionar até início da linha
+Shift + End	Selecionar até final da linha
+Ctrl + Shift + Home	Selecionar até início do arquivo
+Ctrl + Shift + End	Selecionar até final do arquivo
+
+******************************************* FIM COMANDOS *******************************************
+
 
 
