@@ -52,7 +52,65 @@ Model Serving	                  Hospedar seu modelo ML como serviço 24/7	      
 Feature Serving	                Servir features (variáveis) calculadas em tempo real	        Ter ingredientes pré-preparados para qualquer receita
 Monitoramento de latência	      Tempo de resposta de cada chamada	                            Quanto tempo entre pedir e receber
 Monitoramento de throughput	    Quantas chamadas por segundo o sistema aguenta	              Quantos clientes consigo atender simultaneamente
-
+-- INFERÊNCIA (o modelo EM USO)
+Definição: É quando você usa um modelo já treinado para fazer previsões ou gerar respostas.
+Analogia: Imagine um médico formado:
+Ele já estudou anos (treinamento)
+Agora atende pacientes (INFERÊNCIA)
+Cada novo paciente é uma "consulta" onde ele aplica o conhecimento que já tem
+No Databricks:
+python
+---------------------------------------------
+# Você já tem o modelo pronto
+modelo = carregar_modelo("meu_modelo")
+# INFERÊNCIA: usar o modelo para prever
+resultado = modelo.prever(novo_cliente)
+# modelo apenas RESPONDE, não aprende nada novo
+---------------------------------------------
+-- FINE-TUNING (o modelo TREINADO com SEUS dados)
+Definição: É pegar um modelo já existente e treiná-lo novamente com seus dados específicos para ele se especializar na sua área.
+Analogia: Imagine um médico clínico geral que decide se tornar cardiologista:
+Ele já sabe medicina básica (modelo pré-treinado)
+Faz uma especialização de 2 anos em cardiologia (FINE-TUNING)
+Agora entende DEMAIS de coração, melhor que um clínico geral
+No Databricks:
+python
+---------------------------------------------
+# Você tem um modelo base (ex: GPT-4)
+modelo_base = carregar_modelo("gpt-4")
+# FINE-TUNING: treinar com dados da SECRETARIA DA EDUCAÇÃO
+dados_educacao = ["documentos_escolares.pdf", "legislacao_educacao.txt"]
+modelo_especializado = fine_tune(modelo_base, dados_educacao)
+# Agora o modelo entende o JARGÃO da educação!
+---------------------------------------------
+-- EMBEDDINGS (IA): são representações numéricas de dados (texto, imagem, áudio) em formato de vetor (lista de números) que capturam o SIGNIFICADO do conteúdo.
+Analogia 1 - Mapa de significados:
+Imagine um mapa gigante onde palavras similares ficam perto
+"Gato" e "Felino" estão pertinho no mapa
+"Gato" e "Cachorro" estão mais distantes
+"Gato" e "Constituição Federal" estão muito longe
+Embedding do "Gato" poderia ser:
+---------------------------------------------
+text
+[0.8, 0.1, 0.7, 0.2, ...]  # 1.536 números representando "gato"
+---------------------------------------------
+                    EMBEDDINGS
+                         |
+         +---------------+---------------+
+         |                               |
+    TEXTO -> VETOR                  IMAGEM -> VETOR
+"Gato" = [0.8,0.1,0.7]            🐱 = [0.7,0.2,0.8]
+         |                               |
+         +---------------+---------------+
+                         |
+                  ESPAÇO SEMÂNTICO
+                  (mapa de significados)
+                         |
+        Gato 🐱 --- 0.95 --- Felino 🐆
+         |                     |
+       0.3                   0.28
+         |                     |
+    Cachorro 🐕 --- 0.85 --- Canino 🐺
 ******************************************* FIM CONCEITOS *******************************************
 
 ******************************************* MENU *******************************************
