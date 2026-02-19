@@ -1,5 +1,7 @@
+******************************************* CONCEITOS *******************************************
 -- Databricks = Uma plataforma unificada, baseada em nuvem, criada pelos fundadores originais do Apache Spark
 -- Apache Spark = É um framework de processamento distribuído open-source para big data. Permite processar enormes volumes de dados dividindo o trabalho entre múltiplos computadores (cluster). É rápido porque processa dados em memória e suporta várias linguagens (Python, SQL, Scala, R, Java)
+-- FRAMEWORK: é uma palavra em inglês que, em tradução livre, significa "estrutura de trabalho" ou "arcabouço", que nada mais é do que um conjunto de códigos prontos, bibliotecas, ferramentas e regras que servem como base para desenvolver software de forma mais rápida e padronizada. Ele dita a arquitetura do seu projeto e fornece as peças fundamentais, para que você não precise "reinventar a roda" toda vez que for começar um novo trabalho.
 -- Data Lake  = Um Data Lake é um repositório centralizado que armazena todos os seus dados brutos (estruturados, semi-estruturados e não estruturados) em seu formato original, sem esquema rígido pré-definido
 -- Data Warehouse = Sistema otimizado para análise (BI) que armazena dados estruturados de forma organizada em tabelas. Focado em consultas SQL rápidas, mas menos flexível que data lakes
 -- Lakehouse = Data Lake + Data Warehouse 
@@ -19,4 +21,121 @@ Processos de movimentação e transformação de dados
 -- LLMs = Large Language Models - Modelos de linguagem de grande escala (ex: GPT-4, Claude, Llama). São redes neurais treinadas em textos massivos que geram linguagem natural. No Databricks, você pode fine-tunar LLMs com seus dados corporativos.
 -- Pipelines = Fluxos automatizados de processamento de dados. Exemplo: um pipeline pode buscar novos dados todo dia → limpar → transformar → carregar em uma tabela. No Databricks, há o Delta Live Tables para criar pipelines facilmente.
 -- Deploy = Colocar em produção - significa disponibilizar um modelo de machine learning ou aplicação para uso real pelos usuários finais. No Databricks, você faz deploy de modelos via MLflow ou Model Serving
+-- Workspace = Seu ambiente de trabalho no Databricks (UI web onde você organiza notebooks, pastas e gerencia recursos)
+-- Notebook = Interface interativa onde você escreve e executa código em células (Python, SQL, Scala, R)
+-- DBFS (Databricks File System) = Sistema de arquivos distribuído montado no workspace para armazenar e acessar dados
+-- Tabela vs View:
+   Tabela = Dados físicos armazenados (geralmente em formato Parquet no Delta Lake)
+   View = "Tabela virtual" baseada em uma query SQL (não armazena dados)
+-- Partição = Técnica para organizar dados em subpastas (ex: por data) para queries mais rápidas
+-- Catalyst Optimizer = Mecanismo do Spark que otimiza automaticamente suas queries SQL/DataFrame
+-- Shuffle = Operação cara no Spark que redistribui dados entre os nós (ocorre em joins, groupBy)
+-- Lazy Evaluation = Spark só executa as transformações quando uma ação é chamada (otimiza performance)
+   Transformações: filter, select, join (preguiçosas)
+   Ações: show, count, write (disparam a execução)
+-- Unity Catalog = Solução de governança do Databricks para gerenciar permissões, linhagem e auditoria em todos os workspaces
+-- MLflow = Plataforma open-source do Databricks para gerenciar o ciclo de vida de ML:
+   Tracking: registrar parâmetros e métricas
+   Models: empacotar e deployar modelos
+   Registry: versionar modelos em produção
+-- Databricks SQL = Ambiente otimizado para queries SQL e dashboards (Data Warehouse experience)
+-- Serverless vs Provisioned:
+   Serverless = Databricks gerencia a infraestrutura automaticamente (paga por uso)
+   Provisioned = Você configura e gerencia os clusters manualmente
+-- Slack = Envia mensagem em um canal do Slack quando o alerta dispara
+-- Job compute = Clusters que rodam apenas durante jobs automatizados (mais barato)
+-- Pools =	Reserva de máquinas virtuais para clusters iniciarem mais rápido
+Conceito	                       Explicação simples	                                          Analogia
+Endpoints	                      URLs que "expõem" seu modelo para o mundo	                    Um telefone fixo que as pessoas podem ligar
+APIs REST	                      Regras padronizadas para sistemas conversarem	                Protocolo: "Para falar comigo, use este formato de mensagem"
+Model Serving	                  Hospedar seu modelo ML como serviço 24/7	                    Colocar seu modelo em um "container" acessível
+Feature Serving	                Servir features (variáveis) calculadas em tempo real	        Ter ingredientes pré-preparados para qualquer receita
+Monitoramento de latência	      Tempo de resposta de cada chamada	                            Quanto tempo entre pedir e receber
+Monitoramento de throughput	    Quantas chamadas por segundo o sistema aguenta	              Quantos clientes consigo atender simultaneamente
+
+******************************************* FIM CONCEITOS *******************************************
+
+******************************************* MENU *******************************************
+
+Workspace
+É o seu "escritório virtual" dentro do Databricks. Aqui você encontra todos os seus objetos: notebooks, pastas, arquivos e repositórios Git. É onde você organiza seu trabalho, cria estruturas de pastas e acessa tudo que desenvolve . Pense como o "Explorador de Arquivos" do seu projeto.
+
+Recents
+Mostra todos os objetos que você acessou recentemente: notebooks, consultas, dashboards, experimentos e arquivos. É um atalho prático para continuar de onde parou .
+
+Catalog (ou "Data" em algumas versões)
+É o catálogo unificado de dados da sua organização. Com o Unity Catalog, você pode navegar por todas as tabelas, volumes, bancos de dados e arquivos disponíveis, além de gerenciar permissões de acesso . É tipo um "cardápio" de todos os dados que você pode usar.
+
+Workflows (ou "Jobs & Pipelines" / "Fluxos de Trabalho")
+Gerencia a orquestração e automação de tarefas. Aqui você cria e monitora jobs (tarefas agendadas) e pipelines do Delta Live Tables (ETL automatizado) . É onde você coloca seus processos para rodar automaticamente.
+
+Compute
+Gerencia todos os recursos de processamento:
+
+Clusters: conjuntos de computadores para processar dados com Spark 
+
+SQL Warehouses: clusters otimizados para consultas SQL 
+
+ML endpoints: endpoints para modelos de machine learning
+
+Marketplace
+Um espaço para descobrir e acessar dados, notebooks e dashboards compartilhados por terceiros ou provedores de dados .
+
+📊 Área de SQL
+SQL Editor
+Ambiente para escrever e executar consultas SQL interativas, com sintaxe destacada e autocompletar .
+
+Queries
+Gerencia consultas SQL salvas. Você pode organizar, versionar e compartilhar suas consultas com a equipe .
+
+Dashboards
+Cria painéis visuais interativos baseados em consultas SQL. Perfeito para compartilhar insights com times de negócio .
+
+Genie
+Recurso de IA que permite fazer perguntas em linguagem natural sobre seus dados e obter respostas automáticas .
+
+Alerts
+Configura alertas baseados em resultados de consultas (ex: "me avise se vendas caírem 10%"). Pode enviar notificações por email, Slack, etc. .
+
+Query History
+Histórico completo de todas as consultas SQL executadas, útil para auditoria e otimização de performance .
+
+SQL Warehouses
+Gerencia os clusters específicos para SQL (anteriormente "SQL Endpoints") .
+
+🔧 Área de Engenharia de Dados
+Delta Live Tables
+Pipeline declarativo para ETL. Você define transformações e o Databricks gerencia a execução, monitoramento e manutenção .
+
+Job Runs (ou "Data Ingestion")
+Visualiza execuções recentes de jobs e pipelines de ingestão de dados .
+
+🤖 Área de Machine Learning
+Playground
+Ambiente experimental para testar modelos de IA e prompts com LLMs (Large Language Models) interativamente .
+
+AI Builder (Beta)
+Ferramenta visual para construir aplicações de IA generativa sem precisar escrever código .
+
+Experiments
+Gerencia experimentos de ML com MLflow. Registra parâmetros, métricas, modelos e código para cada teste .
+
+Features (ou "Feature Store")
+Repositório centralizado de features (variáveis) para ML. Permite reutilizar features entre modelos e garantir consistência .
+
+Models
+Gerencia o ciclo de vida de modelos com MLflow Model Registry: versionamento, estágios (Staging, Production) e linhagem .
+
+Serving
+Finalmente chegamos! Esta é a seção para implantar modelos em produção . Você cria endpoints que disponibilizam seus modelos como APIs REST para aplicações consumirem em tempo real. Oferece:
+
+Model Serving: para modelos tradicionais de ML 
+
+Feature Serving: para servir features em tempo real
+
+Monitoramento de latência e throughput das chamadas
+
+******************************************* FIM MENU *******************************************
+
+
 
