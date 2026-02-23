@@ -1,0 +1,110 @@
+********************************* CRIAR UMA TABELA DE ÍNDICE DE CRIAÇÃO *********************************
+
+------------- COMANDO POWER SHELL -------------
+# === VARIÁVEIS DE CONFIGURAÇÃO ===
+# Define o caminho da pasta que será varrida (pasta alvo da busca)
+$pasta = "Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1"
+
+# Define o nome do arquivo CSV que será gerado com os resultados
+$arquivoSaida = "NOVO_ESQUEMA_EAT1.csv"
+
+# Inicializa o contador de arquivos em zero (será incrementado a cada arquivo encontrado)
+$contador = 0
+
+# === PREPARAÇÃO DO AMBIENTE ===
+# Verifica se o arquivo de saída já existe no disco
+if (Test-Path $arquivoSaida) 
+{ 
+    # Se existir, remove o arquivo antigo para não misturar com dados novos
+    Remove-Item $arquivoSaida 
+}
+
+# === MENSAGENS INICIAIS PARA O USUÁRIO ===
+# Exibe mensagem em amarelo avisando que o processo pode demorar
+Write-Host "Iniciando busca. Isso pode levar vários minutos..." -ForegroundColor Yellow
+
+# Exibe texto sem quebrar a linha (para ir mostrando o contador progressivamente)
+Write-Host "Arquivos encontrados até agora: " -NoNewline
+
+# === BUSCA PRINCIPAL DOS ARQUIVOS ===
+# Get-ChildItem: comando que lista arquivos e pastas
+# -Path $pasta: especifica onde procurar (usando a variável definida acima)
+# -Recurse: faz a busca em todas as subpastas (modo recursivo)
+# -File: retorna apenas arquivos (ignora pastas)
+# -ErrorAction SilentlyContinue: ignora erros de acesso/permissão e continua
+Get-ChildItem -Path $pasta -Recurse -File -ErrorAction SilentlyContinue | 
+
+# Para CADA arquivo encontrado, executa o bloco de código entre chaves
+ForEach-Object {
+    # === CONTADOR DE PROGRESSO ===
+    # Incrementa o contador em 1 (contabiliza mais um arquivo processado)
+    $contador++
+    
+    # === FEEDBACK VISUAL A CADA 100 ARQUIVOS ===
+    # O operador % retorna o resto da divisão do contador por 100
+    # Quando o resto é zero, significa que contador é múltiplo de 100
+    if ($contador % 100 -eq 0) {
+        # Exibe o número atual sem quebrar linha, mantendo na mesma linha
+        Write-Host "$contador..." -NoNewline
+    }
+    
+    # === CRIAÇÃO DO OBJETO COM OS DADOS DO ARQUIVO ===
+    # [PSCustomObject]: cria um objeto personalizado com propriedades definidas
+    [PSCustomObject]@{
+        # DATA: pega a data da última modificação e formata para padrão brasileiro
+        # ToString("dd/MM/yyyy HH:mm:ss") -> dia/mês/ano hora:minuto:segundo
+        DATA = $_.LastWriteTime.ToString("dd/MM/yyyy HH:mm:ss")
+        
+        # PENULT_PASTA: nome da pasta anterior à pasta atual (avô do arquivo)
+        # $_.Directory.Parent.Name -> pega a pasta pai da pasta atual
+        # if (...) trata casos onde não existe pasta pai (ex: raiz)
+        PENULT_PASTA = if ($_.Directory.Parent) { $_.Directory.Parent.Name } else { "" }
+        
+        # ULT_PASTA: nome da pasta imediatamente anterior (pai do arquivo)
+        # $_.Directory.Name -> nome da pasta onde o arquivo está
+        ULT_PASTA = $_.Directory.Name
+        
+        # EXTENSÃO: extensão do arquivo sem o ponto inicial
+        # TrimStart('.') remove o ponto do início da extensão (.txt vira txt)
+        EXTENSÃO = $_.Extension.TrimStart('.')
+        
+        # ARQUIVO: nome completo do arquivo (com extensão)
+        ARQUIVO = $_.Name
+        
+        # ENDERECO: caminho completo do arquivo (incluindo todas as pastas)
+        ENDERECO = $_.FullName
+    }
+    # O objeto criado é enviado para o próximo comando (|)
+} | 
+
+# === EXPORTAÇÃO PARA ARQUIVO CSV ===
+# Export-Csv: converte objetos em linhas de arquivo CSV
+# -Path $arquivoSaida: salva no arquivo definido no início
+# -Encoding UTF8: usa codificação UTF-8 (com acentos)
+# -NoTypeInformation: não inclui linha extra com informações de tipo
+Export-Csv -Path $arquivoSaida -Encoding UTF8 -NoTypeInformation
+
+# === MENSAGEM FINAL DE CONCLUSÃO ===
+# Exibe mensagem em verde com o total de arquivos processados
+# `n dentro das aspas cria uma nova linha antes do texto
+Write-Host "`nConcluído! Total de $contador arquivos processados." -ForegroundColor Green
+
+------------- FIM COMANDO POWER SHELL ------------- 
+
+📊 VISUALIZAÇÃO EM PLANILHA (Excel/LibreOffice):
+A	                    B	                C	                               D	              E	                              F
+DATA	                PENULT_PASTA	    ULT_PASTA	                       EXTENSÃO	        ARQUIVO	                        ENDERECO
+09/10/2024 18:05:42	  Adriana Accordi	  2024	                           xlsx	            32 e 33_LIBRAS_0924.xlsx	      Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
+15/08/2024 09:23:17	  João Silva	      2024	                           docx	            Relatório_Final.docx	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\João Silva\2024\Relatório_Final.docx
+22/07/2024 14:30:05  	Maria Santos      2024	                           pdf	            Contrato_assinado.pdf	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Maria Santos\2024\Contrato_assinado.pdf
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+🏗️ HIERARQUIA DAS PASTAS NO EXEMPLO:
+Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
+├─────────────────────────── PASTA RAIZ ───────────────────────────┤
+                                  ├──── PASTA 1 ─────┤
+                                                   ├── PASTA 2 ──┤
+                                                                ├── PASTA 3 ──┤
+                                                                             ├── ULT_PASTA ──┤
+                                                                                             ├── ARQUIVO
+
+------------------------------------ FIM CRIAR UMA TABELA DE ÍNDICE DE CRIAÇÃO ------------------------------------
