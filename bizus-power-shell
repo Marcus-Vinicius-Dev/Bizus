@@ -64,7 +64,7 @@ ForEach-Object {
         # $_.Directory.Name -> nome da pasta onde o arquivo está
         ULT_PASTA = $_.Directory.Name
         
-        # EXTENSÃO: extensão do arquivo sem o ponto inicial
+        # EXTENSAO: extensão do arquivo sem o ponto inicial
         # TrimStart('.') remove o ponto do início da extensão (.txt vira txt)
         EXTENSÃO = $_.Extension.TrimStart('.')
         
