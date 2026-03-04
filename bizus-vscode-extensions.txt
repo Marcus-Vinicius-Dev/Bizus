@@ -34,6 +34,8 @@ Remote SSH: Editing Cofiguration Files
 Remote Explorer
 shell-Format
 SQLite Viewer
+SQL Server (mssql)
 Tabnine AI Autocomplete etc...
 Thunder Client
 WSL
+
