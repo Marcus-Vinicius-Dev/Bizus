@@ -24,6 +24,7 @@ Live Server
 Live Share
 Makefile Tools
 Markdown Preview Enhance
+MSYS2/Cygwin/MinGW/Clang support 
 Portuguese (Brazil) Language Pack for Viusual Studio Code
 PowerShell
 Pylance
@@ -38,4 +39,5 @@ SQL Server (mssql)
 Tabnine AI Autocomplete etc...
 Thunder Client
 WSL
+
 
