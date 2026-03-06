@@ -19,7 +19,6 @@ Doxygen Documentation Generator
 Git History
 GitLens - Git supercharged
 Include Autocomplete
-learn-liting
 Live Server
 Live Share
 Makefile Tools
@@ -36,8 +35,8 @@ Remote Explorer
 shell-Format
 SQLite Viewer
 SQL Server (mssql)
-Tabnine AI Autocomplete etc...
 Thunder Client
 WSL
+
 
 
