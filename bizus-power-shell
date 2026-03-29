@@ -3,10 +3,10 @@
 ------------- COMANDO POWER SHELL -------------
 # === VARIÁVEIS DE CONFIGURAÇÃO ===
 # Define o caminho da pasta que será varrida (pasta alvo da busca)
-$pasta = "Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1"
+$pasta = "Z:\CAMINHO\COMPLETO\ULTIMA_PASTA"
 
 # Define o nome do arquivo CSV que será gerado com os resultados
-$arquivoSaida = "NOVO_ESQUEMA_EAT1.csv"
+$arquivoSaida = "ULTIMA_PASTA.csv"
 
 # Inicializa o contador de arquivos em zero (será incrementado a cada arquivo encontrado)
 $contador = 0
@@ -94,9 +94,9 @@ Write-Host "`nConcluído! Total de $contador arquivos processados." -ForegroundC
 📊 VISUALIZAÇÃO EM PLANILHA (Excel/LibreOffice):
 A	                    B	                C	                               D	              E	                              F
 DATA	                PENULT_PASTA	    ULT_PASTA	                       EXTENSÃO	        ARQUIVO	                        ENDERECO
-09/10/2024 18:05:42	  Adriana Accordi	  2024	                           xlsx	            32 e 33_LIBRAS_0924.xlsx	      Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
-15/08/2024 09:23:17	  João Silva	      2024	                           docx	            Relatório_Final.docx	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\João Silva\2024\Relatório_Final.docx
-22/07/2024 14:30:05  	Maria Santos      2024	                           pdf	            Contrato_assinado.pdf	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Maria Santos\2024\Contrato_assinado.pdf
+09/10/2024 18:05:42	  FULANO1           	  2024	                           xlsx	            32 e 33_LIBRAS_0924.xlsx	      Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
+15/08/2024 09:23:17	  FULANO2	              2024	                           docx	            Relatório_Final.docx	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\João Silva\2024\Relatório_Final.docx
+22/07/2024 14:30:05   FULANO3                 2024	                           pdf	            Contrato_assinado.pdf	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Maria Santos\2024\Contrato_assinado.pdf
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 🏗️ HIERARQUIA DAS PASTAS NO EXEMPLO:
 Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
