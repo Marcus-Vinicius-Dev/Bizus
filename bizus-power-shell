@@ -1,5 +1,6 @@
 ############## COMANDOS ##############
 
+############## NAVEGAÇÃO
 pwd                               # ver onde está
 ls                                # lista arquivos e pastas
 ls -Force                         # mostra ocultos
@@ -12,6 +13,36 @@ cd ..                             # voltar pasta
 cd ..\..                          # voltar duas ou mais pastas
 cd ~                              # Ir para a pasta do usuário (home)
 !!                                # executar comando anterior
+
+############## CONFIGURAÇÕES
+PLACA_MAE E FABRICANTE DO DISPOSITIVO -> Get-WmiObject Win32_BaseBoard | Format-Table Manufacturer, Product, Version, SerialNumber -AutoSize 
+MODELO -> Get-WmiObject Win32_ComputerSystem | Select-Object -ExpandProperty Model
+BIOS -> Get-WmiObject Win32_BIOS | Select-Object -ExpandProperty SMBIOSBIOSVersion
+PROCESSADOR -> Get-WmiObject Win32_Processor | Format-Table Name, MaxClockSpeed, NumberOfCores -AutoSize
+QUANTIDADE DE DISCOS -> Get-PSDrive -PSProvider FileSystem | Select-Object -ExpandProperty Name
+"Espaco livre dos discos" Get-PSDrive -PSProvider FileSystem | Format-Table Name, @{Label="Size (GB)"; Expression={[math]::round($_.Used / 1GB, 2)}}, @{Label="FreeSpace (GB)"; Expression={[math]::round($_.Free / 1GB, 2)}} -AutoSize
+"Informacoes dos discos" Get-WmiObject Win32_DiskDrive | Format-Table DeviceID, Caption, @{Label="Size (GB)"; Expression={[math]::round($_.Size / 1GB, 2)}}, MediaType -AutoSize
+"Particoes" Get-WmiObject Win32_DiskPartition | Select-Object -ExpandProperty DeviceID
+"Slots de memoria" Get-WmiObject Win32_PhysicalMemory | Select-Object -ExpandProperty DeviceLocator
+"Modulos de memorias" Get-WmiObject Win32_PhysicalMemory | Format-Table Capacity, Speed, FormFactor, MemoryType -AutoSize
+"Placa de video" Get-WmiObject Win32_VideoController | Format-Table Caption, @{Label="Adapter RAM (MB)"; Expression={[math]::round($_.AdapterRAM / 1MB, 2)}} -AutoSize
+"Dispositivos de Som" Get-WmiObject Win32_SoundDevice | Format-Table Caption, DeviceID -AutoSize
+"Informacoes da Bateria" Get-WmiObject Win32_Battery | Format-Table Caption, Description, EstimatedChargeRemaining -AutoSize
+"Impressoras Instaladas" Get-WmiObject Win32_Printer | Format-Table Name, PortName -AutoSize
+"Dispositivos USB Conectados" Get-WmiObject Win32_PnPSignedDriver | Format-Table DeviceName, DriverVersion -AutoSize
+"Adaptadores de Rede" Get-WmiObject Win32_NetworkAdapter | Where-Object { $_.MACAddress -ne $null } | Format-Table Name, MACAddress -AutoSize
+"Adaptadores Bluetooth" Get-WmiObject Win32_PnPEntity | Where-Object { $_.PNPClass -eq "Bluetooth" } | Format-Table Caption, Status -AutoSize
+"Sistema operacional" Get-WmiObject Win32_OperatingSystem | Format-Table Caption, Version, OSArchitecture, SerialNumber, InstallDate, LastBootUpTime, OSLanguage, Organization -AutoSize
+"Contas de usuarios" Get-LocalUser | Format-Table Name, Enabled -AutoSize
+"Informacoes do ip" ipconfig
+"Configuracao de Rede" ipconfig /all
+"Programas Instalados" Get-WmiObject Win32_Product | Format-Table Name, Version -AutoSize
+
+
+
+
+
+
 
 ############## FIM COMANDOS ##############
 
