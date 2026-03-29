@@ -1,112 +1,17 @@
 ############## COMANDOS ##############
 
-Get-Command → explorar tudo
-Get-Command -Verb Get → explorar por categoria
-Get-Command -Noun Service → explorar por categoria
-
-📁 1. Manipulação de arquivos e diretórios
-Get-Item → obtém um arquivo ou pasta
-Get-ChildItem (ls, dir) → lista arquivos/pastas
-Set-Item → altera propriedades de um item
-New-Item → cria arquivo ou pasta
-Remove-Item → remove arquivo/pasta
-Copy-Item → copia arquivos/pastas
-Move-Item → move/renomeia
-Rename-Item → renomeia
-Clear-Content → limpa conteúdo de arquivo
-Set-Content → escreve conteúdo
-Add-Content → adiciona conteúdo
-Get-Content → lê arquivo (tipo cat)
-
-📂 2. Navegação no sistema
-Set-Location (cd) → muda diretório
-Get-Location (pwd) → mostra caminho atual
-Push-Location → salva diretório atual
-Pop-Location → volta ao anterior
-
-🔎 3. Busca e filtragem
-Select-String → busca texto (tipo grep)
-Where-Object → filtra objetos
-Sort-Object → ordena
-Group-Object → agrupa
-Measure-Object → faz contagens/estatísticas
-Compare-Object → compara dados
-
-📊 4. Manipulação de objetos
-Select-Object → seleciona propriedades
-ForEach-Object → executa ação em cada item
-Tee-Object → envia saída para arquivo + console
-
-🔄 5. Processos e sistema
-Get-Process → lista processos
-Start-Process → inicia programa
-Stop-Process → encerra processo
-Wait-Process → aguarda processo terminar
-
-💻 6. Serviços do Windows
-Get-Service → lista serviços
-Start-Service → inicia serviço
-Stop-Service → para serviço
-Restart-Service → reinicia
-Set-Service → altera configuração
-
-🌐 7. Rede
-Test-Connection → ping
-Test-NetConnection → testa portas/conexões
-Invoke-WebRequest → requisição HTTP
-Invoke-RestMethod → APIs REST
-Resolve-DnsName → consulta DNS
-
-🔐 8. Usuários e permissões
-Get-LocalUser → lista usuários
-New-LocalUser → cria usuário
-Set-LocalUser → altera usuário
-Remove-LocalUser → remove usuário
-
-📦 9. Pacotes e módulos
-Get-Module → lista módulos
-Import-Module → importa módulo
-Install-Module → instala módulo
-Update-Module → atualiza módulo
-Find-Module → busca módulos
-
-🧠 10. Ajuda e descoberta
-Get-Command → lista comandos
-Get-Help → ajuda detalhada
-Get-Member → mostra propriedades de objetos
-
-📝 11. Variáveis e ambiente
-Get-Variable → lista variáveis
-Set-Variable → cria/modifica
-Remove-Variable → remove
-Get-Env → (via $env:) variáveis de ambiente
-
-🔄 12. Controle de fluxo (scripts)
-if, else → condição
-switch → múltiplas condições
-for, foreach → loops
-while → loop condicional
-break, continue → controle de loop
-
-⚙️ 13. Execução e histórico
-Invoke-Expression → executa string como código
-Start-Job → roda em background
-Get-Job → lista jobs
-Receive-Job → pega resultado
-Stop-Job → encerra job
-
-📜 14. Logs e eventos
-Get-EventLog → logs antigos
-Get-WinEvent → logs modernos
-Write-EventLog → escreve log
-
-🧰 15. Diversos úteis
-Write-Output → saída padrão
-Write-Host → imprime no console
-Write-Error → erro
-Write-Warning → aviso
-Clear-Host (cls) → limpa tela
-Out-File → salva saída em arquivo
+pwd                               # ver onde está
+ls                                # lista arquivos e pastas
+ls -Force                         # mostra ocultos
+ls -Directory                     # listar somente pastas
+ls -File                          # listar somente arquivos
+ls -Recurse                       # lista tudo (subpastas)
+ls C:\Users *documen* -File -Recurse       # pesquisa por arquivos com trecho %documen%
+cd nome-da-pasta                  # entrar na pasta
+cd ..                             # voltar pasta
+cd ..\..                          # voltar duas ou mais pastas
+cd ~                              # Ir para a pasta do usuário (home)
+!!                                # executar comando anterior
 
 ############## FIM COMANDOS ##############
 
