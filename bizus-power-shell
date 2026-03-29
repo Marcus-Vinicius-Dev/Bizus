@@ -12,6 +12,7 @@ cd nome-da-pasta                  # entrar na pasta
 cd ..                             # voltar pasta
 cd ..\..                          # voltar duas ou mais pastas
 cd ~                              # Ir para a pasta do usuário (home)
+.\nome_do_arquivo                 # Ir para a pasta do usuário (home)
 !!                                # executar comando anterior
 notepad $PROFILE                  # abre o snnipet (na primeira vez, salve-o como Microsoft.PowerShell_profile.ps1)
 . $PROFILE                        # executa o snnipet
