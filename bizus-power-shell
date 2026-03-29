@@ -1,110 +1,113 @@
-********************************* CRIAR UMA TABELA DE ÍNDICE DE CRIAÇÃO *********************************
+############## COMANDOS ##############
 
-------------- COMANDO POWER SHELL -------------
-# === VARIÁVEIS DE CONFIGURAÇÃO ===
-# Define o caminho da pasta que será varrida (pasta alvo da busca)
-$pasta = "Z:\CAMINHO\COMPLETO\ULTIMA_PASTA"
+Get-Command → explorar tudo
+Get-Command -Verb Get → explorar por categoria
+Get-Command -Noun Service → explorar por categoria
 
-# Define o nome do arquivo CSV que será gerado com os resultados
-$arquivoSaida = "ULTIMA_PASTA.csv"
+📁 1. Manipulação de arquivos e diretórios
+Get-Item → obtém um arquivo ou pasta
+Get-ChildItem (ls, dir) → lista arquivos/pastas
+Set-Item → altera propriedades de um item
+New-Item → cria arquivo ou pasta
+Remove-Item → remove arquivo/pasta
+Copy-Item → copia arquivos/pastas
+Move-Item → move/renomeia
+Rename-Item → renomeia
+Clear-Content → limpa conteúdo de arquivo
+Set-Content → escreve conteúdo
+Add-Content → adiciona conteúdo
+Get-Content → lê arquivo (tipo cat)
 
-# Inicializa o contador de arquivos em zero (será incrementado a cada arquivo encontrado)
-$contador = 0
+📂 2. Navegação no sistema
+Set-Location (cd) → muda diretório
+Get-Location (pwd) → mostra caminho atual
+Push-Location → salva diretório atual
+Pop-Location → volta ao anterior
 
-# === PREPARAÇÃO DO AMBIENTE ===
-# Verifica se o arquivo de saída já existe no disco
-if (Test-Path $arquivoSaida) 
-{ 
-    # Se existir, remove o arquivo antigo para não misturar com dados novos
-    Remove-Item $arquivoSaida 
-}
+🔎 3. Busca e filtragem
+Select-String → busca texto (tipo grep)
+Where-Object → filtra objetos
+Sort-Object → ordena
+Group-Object → agrupa
+Measure-Object → faz contagens/estatísticas
+Compare-Object → compara dados
 
-# === MENSAGENS INICIAIS PARA O USUÁRIO ===
-# Exibe mensagem em amarelo avisando que o processo pode demorar
-Write-Host "Iniciando busca. Isso pode levar vários minutos..." -ForegroundColor Yellow
+📊 4. Manipulação de objetos
+Select-Object → seleciona propriedades
+ForEach-Object → executa ação em cada item
+Tee-Object → envia saída para arquivo + console
 
-# Exibe texto sem quebrar a linha (para ir mostrando o contador progressivamente)
-Write-Host "Arquivos encontrados até agora: " -NoNewline
+🔄 5. Processos e sistema
+Get-Process → lista processos
+Start-Process → inicia programa
+Stop-Process → encerra processo
+Wait-Process → aguarda processo terminar
 
-# === BUSCA PRINCIPAL DOS ARQUIVOS ===
-# Get-ChildItem: comando que lista arquivos e pastas
-# -Path $pasta: especifica onde procurar (usando a variável definida acima)
-# -Recurse: faz a busca em todas as subpastas (modo recursivo)
-# -File: retorna apenas arquivos (ignora pastas)
-# -ErrorAction SilentlyContinue: ignora erros de acesso/permissão e continua
-Get-ChildItem -Path $pasta -Recurse -File -ErrorAction SilentlyContinue | 
+💻 6. Serviços do Windows
+Get-Service → lista serviços
+Start-Service → inicia serviço
+Stop-Service → para serviço
+Restart-Service → reinicia
+Set-Service → altera configuração
 
-# Para CADA arquivo encontrado, executa o bloco de código entre chaves
-ForEach-Object {
-    # === CONTADOR DE PROGRESSO ===
-    # Incrementa o contador em 1 (contabiliza mais um arquivo processado)
-    $contador++
-    
-    # === FEEDBACK VISUAL A CADA 100 ARQUIVOS ===
-    # O operador % retorna o resto da divisão do contador por 100
-    # Quando o resto é zero, significa que contador é múltiplo de 100
-    if ($contador % 100 -eq 0) {
-        # Exibe o número atual sem quebrar linha, mantendo na mesma linha
-        Write-Host "$contador..." -NoNewline
-    }
-    
-    # === CRIAÇÃO DO OBJETO COM OS DADOS DO ARQUIVO ===
-    # [PSCustomObject]: cria um objeto personalizado com propriedades definidas
-    [PSCustomObject]@{
-        # DATA: pega a data da última modificação e formata para padrão brasileiro
-        # ToString("dd/MM/yyyy HH:mm:ss") -> dia/mês/ano hora:minuto:segundo
-        DATA = $_.LastWriteTime.ToString("dd/MM/yyyy HH:mm:ss")
-        
-        # PENULT_PASTA: nome da pasta anterior à pasta atual (avô do arquivo)
-        # $_.Directory.Parent.Name -> pega a pasta pai da pasta atual
-        # if (...) trata casos onde não existe pasta pai (ex: raiz)
-        PENULT_PASTA = if ($_.Directory.Parent) { $_.Directory.Parent.Name } else { "" }
-        
-        # ULT_PASTA: nome da pasta imediatamente anterior (pai do arquivo)
-        # $_.Directory.Name -> nome da pasta onde o arquivo está
-        ULT_PASTA = $_.Directory.Name
-        
-        # EXTENSAO: extensão do arquivo sem o ponto inicial
-        # TrimStart('.') remove o ponto do início da extensão (.txt vira txt)
-        EXTENSÃO = $_.Extension.TrimStart('.')
-        
-        # ARQUIVO: nome completo do arquivo (com extensão)
-        ARQUIVO = $_.Name
-        
-        # ENDERECO: caminho completo do arquivo (incluindo todas as pastas)
-        ENDERECO = $_.FullName
-    }
-    # O objeto criado é enviado para o próximo comando (|)
-} | 
+🌐 7. Rede
+Test-Connection → ping
+Test-NetConnection → testa portas/conexões
+Invoke-WebRequest → requisição HTTP
+Invoke-RestMethod → APIs REST
+Resolve-DnsName → consulta DNS
 
-# === EXPORTAÇÃO PARA ARQUIVO CSV ===
-# Export-Csv: converte objetos em linhas de arquivo CSV
-# -Path $arquivoSaida: salva no arquivo definido no início
-# -Encoding UTF8: usa codificação UTF-8 (com acentos)
-# -NoTypeInformation: não inclui linha extra com informações de tipo
-Export-Csv -Path $arquivoSaida -Encoding UTF8 -NoTypeInformation
+🔐 8. Usuários e permissões
+Get-LocalUser → lista usuários
+New-LocalUser → cria usuário
+Set-LocalUser → altera usuário
+Remove-LocalUser → remove usuário
 
-# === MENSAGEM FINAL DE CONCLUSÃO ===
-# Exibe mensagem em verde com o total de arquivos processados
-# `n dentro das aspas cria uma nova linha antes do texto
-Write-Host "`nConcluído! Total de $contador arquivos processados." -ForegroundColor Green
+📦 9. Pacotes e módulos
+Get-Module → lista módulos
+Import-Module → importa módulo
+Install-Module → instala módulo
+Update-Module → atualiza módulo
+Find-Module → busca módulos
 
-------------- FIM COMANDO POWER SHELL ------------- 
+🧠 10. Ajuda e descoberta
+Get-Command → lista comandos
+Get-Help → ajuda detalhada
+Get-Member → mostra propriedades de objetos
 
-📊 VISUALIZAÇÃO EM PLANILHA (Excel/LibreOffice):
-A	                    B	                C	                               D	              E	                              F
-DATA	                PENULT_PASTA	    ULT_PASTA	                       EXTENSÃO	        ARQUIVO	                        ENDERECO
-09/10/2024 18:05:42	  FULANO1           	  2024	                           xlsx	            32 e 33_LIBRAS_0924.xlsx	      Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
-15/08/2024 09:23:17	  FULANO2	              2024	                           docx	            Relatório_Final.docx	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\João Silva\2024\Relatório_Final.docx
-22/07/2024 14:30:05   FULANO3                 2024	                           pdf	            Contrato_assinado.pdf	          Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Maria Santos\2024\Contrato_assinado.pdf
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-🏗️ HIERARQUIA DAS PASTAS NO EXEMPLO:
-Z:\DEPLAN_CEPEA\CEPEA\00_NOVO_ESQUEMA_EAT1\00-ATENDIMENTO\Assessoria_CGRH\Adriana Accordi\2024\32 e 33_LIBRAS_0924.xlsx
-├─────────────────────────── PASTA RAIZ ───────────────────────────┤
-                                  ├──── PASTA 1 ─────┤
-                                                   ├── PASTA 2 ──┤
-                                                                ├── PASTA 3 ──┤
-                                                                             ├── ULT_PASTA ──┤
-                                                                                             ├── ARQUIVO
+📝 11. Variáveis e ambiente
+Get-Variable → lista variáveis
+Set-Variable → cria/modifica
+Remove-Variable → remove
+Get-Env → (via $env:) variáveis de ambiente
 
------------------------------------- FIM CRIAR UMA TABELA DE ÍNDICE DE CRIAÇÃO ------------------------------------
+🔄 12. Controle de fluxo (scripts)
+if, else → condição
+switch → múltiplas condições
+for, foreach → loops
+while → loop condicional
+break, continue → controle de loop
+
+⚙️ 13. Execução e histórico
+Invoke-Expression → executa string como código
+Start-Job → roda em background
+Get-Job → lista jobs
+Receive-Job → pega resultado
+Stop-Job → encerra job
+
+📜 14. Logs e eventos
+Get-EventLog → logs antigos
+Get-WinEvent → logs modernos
+Write-EventLog → escreve log
+
+🧰 15. Diversos úteis
+Write-Output → saída padrão
+Write-Host → imprime no console
+Write-Error → erro
+Write-Warning → aviso
+Clear-Host (cls) → limpa tela
+Out-File → salva saída em arquivo
+
+############## FIM COMANDOS ##############
+
+
