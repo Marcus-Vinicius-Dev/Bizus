@@ -15,6 +15,7 @@ cd ~                              # Ir para a pasta do usuário (home)
 !!                                # executar comando anterior
 
 ############## CONFIGURAÇÕES
+
 PLACA_MAE E FABRICANTE DO DISPOSITIVO -> Get-WmiObject Win32_BaseBoard | Format-Table Manufacturer, Product, Version, SerialNumber -AutoSize 
 MODELO -> Get-WmiObject Win32_ComputerSystem | Select-Object -ExpandProperty Model
 BIOS -> Get-WmiObject Win32_BIOS | Select-Object -ExpandProperty SMBIOSBIOSVersion
@@ -37,12 +38,6 @@ QUANTIDADE DE DISCOS -> Get-PSDrive -PSProvider FileSystem | Select-Object -Expa
 "Informacoes do ip" ipconfig
 "Configuracao de Rede" ipconfig /all
 "Programas Instalados" Get-WmiObject Win32_Product | Format-Table Name, Version -AutoSize
-
-
-
-
-
-
 
 ############## FIM COMANDOS ##############
 
