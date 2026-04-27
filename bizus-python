@@ -1,3 +1,6 @@
+
+########################################## CONCEITOS ##########################################
+---------------------------------------------------------------------------------------------------------------------------------
 Framework vs Biblioteca
 Conceitos Fundamentais
 Aspecto	      Biblioteca (Library)	                                        Framework
@@ -16,12 +19,12 @@ Ambos são importados	                    import nome
 
 Tabela de Decisão
 Você precisa...	         Escolha Biblioteca	          Escolha Framework
-Controle total	         ✅ Sim	                    ❌ Não
-Começar rápido	         ❌ Demora configurar	      ✅ Já tem estrutura
+Controle total	         ✅ Sim	                      ❌ Não
+Começar rápido	         ❌ Demora configurar	        ✅ Já tem estrutura
 Projeto pequeno	         ✅ Melhor	                  ❌ Muito pesado
 Projeto grande	         ❌ Vira bagunça	            ✅ Organiza
 Flexibilidade	           ✅ Alta	                    ❌ Baixa
-Padronização	           ❌ Cada um faz diferente	  ✅ Equipe segue padrão
+Padronização	           ❌ Cada um faz diferente	    ✅ Equipe segue padrão
 Aprendizado	             ✅ Mais fácil	              ❌ Curva maior
 
 Resumo Final
@@ -35,3 +38,355 @@ Acoplamento	   Baixo (fácil trocar)	                      Alto (difícil trocar
 Regra de ouro:
 Biblioteca = você pede um serviço
 Framework = você se inscreve para ser chamado
+---------------------------------------------------------------------------------------------------------------------------------
+O que é Python?
+Python é uma linguagem de programação de alto nível, interpretada, de tipagem dinâmica e multiparadigma, conhecida por sua sintaxe clara e legível.
+
+TIPAGEM DINÂMICA:
+┌─────────────────────────────────────────┐
+│ A variável NÃO TEM tipo fixo            │
+│ O tipo é determinado pelo VALOR atual   │
+│ Ex: x = 10 (int) → x = "texto" (str)    │
+│ Vantagem: flexível, rápido de escrever  │
+│ Desvantagem: erros só em execução       │
+└─────────────────────────────────────────┘
+
+MULTIPARADIGMA:
+┌─────────────────────────────────────────┐
+│ A linguagem suporta MÚLTIPLOS estilos   │
+│ Você escolhe:                            │
+│ • Imperativo (passo a passo)            │
+│ • Orientado a Objetos (classes)         │
+│ • Funcional (transformações)            │
+│ • Procedural (funções)                  │
+│ Vantagem: usar melhor ferramenta        │
+│ Desvantagem: pode confundir iniciantes  │
+└─────────────────────────────────────────┘
+
+PYTHON = Dinâmica + Multiparadigma
+
+História e Origem
+Informação	    Detalhe
+Criador	        Guido van Rossum (Holanda)
+Ano de criação	1991 (início do desenvolvimento em 1989)
+Local          	Centrum Wiskunde & Informatica (CWI), Amsterdã
+Inspiração	    Linguagem ABC (ensino), C, Modula-3, Lisp
+Nome	          Monty Python Flying Circus (não pela cobra!)
+
+Por que foi criado?
+Guido queria uma linguagem que fosse:
+Fácil de ler (como o inglês)
+Produtiva (menos código para fazer mais)
+Divertida de programar
+Acessível para iniciantes, mas poderosa para experts
+Código aberto (desde o início)
+
+Linha do Tempo
+1989 - Guido começa a escrever Python nas férias de Natal
+1991 - Versão 0.9.0 lançada (já tinha lambda, map, filter)
+1994 - Python 1.0 (funcionalidades básicas)
+2000 - Python 2.0 (compreensão de listas, coletor de lixo)
+2008 - Python 3.0 (quebra compatibilidade, corrigiu problemas)
+2020 - Fim do suporte ao Python 2.7 ("a grande migração")
+2024 - Python 3.13 (versões atuais até 3.14 em desenvolvimento)
+
+Para que serve? Principais usos
+Área	                     Frameworks/Bibliotecas	             Uso real
+Análise de Dados	         Pandas, NumPy	                     Governo paulista processa dados da educação
+Web Scraping	             BeautifulSoup, Selenium, Scrapy	   Coletar dados da SED (o que você está fazendo!)
+Desenvolvimento Web        Django, Flask, FastAPI	             Sites, APIs, sistemas internos
+Machine Learning/AI	       TensorFlow, PyTorch, scikit-learn	 ChatGPT usa Python, reconhecimento facial
+Automação	                 PyAutoGUI, Selenium	               Robôs que preenchem planilhas, enviam emails
+Científico/Engenharia	     SciPy, Matplotlib	                 Simulações, gráficos, cálculos complexos
+DevOps	                   Ansible, Fabric	                   Infraestrutura como código
+Cibersegurança	           Scapy, Requests	                   Testes de penetração, análise de rede
+---------------------------------------------------------------------------------------------------------------------------------
+1. MÓDULOS (Modules)
+Conceito: Um módulo é um arquivo .py contendo funções, classes e variáveis. É como uma "caixa de ferramentas".
+
+from selenium import webdriver           # Módulo núcleo
+from selenium.webdriver.common.by import By        # Módulo de estratégias
+from selenium.webdriver.support.ui import WebDriverWait  # Módulo de espera
+___________________________________________________
+2. CLASSES (Classes)
+Conceito: Uma classe é um molde/template para criar objetos. Define características (atributos) e comportamentos (métodos).
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+
+# 1. CLASSE webdriver.Chrome()
+driver = webdriver.Chrome()  # Objeto que controla o navegador
+# Métodos do objeto:
+driver.get("https://google.com")  # Navegar
+driver.find_element(By.ID, "x")   # Encontrar elemento
+driver.quit()                      # Fechar
+
+# 2. CLASSE WebDriverWait (espera)
+wait = WebDriverWait(driver, 10)  # Objeto de espera
+# Métodos:
+wait.until(lambda d: d.find_element(By.ID, "x"))  # Esperar condição
+
+# 3. CLASSE Select (dropdown)
+from selenium.webdriver.support.ui import Select
+select = Select(driver.find_element(By.ID, "tipo"))
+select.select_by_visible_text("DIRETORIA")  # Método específico
+___________________________________________________
+3. OBJETOS (Objects)
+Conceito: Um objeto é uma instância concreta de uma classe. É a "coisa real" que existe na memória.
+
+driver = webdriver.Chrome()  # 'driver' é um OBJETO
+elemento = driver.find_element(By.ID, "email")  # 'elemento' é outro OBJETO
+wait = WebDriverWait(driver, 10)  # 'wait' é um OBJETO
+___________________________________________________
+4. FUNÇÕES (Functions)
+Conceito: Bloco de código reutilizável que executa uma tarefa específica.
+
+# Métodos do objeto 'driver'
+driver.get("https://google.com")           # Navega
+driver.find_element(By.ID, "id")           # Encontra elemento
+driver.execute_script("alert('Oi')")       # Executa JS
+driver.back()                              # Volta
+driver.forward()                           # Avança
+driver.refresh()                           # Atualiza
+driver.close()                             # Fecha
+driver.quit()                              # Fecha tudo
+
+# Métodos de um elemento
+elemento = driver.find_element(By.ID, "email")
+elemento.click()                           # Clica
+elemento.send_keys("texto")                # Digita
+elemento.clear()                           # Limpa
+elemento.text                              # Pega texto
+elemento.get_attribute("value")            # Pega atributo
+___________________________________________________
+5. MÉTODOS (Methods)
+Conceito: São funções que pertencem a uma classe. São chamadas "sobre" um objeto.
+
+# DIFERENÇA ENTRE FUNÇÃO E MÉTODO
+
+# FUNÇÃO (independente)
+print(len("Python"))  # len() é uma função
+
+# MÉTODO (pertence a um objeto)
+nome = "Python"
+nome.upper()  # upper() é um método do objeto string
+
+# EXEMPLO PRÁTICO
+class ContaBancaria:
+    def __init__(self, titular, saldo):
+        self.titular = titular
+        self.saldo = saldo
+    
+    def depositar(self, valor):      # MÉTODO
+        self.saldo += valor
+        return f"Depositado {valor}. Saldo: {self.saldo}"
+    
+    def sacar(self, valor):          # MÉTODO
+        if valor <= self.saldo:
+            self.saldo -= valor
+            return f"Saque de {valor} realizado"
+
+# Usando os métodos
+conta = ContaBancaria("Marcus", 1000)
+print(conta.depositar(500))  # Usando o método depositar
+print(conta.sacar(200))      # Usando o método sacar
+___________________________________________________
+6. ATRIBUTOS (Attributes)
+Conceito: São variáveis que pertencem a um objeto ou classe. Representam características/estado.
+
+# Atributos do objeto 'driver'
+titulo = driver.title        # Atributo (página atual)
+url = driver.current_url     # Atributo
+handles = driver.window_handles  # Atributo (lista de abas)
+
+# Atributos de um elemento
+texto = elemento.text               # Texto visível
+id_elemento = elemento.id           # ID interno do elemento
+tag = elemento.tag_name             # Nome da tag (div, span, etc.)
+classe = elemento.get_attribute("class")  # Classe CSS
+___________________________________________________
+7. VARIÁVEIS (Variables)
+Conceito: Espaço na memória que armazena um valor.
+
+# DECLARAR e ATRIBUIR
+nome = "Marcus"        # Variável string
+idade = 35             # Variável int
+altura = 1.75          # Variável float
+ativo = True           # Variável bool
+lista = [1, 2, 3]      # Variável lista
+
+# Python é TIPAGEM DINÂMICA (não precisa declarar tipo)
+x = 10    # x é int
+x = "dez" # x agora é string (pode mudar!)
+
+# REGRAS de nomes de variáveis
+nome_completo = "Marcus"      # Snake case (padrão Python)
+nomeCompleto = "Marcus"       # Camel case (menos comum)
+NomeCompleto = "Marcus"       # Pascal case (usado em classes)
+_NOME_PRIVADO = "Marcus"      # Convenção: privado
+CONSTANTE = "VALOR FIXO"      # Convenção: constante
+___________________________________________________
+8. PARÂMETROS vs ARGUMENTOS
+
+# PARÂMETROS = variáveis definidas na função
+def somar(a, b):    # 'a' e 'b' são PARÂMETROS
+    return a + b
+
+# ARGUMENTOS = valores passados ao chamar a função
+resultado = somar(5, 3)  # 5 e 3 são ARGUMENTOS
+
+# DIFERENTES TIPOS DE ARGUMENTOS
+def exemplo(normal, *args, **kwargs):
+    # normal: argumento obrigatório
+    # *args: argumentos posicionais extras (tupla)
+    # **kwargs: argumentos nomeados extras (dicionário)
+    pass
+
+# Chamada com diferentes tipos
+exemplo(1, 2, 3, 4, nome="Marcus", idade=35)
+___________________________________________________
+9. IMPORT (Importação)
+
+# 1. import módulo (traz tudo)
+import math
+print(math.sqrt(16))  # Precisa do prefixo 'math.'
+
+# 2. from módulo import item (traz específico)
+from math import sqrt, pi
+print(sqrt(16))  # Não precisa de prefixo
+print(pi)
+
+# 3. from módulo import * (traz tudo - NÃO RECOMENDADO)
+from math import *
+print(sqrt(16))  # Pode causar conflitos de nome
+
+# 4. import módulo as apelido (renomeia)
+import pandas as pd  # 'pd' é apelido
+df = pd.DataFrame()
+
+# 5. from módulo import item as apelido
+from datetime import datetime as dt
+agora = dt.now()
+___________________________________________________
+TABELA RESUMO
+Conceito	  Analogia	                Exemplo Python	        Exemplo no seu código
+Módulo	    Gaveta com ferramentas	  import math	            from selenium import webdriver
+Classe	    Planta/macho	            class Carro:	          webdriver.Chrome
+Objeto	    Casa real	                meu_carro = Carro()	    driver = webdriver.Chrome()
+Método	    Ação que objeto faz	      carro.acelerar()	      driver.get("url")
+Atributo	  Característica	          carro.cor	              driver.title
+Função	    Ação independente	        len("texto")	          print("oi")
+Variável	  Caixa com valor	          nome = "Marcus"	        wait = WebDriverWait(...)
+___________________________________________________
+Resumo final para seu trabalho:
+Módulo = arquivo .py que você importa
+Classe = molde para criar objetos
+Objeto = instância concreta (ex: driver, wait, elemento)
+Método = ação que o objeto executa (ex: .get(), .click())
+Atributo = característica do objeto (ex: .title, .text)
+Função = ação independente (ex: print(), len())
+Variável = espaço que guarda dados
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+########################################## SELENIUM WEB SCRAPING ##########################################
+---------------------------------------------------------------------------------------------------------------------------------
+MÓDULOS:
+
+MÓDULOS PRINCIPAIS (NÚCLEO)
+from selenium import webdriver           # Núcleo: controla o navegador (abrir, fechar, navegar)
+
+MÓDULOS COMUNS (WEBDRIVER)
+from selenium.webdriver.common.by import By        # Estratégias de localização (ID, XPATH, CSS, NAME, TAG, LINK)
+from selenium.webdriver.common.keys import Keys    # Simular teclas especiais (ENTER, TAB, ESC, F5, CTRL)
+from selenium.webdriver.common.action_chains import ActionChains  # Ações em cadeia (arrastar, duplo clique, hover)
+from selenium.webdriver.common.alert import Alert   # Lidar com popups de alerta (aceitar, cancelar, digitar)
+from selenium.webdriver.common.proxy import Proxy   # Configurar servidor proxy (IP e porta)
+from selenium.webdriver.common.utils import is_connectable  # Verificar se uma porta está disponível para conexão
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities  # Configurar capacidades do navegador
+from selenium.webdriver.common.html5.application_cache import ApplicationCache  # Manipular cache HTML5 da aplicação
+
+MÓDULOS DE SUPORTE (SUPPORT)
+from selenium.webdriver.support.ui import Select    # Manipular dropdowns (caixas de seleção)
+from selenium.webdriver.support.ui import WebDriverWait  # Espera condicional até elemento aparecer
+from selenium.webdriver.support import expected_conditions as EC  # Condições de espera pré-definidas
+from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver  # Disparar eventos durante ações
+from selenium.webdriver.support.abstract_event_listener import AbstractEventListener  # Criar listeners personalizados
+from selenium.webdriver.support.color import Color  # Converter cores entre formatos (RGB, HEX)
+from selenium.webdriver.support.relative_locator import RelativeLocator  # Localizar elementos próximos a outros
+
+MÓDULOS DO CHROME
+from selenium.webdriver.chrome.options import Options  # Configurações específicas do Chrome
+from selenium.webdriver.chrome.service import Service  # Configurar caminho do chromedriver.exe
+from selenium.webdriver.chrome.webdriver import WebDriver  # Classe específica do WebDriver Chrome
+
+MÓDULOS DO FIREFOX
+from selenium.webdriver.firefox.options import Options  # Configurações específicas do Firefox
+from selenium.webdriver.firefox.service import Service  # Configurar caminho do geckodriver.exe
+from selenium.webdriver.firefox.webdriver import WebDriver  # Classe específica do WebDriver Firefox
+
+MÓDULOS DO EDGE
+from selenium.webdriver.edge.options import Options  # Configurações específicas do Edge
+from selenium.webdriver.edge.service import Service  # Configurar caminho do msedgedriver.exe
+from selenium.webdriver.edge.webdriver import WebDriver  # Classe específica do WebDriver Edge
+
+MÓDULOS DO SAFARI
+from selenium.webdriver.safari.options import Options  # Configurações específicas do Safari
+from selenium.webdriver.safari.service import Service  # Configurar caminho do safaridriver.exe
+from selenium.webdriver.safari.webdriver import WebDriver  # Classe específica do WebDriver Safari
+
+MÓDULOS DO INTERNET EXPLORER
+from selenium.webdriver.ie.options import Options  # Configurações específicas do IE
+from selenium.webdriver.ie.service import Service  # Configurar caminho do IEDriverServer.exe
+from selenium.webdriver.ie.webdriver import WebDriver  # Classe específica do WebDriver IE
+
+MÓDULOS REMOTOS
+from selenium.webdriver.remote.webelement import WebElement  # Manipular elementos remotamente (Selenium Grid)
+from selenium.webdriver.remote.command import Command  # Comandos remotos para o servidor Selenium
+from selenium.webdriver.remote.errorhandler import ErrorHandler  # Tratar erros de conexão remota
+from selenium.webdriver.remote.remote_connection import RemoteConnection  # Gerenciar conexão remota
+from selenium.webdriver.remote.utils import dump_json  # Converter objetos para JSON
+
+EXCEÇÕES (ERROR HANDLING)
+from selenium.common.exceptions import NoSuchElementException  # Elemento não encontrado na página
+from selenium.common.exceptions import TimeoutException  # Tempo de espera esgotou
+from selenium.common.exceptions import ElementNotVisibleException  # Elemento existe mas está invisível
+from selenium.common.exceptions import ElementNotInteractableException  # Elemento não pode ser clicado/interagido
+from selenium.common.exceptions import StaleElementReferenceException  # Elemento foi removido do DOM
+from selenium.common.exceptions import NoSuchWindowException  # Janela/aba não existe mais
+from selenium.common.exceptions import WebDriverException  # Erro genérico do driver
+from selenium.common.exceptions import InvalidSelectorException  # Seletor CSS/XPATH com sintaxe inválida
+from selenium.common.exceptions import MoveTargetOutOfBoundsException  # Movimento do mouse fora da tela
+from selenium.common.exceptions import NoSuchFrameException  # Frame/iframe não encontrado
+from selenium.common.exceptions import NoSuchAttributeException  # Atributo não existe no elemento
+from selenium.common.exceptions import UnexpectedAlertPresentException  # Alerta inesperado apareceu
+from selenium.common.exceptions import NoAlertPresentException  # Tentou acessar alerta que não existe
+from selenium.common.exceptions import InvalidCookieDomainException  # Tentou setar cookie para domínio errado
+from selenium.common.exceptions import UnableToSetCookieException  # Não foi possível definir cookie
+from selenium.common.exceptions import InvalidElementStateException  # Elemento em estado inválido para ação
+from selenium.common.exceptions import InvalidArgumentException  # Argumento passado tem tipo inválido
+from selenium.common.exceptions import JavascriptException  # Erro na execução do JavaScript
+from selenium.common.exceptions import ImeNotAvailableException  # Input Method Editor não disponível
+from selenium.common.exceptions import ImeActivationFailedException  # Falha ao ativar IME
+from selenium.common.exceptions import SessionNotCreatedException  # Falha ao criar sessão do driver
+from selenium.common.exceptions import NoSuchDriverException  # Driver executável não encontrado no PATH
+
+MÓDULOS DE TIPOS (TYPE HINTS)
+from selenium.types import AnyKey  # Tipo para teclas especiais (type hints)
+from selenium.types import WaitExcTypes  # Tipos de exceções de espera
+
+IMPORTANTE: NÃO precisa importar tudo. O essencial para começar é:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+
+
+
+
+
