@@ -30,9 +30,12 @@ cd.. = (volta um diretório)
 git init = (dá início ao monitoramento do projeto mas não dos arquivos dentro do projeto)
 git config user.name "Marcus-Vinicius-Dev"
 git config user.email "marcus.vini.dev@gmail.com"
+git config --global user.email "marcus.vini.dev@gmail.com" = (Para fazer uma configuração global e única, basta fazer este comando)
+git config user.name "marcussilva05" 
+git config user.email "marcus.silva05@educacao.sp.gov.br"
+git config --global user.email "marcus.silva05@educacao.sp.gov.br" 
 git config user.name "Marcus-Vinicius-C-S"
 git config user.email "ciapdivtectic@gmail.com"
-git config --global user.email "marcus.vini.dev@gmail.com" = (Para fazer uma configuração global e única, basta fazer este comando)
 git add nomedoarquivo = (dá início ao monitoramento de arquivos, ou após ser modificado)
 git add . = (adiciona todos os arquivos do projeto no Git)
 git commit -m "escreva uma mensagem sobre a etapa do commit, ex:. primeiro commit"
@@ -47,7 +50,6 @@ git checkout códigodocommit = ("viagem no tempo" antes de checkout, dá um git 
 git checkout master = (retorna ao commit mais recente)
 git mv nomedoarquivo novonomedoarquivo = (renomeia o arquivo p/ outro nome de arquivo)
 git rm nomedoarquivo = (remove o arquivo do Git)
-
 git diff --staged = (mostra todas as alterações do arquivo "bom usar antes de commitar")
 "outro uso do git diff é digitar git log --oneline, copiar o código do commit e colar na frente do comando git diff códigocolado, isso mostrará as mudanças feitas entre o commit master e o copiado e colado"
 "git diff código1..código2 = (mudanças feitas do código1 commit mais antigo ao mais recente escolhido código2)"
