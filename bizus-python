@@ -1,0 +1,37 @@
+Framework vs Biblioteca
+Conceitos Fundamentais
+Aspecto	      Biblioteca (Library)	                                        Framework
+Definição   	Conjunto de funções reutilizáveis que seu código CHAMA	      Estrutura que CHAMA seu código (Inversão de Controle)
+Controle    	Você decide quando e como usar	                              O framework decide o fluxo, você preenche as lacunas
+Liberdade	    Alta - você escolhe o que usar	                              Baixa - segue regras e padrões pré-definidos
+Tamanho	      Geralmente menor, mais específico	                            Geralmente maior, mais abrangente
+
+Semelhanças
+Semelhança	                              Explicação
+Ambos reutilizam código	                  Evitam reinventar a roda
+Ambos economizam tempo	                  Funções já prontas e testadas
+Ambos têm documentação	                  Precisam ser aprendidos
+Ambos podem ser instalados via pip	      pip install nome
+Ambos são importados	                    import nome
+
+Tabela de Decisão
+Você precisa...	         Escolha Biblioteca	          Escolha Framework
+Controle total	         ✅ Sim	                    ❌ Não
+Começar rápido	         ❌ Demora configurar	      ✅ Já tem estrutura
+Projeto pequeno	         ✅ Melhor	                  ❌ Muito pesado
+Projeto grande	         ❌ Vira bagunça	            ✅ Organiza
+Flexibilidade	           ✅ Alta	                    ❌ Baixa
+Padronização	           ❌ Cada um faz diferente	  ✅ Equipe segue padrão
+Aprendizado	             ✅ Mais fácil	              ❌ Curva maior
+
+Resumo Final
+              Biblioteca	                               Framework
+Frase-chave	  "Eu uso a biblioteca"	                     "O framework me usa"
+Controle	     Você decide o fluxo	                      Framework decide o fluxo
+Exemplos	     requests, pandas, numpy, beautifulsoup	    Django, Flask, Scrapy, PyTest
+Quando usar	   Tarefas específicas, projetos pequenos	    Sistemas completos, projetos grandes
+Acoplamento	   Baixo (fácil trocar)	                      Alto (difícil trocar)
+
+Regra de ouro:
+Biblioteca = você pede um serviço
+Framework = você se inscreve para ser chamado
