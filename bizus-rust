@@ -6,6 +6,57 @@ Foi criada por Graydon Hoare, um engenheiro que trabalhava na Mozilla
 No Firefox, por exemplo, a Mozilla descobriu que mais de 70% dos bugs de segurança críticos eram causados por erros de gerenciamento de memória (acessos inválidos, 
 ponteiros soltos, etc.) . Rust foi feita para resolver isso de forma definitiva.
 
+📊 Python vs Rust: Filosofias Diferentes
+Aspecto	                 Python	                                         Rust
+Tipo de linguagem	     Interpretada	                                 Compilada
+Execução	             Linha por linha (runtime)	                     Compila tudo ANTES de executar
+Performance	             Mais lenta (5-100x mais lenta que Rust)	     Muito rápida (comparável a C/C++)
+Memória	                 Gerenciamento automático (garbage collector)	 Gerenciamento manual (mas seguro, sem GC)
+Portabilidade	         Precisa do Python instalado na máquina alvo	 Gera um .exe independente
+Segurança	             Erros aparecem em execução	                     Erros são capturados na compilação
+
+
+Arquivo/Pasta	                 Para que serve	                                                       Python equivalente
+Cargo.toml	                     Configuração do projeto (nome, dependências, versão)	               requirements.txt + setup.py + pyproject.toml
+Cargo.lock	                     Versões EXATAS de cada dependência (garante reprodutibilidade)	       pip freeze > requirements.txt
+src/main.rs	                     SEU CÓDIGO	                                                           hello.py (seu código)
+target/debug/*.o	             Arquivos objeto (cada parte do código compilada separadamente)	       Não existe (interpretado)
+target/debug/*.exe	             O EXECUTÁVEL FINAL	                                                   Não existe (precisa do interpretador)
+target/debug/*.pdb	             Informações de debug para o Visual Studio	                           Não existe
+target/debug/deps/	             Dependências compiladas (ex: biblioteca rand)	                       site-packages/ (mas em Python são interpretadas)
+target/debug/incremental/	     Cache para compilações mais rápidas (reaproveita o que já compilou)   __pycache__/ (bytecode)
+
+)
+📊 Comparação direta: Executar "Hello World"
+---------------------------------------------------
+Python:
+powershell
+echo print('Hello') > hello.py
+python hello.py
+# Saída: Hello
+
+O que aconteceu nos bastidores:
+Abriu o arquivo hello.py
+Leu "print('Hello')"
+Interpretou e executou
+---------------------------------------------------
+Rust:
+powershell
+cargo new hello --bin
+cd hello
+# (escrever o código em src/main.rs)
+cargo run
+
+O que aconteceu nos bastidores:
+Leu todo o código em src/main.rs
+Analisou sintaxe (se algo errado, NÃO compila)
+Verificou tipos (se passar string onde espera número, NÃO compila)
+Verificou memória (se esquecer de liberar, NÃO compila)
+Otimizou o código (remove código morto, reorganiza instruções)
+Gerou um arquivo .exe DE 186KB (sim, um Hello World faz 186KB!)
+Executou o .exe
+---------------------------------------------------
+
 ############################################## REQUISITOS MÍNIMOS ##############################################
 EXTENSÕES VSCODE
 
@@ -26,6 +77,8 @@ INSTALAÇÕES RUST
 			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\vinic\.cargo\bin", [EnvironmentVariableTarget]::User)
 			rustc --version
 			cargo --version
+
+############################################## COMANDOS ##############################################
 
 
 
