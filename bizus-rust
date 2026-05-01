@@ -1,0 +1,43 @@
+############################################## CONCEITOS ##############################################
+Rust SIGNIFICA Ferrugem 
+O projeto começou em 2006 como um hobby pessoal, mas foi anunciado oficialmente em 2010
+Foi desenvolvida nos laboratórios da Mozilla Research
+Foi criada por Graydon Hoare, um engenheiro que trabalhava na Mozilla
+No Firefox, por exemplo, a Mozilla descobriu que mais de 70% dos bugs de segurança críticos eram causados por erros de gerenciamento de memória (acessos inválidos, 
+ponteiros soltos, etc.) . Rust foi feita para resolver isso de forma definitiva.
+
+############################################## REQUISITOS MÍNIMOS ##############################################
+EXTENSÕES VSCODE
+
+				"rust-lang.rust-analyzer",
+				"vadimcn.vscode-lldb",
+				"serayuzgur.crates",
+				"tamasfe.even-better-toml",
+				"fill-labs.dependi",
+				"dustypomerleau.rust-snippets",
+				"panicbit.cargo" 
+
+INSTALAÇÕES RUST
+
+      winget install Rustlang.Rustup
+			Write-Host "`n2. Instalando Ferramentas de Build do C++..." -ForegroundColor Yellow
+			winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+			Write-Host "`n3. Adicionando Rust ao PATH..." -ForegroundColor Yellow
+			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\vinic\.cargo\bin", [EnvironmentVariableTarget]::User)
+			rustc --version
+			cargo --version
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
