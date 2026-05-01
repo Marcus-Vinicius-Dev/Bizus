@@ -288,7 +288,43 @@ Atributo = característica do objeto (ex: .title, .text)
 Função = ação independente (ex: print(), len())
 Variável = espaço que guarda dados
 ---------------------------------------------------------------------------------------------------------------------------------
+########################################## REQUISITOS MÍNIMOS ##########################################
+EXTENSÕES VSCODE
 
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.debugpy",
+				"ms-toolsai.jupyter",
+				"ms-toolsai.datawrangler",
+				"njpwerner.autodocstring",
+				"kevinrose.vsc-python-indent",
+				"coenraads.bracket-pair-colorizer-2",
+				"christian-kohler.path-intellisense",
+				"littlefoxteam.vscode-python-test-adapter",
+				"ms-python.black-formatter",
+				"ms-python.isort",
+				"ms-python.flake8",
+				"ms-python.vscode-python-envs",      # Gerenciamento de ambientes virtuais
+				"VisualStudioExptTeam.vscodeintellicode", # AI IntelliCode
+				"bierner.markdown-preview-github-styles", # Markdown GitHub style
+				"gruntfuggly.todo-tree"              # Gerenciamento de TODO comments 
+
+VERIFICAÇÕES PYTHON
+
+python --version 2>&1
+pip --version
+pip list | findstr -i "pandas pyodbc sqlalchemy dotenv numpy"
+
+INSTALAR PYTHON
+
+winget install Python.Python.3.12
+python -m pip install --upgrade pip
+pip install pyodbc pandas SQLAlchemy python-dotenv
+pip install pandas sqlalchemy pyodbc
+Start-BitsTransfer -Source "https://go.microsoft.com/fwlink/?linkid=2249006" -Destination "$env:TEMP\msodbcsql.msi"
+Start-Process -Wait -FilePath msiexec -ArgumentList "/i `"$env:TEMP\msodbcsql.msi`" /quiet IACCEPTMSODBCSQLLICENSETERMS=YES"
+pip install selenium
+pip install -r requirements.txt
 
 
 ########################################## SELENIUM WEB SCRAPING ##########################################
