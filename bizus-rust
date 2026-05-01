@@ -70,16 +70,382 @@ EXTENSÕES VSCODE
 
 INSTALAÇÕES RUST
 
-      winget install Rustlang.Rustup
-			Write-Host "`n2. Instalando Ferramentas de Build do C++..." -ForegroundColor Yellow
-			winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
-			Write-Host "`n3. Adicionando Rust ao PATH..." -ForegroundColor Yellow
-			[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\vinic\.cargo\bin", [EnvironmentVariableTarget]::User)
-			rustc --version
-			cargo --version
+				# Instalação
+				winget install Rustlang.Rustup                    # Instala Rust no Windows
+				rustup-init.exe                                   # Instalador manual
+				rustup update                                     # Atualiza Rust para última versão
+				rustup self uninstall                             # Desinstala completamente
+				
+				# Versões e toolchains
+				rustc --version                                   # Versão do compilador Rust
+				cargo --version                                   # Versão do Cargo
+				rustup show                                       # Mostra toolchains instaladas
+				rustup default stable                             # Define stable como padrão
+				rustup override set stable                        # Usa stable APENAS nesse projeto
+				rustup target add thumbv6m-none-eabi              # Adiciona target para ESP32
+				
+				# Documentação
+				rustup doc                                        # Abre documentação offline local
+				rustup doc --std                                  # Documentação da biblioteca padrão
+				
+				# Componentes adicionais
+				rustup component add rustfmt                      # Adiciona formatador de código
+				rustup component add clippy                       # Adiciona linter (análise estática)
+				rustup component add rust-analyzer                # Adiciona suporte ao VSCode
+
+				Write-Host "`n2. Instalando Ferramentas de Build do C++..." -ForegroundColor Yellow
+				winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+				Write-Host "`n3. Adicionando Rust ao PATH..." -ForegroundColor Yellow
+				[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Users\vinic\.cargo\bin", [EnvironmentVariableTarget]::User)
+
 
 ############################################## COMANDOS ##############################################
 
+🆕 CRIANDO PROJETOS
+bash
+# Projeto executável (binário)
+cargo new meu_projeto --bin                       # Cria projeto com src/main.rs
+cargo new --bin meu_projeto                       # Mesmo comando (--bin é padrão)
+
+# Projeto biblioteca (pode ser usado por outros projetos)
+cargo new minha_lib --lib                         # Cria projeto com src/lib.rs
+
+# Em uma pasta já existente (não cria nova pasta)
+cargo init --bin                                  # Inicializa projeto na pasta atual
+cargo init --lib                                  # Inicializa biblioteca na pasta atual
+
+# Com configurações extras
+cargo new meu_projeto --bin --vcs git             # Já inicializa repositório Git
+cargo new meu_projeto --bin --edition 2021        # Define edição específica
+
+🔨 COMPILAÇÃO (BUILD)
+bash
+# Compilação básica
+cargo build                                       # Compila em modo debug
+cargo build --release                             # Compila com otimizações (mais rápido)
+cargo build --target x86_64-pc-windows-msvc       # Compila para target específico
+
+# Compilação com informações extras
+cargo build --verbose                             # Mostra TODOS os comandos executados
+cargo build --quiet                               # Saída silenciosa (só erros)
+cargo build --color always                        # Força cores na saída
+
+# Compilação com features (dependências condicionais)
+cargo build --features "feature1,feature2"        # Ativa features específicas
+cargo build --all-features                        # Ativa todas as features
+cargo build --no-default-features                 # Desativa features padrão
+
+# Compilação com profiling
+cargo build --profile dev                         # Debug (padrão)
+cargo build --profile release                     # Release otimizado
+cargo build --profile test                        # Perfil de testes
+
+# Compilação de exemplos
+cargo build --examples                            # Compila todos os exemplos
+cargo build --example meu_exemplo                 # Compila exemplo específico
+
+🏃 EXECUÇÃO
+bash
+# Execução básica
+cargo run                                         # Compila (se necessário) e executa
+cargo run --release                               # Executa versão otimizada
+
+# Passando argumentos para o programa (APÓS -- )
+cargo run -- arg1 arg2 "argumento com espaço"     # Argumentos vão para seu programa
+cargo run -- --help                               # Seu programa recebe --help
+cargo run -- -n 10 -f arquivo.txt                 # Seu programa recebe parâmetros
+
+# Execução com features
+cargo run --features "feature1"                   # Ativa features e executa
+
+# Execução de exemplos
+cargo run --example meu_exemplo                   # Compila e executa um exemplo
+cargo run --example meu_exemplo -- arg1 arg2      # Exemplo + argumentos
+
+# Execução de binários específicos
+cargo run --bin meu_binario                       # Se tiver múltiplos binários
+cargo run --bin meu_binario -- arg1               # Binário específico + argumentos
+
+🧪 TESTES
+bash
+# Executar testes
+cargo test                                        # Roda todos os testes
+cargo test --release                              # Roda testes em modo release
+cargo test -- --nocapture                         # Mostra println! dentro dos testes
+cargo test -- --test-threads=1                    # Roda testes em série (não paralelo)
+
+# Testes específicos
+cargo test nome_do_teste                          # Roda apenas testes com esse nome
+cargo test modulo::submodulo::teste               # Roda teste por caminho completo
+cargo test --test integration_test                # Roda apenas teste de integração específico
+
+# Preparação para testes
+cargo test -- --ignored                           # Roda apenas testes marcados como #[ignored]
+cargo test -- --include-ignored                   # Roda testes normais E ignorados
+
+# Documentação como teste
+cargo test --doc                                  # Roda testes de documentação (/// exemplo)
+cargo test -- --show-output                       # Mostra saída de testes bem-sucedidos
+
+# Testes com features
+cargo test --features "feature1"                  # Roda testes com features ativadas
+cargo test --all-features                         # Roda testes com todas features
+
+# Benchmarks (instável, precisa de nightly)
+cargo bench                                       # Roda benchmarks
+cargo bench -- --save-baseline base               # Salva baseline para comparação
+
+📦 GERENCIAMENTO DE DEPENDÊNCIAS
+bash
+# Adicionar dependências (precisa do cargo-edit: cargo install cargo-edit)
+cargo add rand                                    # Adiciona última versão
+cargo add rand@0.8.5                              # Adiciona versão específica
+cargo add serde --features derive                 # Adiciona com features
+cargo add tokio --features full                   # Adiciona tokio com todas features
+cargo add --dev pretty_assertions                 # Dependência apenas para desenvolvimento
+
+# Remover dependências
+cargo rm rand                                     # Remove dependência
+cargo rm --dev pretty_assertions                  # Remove dependência de desenvolvimento
+
+# Atualizar dependências
+cargo update                                      # Atualiza TODAS dependências (dentro do semver)
+cargo update -p rand                              # Atualiza apenas a dependência rand
+cargo update --precise 0.8.5 -p rand              # Atualiza para versão específica
+cargo update --dry-run                            # Mostra o que seria atualizado (sem fazer)
+
+# Listar dependências
+cargo tree                                        # Mostra árvore de dependências
+cargo tree --duplicates                           # Mostra dependências duplicadas
+cargo tree --depth 2                              # Limita profundidade da árvore
+cargo tree --invert --package rand                # Mostra quem depende de rand
+cargo tree --prefix none                          # Remove prefixo de saída
+
+# Verificar dependências desatualizadas
+cargo outdated                                    # Precisa de: cargo install cargo-outdated
+
+🔍 INSPEÇÃO E ANÁLISE
+bash
+# Verificação sem compilar
+cargo check                                       # Verifica sintaxe e tipos (MAIS RÁPIDO!)
+cargo check --release                             # Verifica modo release
+cargo check --target wasm32-unknown-unknown       # Verifica para target específico
+
+# Análise estática (linter)
+cargo clippy                                      # Executa linter (recomendações)
+cargo clippy -- -W clippy::pedantic               # Regras pedantes (mais rigoroso)
+cargo clippy -- -A clippy::all                    # Desativa todas as regras
+cargo clippy --fix                                # Corrige problemas automaticamente
+cargo clippy --tests                              # Analisa também códigos de teste
+cargo clippy -- --deny warnings                   # Trata warnings como erros
+
+# Formatação de código
+cargo fmt                                         # Formata TODO o código
+cargo fmt -- --check                              # Apenas verifica, não modifica
+cargo fmt -- --config max_width=100               # Formata com largura máxima 100
+cargo fmt --all                                   # Formata todos os alvos (bin, lib, tests)
+
+# Documentação
+cargo doc                                         # Gera documentação
+cargo doc --open                                  # Gera e ABRE no navegador
+cargo doc --no-deps                               # Documenta só seu código (não dependências)
+cargo doc --document-private-items                # Documenta itens privados também
+
+# Informações do projeto
+cargo metadata                                    # Mostra JSON com estrutura do projeto
+cargo metadata --format-version 1                 # Versão específica do formato
+cargo locate-project                              # Mostra caminho do Cargo.toml
+cargo pkgid                                       # Mostra ID completo do pacote
+cargo pkgid -p rand                               # Mostra ID de uma dependência
+
+🧹 LIMPEZA E MANUTENÇÃO
+bash
+# Limpeza
+cargo clean                                       # Remove pasta target/ completamente
+cargo clean --release                             # Remove apenas compilações release
+cargo clean --doc                                 # Remove apenas documentação gerada
+cargo clean --target-dir ./out                    # Limpa diretório específico
+
+# Cache
+cargo cache                                       # Precisa de: cargo install cargo-cache
+cargo cache -a                                    # Limpa TODO cache
+cargo cache --autoclean                           # Remove apenas as versões antigas
+
+# Limpeza agressiva (recriar tudo)
+cargo clean && cargo update                       # Recria tudo do zero
+
+📦 PUBLICAÇÃO E PACKAGING
+bash
+# Login no crates.io (registro oficial de pacotes Rust)
+cargo login seu-token-aqui                        # Login para publicar
+
+# Publicar pacote
+cargo publish                                     # Publica seu crate no crates.io
+cargo publish --dry-run                           # Verifica sem publicar
+cargo publish --no-verify                         # Ignora verificação final
+cargo publish --allow-dirty                       # Permite publicar com arquivos sujos
+
+# Pacote local
+cargo package                                     # Cria .crate file (não publica)
+cargo package --list                              # Lista arquivos que serão incluídos
+cargo package --no-verify                         # Pula verificação
+
+# Instalar/Desinstalar binários
+cargo install ripgrep                             # Instala binário do crates.io
+cargo install --path .                            # Instala binário local
+cargo install --force ripgrep                     # Força reinstalação
+cargo uninstall ripgrep                           # Remove binário instalado
+cargo install --list                              # Lista binários instalados
+🐛 DEBUG E PERFILAMENTO
+bash
+# Debug com informação de linha
+cargo rustc -- -C debuginfo=2                     # Debug info nível 2 (padrão)
+cargo rustc -- -C lto                             # Link-time optimization
+
+# Perfilamento (performance)
+cargo run --release -- --bench                    # Executa benchmark
+cargo flamegraph                                   # Gera gráfico de chamadas (precisa cargo-flamegraph)
+
+# Desassemble (ver assembly gerado)
+cargo rustc -- --emit asm                         # Gera código assembly
+cargo rustc -- --emit llvm-ir                     # Gera LLVM IR
+cargo rustc -- -Z print-mono-items                # Mostra funções genéricas instanciadas
+
+# Tempo de compilação
+cargo build --timings                             # Mostra gráfico de quanto tempo cada coisa levou
+cargo build -Z timings                            # Versão mais detalhada (nightly)
+
+🎯 MANEJANDO MÚLTIPLOS ALVOS (CROSS-COMPILATION)
+bash
+# Adicionar targets
+rustup target add x86_64-pc-windows-msvc          # Windows (padrão)
+rustup target add x86_64-unknown-linux-gnu        # Linux
+rustup target add wasm32-unknown-unknown          # WebAssembly
+rustup target add thumbv7em-none-eabihf           # ARM (embarcados)
+
+# Compilar para outros targets
+cargo build --target wasm32-unknown-unknown       # Compila para WebAssembly
+cargo build --target x86_64-unknown-linux-gnu    # Compila para Linux (no Windows)
+
+# Cross-compilação com bindings C
+cargo build --target aarch64-unknown-linux-gnu    # ARM64 Linux
+
+🔧 WORKSPACES (MÚLTIPLOS PROJETOS RELACIONADOS)
+bash
+# Criar workspace (Cargo.toml na raiz com [workspace])
+cargo new workspace-exemplo --bin
+cd workspace-exemplo
+# Editar Cargo.toml para incluir [workspace]
+
+# Comandos em workspaces
+cargo build --workspace                           # Compila todos projetos do workspace
+cargo test --workspace                            # Testa todos projetos
+cargo clean --workspace                           # Limpa todos projetos
+cargo update --workspace                          # Atualiza dependências de todos
+
+# Trabalhar com projeto específico no workspace
+cargo build -p meu_projeto                        # Compila apenas projeto específico
+cargo test -p minha_lib                           # Testa apenas library específica
+cargo run -p app_binaria                          # Executa binário específico
+
+🚀 COMANDOS AVANÇADOS (CRATES ESPECIALIZADAS)
+bash
+# Expandir macros (ver código gerado)
+cargo rustc -- -Z unstable-options --pretty=expanded   # Expande todas macros
+cargo rustc -- --pretty=expanded > expanded.rs         # Salva em arquivo
+
+# Gerar gráfico de dependências
+cargo graph                                           # Precisa: cargo install cargo-graph
+cargo graph --bin                                     # Gráfico apenas binários
+
+# Gerar documentação em PDF
+cargo book                                            # Precisa: cargo install cargo-book
+
+# Criar release com binários otimizados
+cargo build --release && ls target/release/           # Binários estão aqui
+
+# Verificar tamanho do binário
+cargo bloat --release                                 # Precisa: cargo install cargo-bloat
+cargo bloat --release --target-crate meu_bin
+
+# Análise de segurança
+cargo audit                                           # Precisa: cargo install cargo-audit
+cargo audit --deny-warnings                           # Falha se encontrar vulnerabilidades
+
+# Gerar dependências em formato .dot
+cargo deps                                            # Precisa: cargo install cargo-deps
+cargo deps --graph | dot -Tpng > graph.png           # Gera imagem do gráfico
+
+🛠️ COMANDOS ÚTEIS DO RUSTC (COMPILADOR)
+bash
+# Compilação direta (sem Cargo)
+rustc main.rs                                        # Compila arquivo único
+rustc main.rs -o meu_programa                        # Especifica nome do executável
+rustc main.rs -C opt-level=3                         # Otimização nível 3
+
+# Compilação com bibliotecas externas
+rustc main.rs -L /caminho/para/libs                  # Adiciona caminho de bibliotecas
+rustc main.rs -l nome_da_biblioteca                  # Linka biblioteca externa
+
+# Ver opções do compilador
+rustc --help                                         # Ajuda básica
+rustc -C help                                        # Ajuda sobre otimizações
+rustc -Z help                                        # Opções instáveis (nightly)
+
+# Desassemble (ver assembly gerado)
+rustc main.rs --emit asm -C opt-level=3              # Gera assembly otimizado
+
+📋 LISTA COMPLETA DE COMANDOS CARGO
+bash
+cargo --help                                         # Lista TODOS comandos disponíveis
+cargo help build                                     # Ajuda específica do comando build
+cargo --list                                         # Lista comandos instalados
+
+# Comandos embutidos (sempre disponíveis)
+cargo build
+cargo check
+cargo clean
+cargo doc
+cargo new
+cargo init
+cargo run
+cargo test
+cargo bench
+cargo update
+cargo search                                        # Busca crates no crates.io
+cargo publish
+cargo install
+cargo uninstall
+cargo metadata
+cargo pkgid
+cargo locate-project
+cargo package
+cargo login
+cargo vendor                                         # Baixa dependências localmente
+
+🔧 INSTALANDO COMANDOS EXTRAS (CARGO-PLUGINS)
+bash
+# Instalar plugins úteis
+cargo install cargo-edit                            # Permite: cargo add, cargo rm
+cargo install cargo-outdated                        # Mostra dependências desatualizadas
+cargo install cargo-audit                           # Verifica vulnerabilidades
+cargo install cargo-bloat                           # Analisa tamanho do binário
+cargo install cargo-tree                            # Mostra árvore de dependências
+cargo install cargo-deps                            # Gera gráfico de dependências
+cargo install cargo-flamegraph                      # Gera gráfico de performance
+cargo install cargo-cache                           # Gerencia cache do Cargo
+cargo install cargo-watch                           # Observa mudanças e recompila
+cargo install cargo-tarpaulin                       # Cobertura de testes
+cargo install cargo-expand                          # Expande macros
+cargo install cargo-generate                        # Gera projetos a partir de templates
+
+👀 CARGO-WATCH (MONITORAMENTO AUTOMÁTICO)
+bash
+cargo watch -x run                                  # Executa ao salvar alterações
+cargo watch -x check -x test -x run                 # Executa múltiplos comandos
+cargo watch -s "cargo run -- arg1 arg2"             # Executa script personalizado
+cargo watch -x build --delay 1                      # Delay de 1 segundo
+cargo watch -i target/* -i Cargo.lock               # Ignora pastas/arquivos
 
 
 
