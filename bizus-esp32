@@ -1,0 +1,48 @@
+**************************** CONCEITOS ****************************
+
+ESP32 = Espressif Systems 32 BITS
+Espressif Systems (nome da empresa fabricante chinesa)
+Portanto, ESP32 significa literalmente "Microcontrolador de 32 bits da Espressif"
+
+ESP32 é a uma série de microcontroladores
+
+Ano de Fundação	2008 
+Nome do Fundador	Teo Swee Ann
+Motivo para ter sido fundada	Inicialmente como uma consultoria de um homem só, o objetivo era desenvolver soluções de semicondutores para a Internet das Coisas (IoT), 
+tornando essa tecnologia mais rápida, segura, acessível e com baixo consumo de energia
+
+
+
+**************************** PROJETO 1 ****************************
+1) No VS Code baixe a extensão 'PlatformIO IDE'
+2) Após instalar, clique no ícone da formiga (PlatformIO) 
+3) Clique em "New Project"
+4) Preencha:
+
+Name: meu_primeiro_esp32
+Board: procure e selecione Espressif ESP32 Dev Module
+Framework: Arduino
+Location: clique em "Browse" e escolha C:\Users\vinic\Desktop\
+Clique em "Finish"
+
+5) localize o arquivo src/main.cpp e substitua o conteúdo por:
+
+#include <Arduino.h>
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(2, OUTPUT);  // Pino 2 do ESP32 (LED onboard em muitas placas)
+  Serial.println("Programa iniciado!");
+}
+
+void loop() {
+  digitalWrite(2, HIGH);
+  Serial.println("LED ligado");
+  delay(1000);
+  
+  digitalWrite(2, LOW);
+  Serial.println("LED desligado");
+  delay(1000);
+}
+
+6)
