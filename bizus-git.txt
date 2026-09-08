@@ -91,6 +91,8 @@ git config credential.helper store = (não precisa mais ficar autenticando o git
 git config --global --unset credential.helper = (remove o autenticador global)
 git config --unset credential.helper = (remove o autenticador local)
 
+******************************
+******************************
 CRIAR REPOSITÓRIO LOCAL E COPIAR DO GITHUB PARA PC
 1) VÁ AO REPOSITÓRIO GITHUB E ACESSE -> BOTÃO |<>CODE| -> LOCAL -> HTTPS -> COPIE ENDREÇO DO TIPO: https://github.com/Marcus-Vinicius-Dev/NOME_DO_REPOSITÓRIO.git
 2) VÁ PARA A IDE E NO TERMINAL PS NAVEGUE ATÉ A PASTA DE INTERESSE DIGITE: git clone https://github.com/Marcus-Vinicius-Dev/NOME_DO_REPOSITÓRIO.git
@@ -182,6 +184,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 "@ | Out-File -FilePath LICENSE -Encoding utf8
+15) FIM
+******************************
+******************************
 
 Adicionar colaborador
 *No Github internet->acessar o repositório->aba settings->manage acess-> invite a collaborator->procurar por nome de usuário, nome completo ou email, pronto, agora é só clonar o projeto e realizar push's e pull's
