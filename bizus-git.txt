@@ -94,7 +94,13 @@ git config --unset credential.helper = (remove o autenticador local)
 CRIAR REPOSITÓRIO LOCAL E COPIAR DO GITHUB PARA PC
 1) VÁ AO REPOSITÓRIO GITHUB E ACESSE -> BOTÃO |<>CODE| -> LOCAL -> HTTPS -> COPIE ENDREÇO DO TIPO: https://github.com/Marcus-Vinicius-Dev/NOME_DO_REPOSITÓRIO.git
 2) VÁ PARA A IDE E NO TERMINAL PS NAVEGUE ATÉ A PASTA DE INTERESSE DIGITE: git clone https://github.com/Marcus-Vinicius-Dev/NOME_DO_REPOSITÓRIO.git
-3) acabou.
+3) AGORA TEM ACESSO LOCALMENTE.
+4) PARA FAZER COMMITS E PUSH PARA O GITHUB, DEVE ATUALIZAR AS CREDENCIAS CONFORME ABAIXO
+5) DIGITE: cmdkey /delete:git:https://github.com PARA LIMPAR AS CREDENCIAIS
+6) DIGITE: git config user.name "Marcus-Vinicius-Dev"
+7) DIGITE: git config user.email "marcus.vini.dev@gmail.com"
+8) DÊ O COMMIT E O PUSH 
+9) FIM.
 
 Adicionar colaborador
 *No Github internet->acessar o repositório->aba settings->manage acess-> invite a collaborator->procurar por nome de usuário, nome completo ou email, pronto, agora é só clonar o projeto e realizar push's e pull's
