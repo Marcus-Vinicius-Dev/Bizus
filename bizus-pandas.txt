@@ -405,9 +405,91 @@ else:
     print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_parquet não chamada")
 
 
+******************************************************************** query.py ************************************************************************************************
 
+# python -m venv venv (cria venv se necessário)
+# .\venv\Scripts\activate (ativa a venv)
+# deactivate (desativa venv)
+# pip install -r requirements.txt
+# python -m pip install --force-reinstall --no-cache-dir -r requirements.txt
+# se não der certo, use python -m pip install -r requirements.txt
+# cd (endereço do programa)
+# python (nome_do_programa.py)
 
+# sys
+from colorama import init, Fore, Back, Style
+from datetime import datetime
+import datetime
+import os
+import platform
+import pkgutil
+import psutil
+import requests
+import shutil
+import socket
+import subprocess
+import sys
 
+# leitura
+from docx import Document
+from openpyxl import load_workbook
+from tqdm import tqdm
+import csv
+import json
+import pandas as pd
+import pyarrow as pa
+import pyarrow.csv as pv
+import pyarrow.parquet as pq
+import re
+import unicodedata
+import tarfile
+import zipfile
+
+# debug
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+import pyautogui
+import pygetwindow as gw
+import uiautomation as auto
+import time
+
+init(autoreset=True) # reseta a cor no próximo print
+
+# variáveis
+parquet = '1' # 1 = CEPEA_PARQUET, 2 = CONTAGEH_PARQUET, 3 = SAS_PARQUET
+
+# funções
+ler_pasta = '1'
+
+#lógica
+if parquet == '1':
+    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CEPEA_PARQUET'
+elif parquet == '2':
+    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CONTAGEH_PARQUET'
+elif parquet == '2':
+    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\SAS_PARQUET'
+else:
+    print(Fore.RED + Style.BRIGHT + f"pasta não selecionada")
+
+def funcao_ler_pasta():
+    print(Fore.YELLOW + Style.BRIGHT + f'  PASTA EXAMINADA: {pasta_destino}' , '\n')
+    with os.scandir(pasta_destino) as entradas:  # scandir já traz info de tipo, mais rápido que listdir+isdir
+        for entrada in entradas:
+            if entrada.is_dir():  # já sabe se é pasta, sem precisar juntar caminho
+                print(Fore.WHITE + Style.BRIGHT + f'  SUBPASTA: {entrada.name}')
+            else:
+                print(Fore.BLUE + Style.BRIGHT + f'  ARQUIVO: {entrada.name}')
+    pass
+  
+# CHAMAR funcao_ler_pasta
+if ler_pasta == '1':
+    funcao_ler_pasta()
+else:
+    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta não chamada")
 
 
 
