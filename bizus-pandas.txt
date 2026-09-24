@@ -55,15 +55,15 @@ init(autoreset=True) # reseta a cor no próximo print
 
 # variaveis
 pasta_base = '3' # 1 = cepea, 2 = contageh, 3 = sas, != None
-pasta_parquet_base = '3' # 1 = cepea, 2 = contageh, 3 = sas, != None
+pasta_parquet_base = pasta_base # pasta de downloas 3 pastas: 1 = cepea, 2 = contageh, 3 = sas
 pasta_parquet_raiz = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET'
 arquivo_csv = 'SAS.[082026].TB_FUNCIONAL.csv'
 
 # funções
 ler_pasta =                '1' # 0 ou 1
-teste_csv =                '1'
-converter_csv_to_parquet = '1'
-parquet_info =             '1'
+teste_csv =                '0'
+converter_csv_to_parquet = '0'
+parquet_info =             '0'
 ler_pasta_parquet =        '1'
 
 # lógica
