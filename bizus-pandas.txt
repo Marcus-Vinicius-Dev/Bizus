@@ -7,412 +7,6 @@
 # pip install -r requirements.txt
 # python -m pip install --force-reinstall --no-cache-dir -r requirements.txt
 # se não der certo, use python -m pip install -r requirements.txt
-# cd C:\Users\marcus.silva05\Desktop\DADOS\PROGRAMAS
-# python consultor.py
-
-# sys
-from colorama import init, Fore, Back, Style
-from datetime import datetime
-import datetime
-import os
-import platform
-import pkgutil
-import psutil
-import requests
-import shutil
-import socket
-import subprocess
-import sys
-
-# leitura
-from docx import Document
-from openpyxl import load_workbook
-from tqdm import tqdm
-import csv
-import json
-import pandas as pd
-import pyarrow as pa
-import pyarrow.csv as pv
-import pyarrow.parquet as pq
-import re
-import unicodedata
-import tarfile
-import zipfile
-
-# debug
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.edge.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-import pyautogui
-import pygetwindow as gw
-import uiautomation as auto
-import time
-
-init(autoreset=True) # reseta a cor no próximo print 
-
-# variaveis
-pasta_base = '3' # 1 = cepea, 2 = contageh, 3 = sas, != None
-pasta_parquet_base = pasta_base # pasta de downloas 3 pastas: 1 = cepea, 2 = contageh, 3 = sas
-pasta_parquet_raiz = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET'
-arquivo_csv = 'SAS.[082026].TB_FUNCIONAL.csv'
-
-# funções
-ler_pasta =                '1' # 0 ou 1
-teste_csv =                '0'
-converter_csv_to_parquet = '0'
-parquet_info =             '0'
-ler_pasta_parquet =        '1'
-
-# lógica
-# pasta_base é a origem (onde estão os .csv)
-if pasta_base == '1':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\CEPEA'
-elif  pasta_base == '2':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\CONTAGEH'
-elif  pasta_base == '3':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\SAS'
-else:
-    pasta_destino = None # pasta atual
-
-# pasta_parquet é onde serão salvos os arquivos .parquet 
-if pasta_parquet_base == '1':
-    pasta_download = os.path.join(pasta_parquet_raiz, 'CEPEA_PARQUET')
-elif pasta_parquet_base == '2':
-    pasta_download = os.path.join(pasta_parquet_raiz, 'CONTAGEH_PARQUET')
-elif pasta_parquet_base == '3':
-    pasta_download = os.path.join(pasta_parquet_raiz, 'SAS_PARQUET')
-else:
-    pasta_download = pasta_parquet_raiz  # Fallback: pasta raiz
-
-print(Fore.YELLOW + Style.BRIGHT + f"\n Pasta Repositório de .csv = {pasta_destino}")  
-print(Fore.YELLOW + Style.BRIGHT + f"\n Pasta Repositório de .parquet {pasta_download}") 
-
-# variavel atrelada a lógica
-caminho_teste_csv = os.path.join(pasta_destino, arquivo_csv) 
-
-def funcao_ler_pasta():
-    print(Fore.YELLOW + Style.BRIGHT + '\n' + f'  PASTA EXAMINADA: {pasta_destino}')
-    with os.scandir(pasta_destino) as entradas:  # scandir já traz info de tipo, mais rápido que listdir+isdir
-        for entrada in entradas:
-            if entrada.is_dir():  # já sabe se é pasta, sem precisar juntar caminho
-                print(Fore.WHITE + Style.BRIGHT + f'  SUBPASTA: {entrada.name}')
-            else:
-                print(Fore.BLUE + Style.BRIGHT + f'  ARQUIVO: {entrada.name}')
-    pass
-  
-# CHAMAR funcao_ler_pasta
-if ler_pasta == '1':
-    funcao_ler_pasta()
-else:
-    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta não chamada")
-
-def testar_csv(caminho_teste_csv, sep=';', encoding='utf-8-sig'):
-    """Valida um CSV rapidamente"""
-    
-    # 1. Existe?
-    if not os.path.exists(caminho_teste_csv):
-        print(Fore.RED + f"❌ Arquivo não encontrado: {caminho_teste_csv}")
-        return None
-    
-    # 2. Tenta ler
-    try:
-        df = pd.read_csv(caminho_teste_csv, sep=sep, encoding=encoding)
-    except pd.errors.ParserError as e:
-        print(Fore.RED + f"❌ Erro no parser: {e}")
-        return None
-    except UnicodeDecodeError:
-        df = pd.read_csv(caminho_teste_csv, sep=sep, encoding='latin-1')
-    
-    # 3. Mostra info
-    print(Fore.GREEN + f"\n📊 ARQUIVO VALIDADO:")
-    print(Fore.WHITE + f"   Arquivo:  {os.path.basename(caminho_teste_csv)}")
-    print(Fore.WHITE + f"   Linhas:   {len(df):,}")
-    print(Fore.WHITE + f"   Colunas:  {len(df.columns)}")
-    print(Fore.WHITE + f"   Nulos:    {df.isna().sum().sum():,}")
-    
-        # 4. Nulos por coluna
-    print(Fore.GREEN + f"\n📊 NULOS POR COLUNA:")
-    for i, col in enumerate(df.columns, 1):
-        nulos = df[col].isna().sum()
-        pct = (nulos / len(df) * 100) if len(df) > 0 else 0
-        cor = Fore.RED if pct > 50 else Fore.YELLOW if pct > 10 else Fore.CYAN
-        print(cor + f"   {i:3d}. {col:30s} | Nulos: {nulos:6,} ({pct:5.1f}%)")
-
-    return df
-
-# CHAMAR testar_csv
-if teste_csv == '1':
-    df = testar_csv(caminho_teste_csv, sep=';', encoding='utf-8-sig')
-else:
-    print(Fore.RED + Style.BRIGHT + f"testar_csv não chamada")
-
-
-def conv_csv_to_parquet(caminho_csv, nome_parquet=None, sep=';', encoding='utf-8-sig'):
-    if nome_parquet is None:
-        nome_parquet = os.path.splitext(os.path.basename(caminho_csv))[0] + '.parquet'
-    
-    caminho_saida = os.path.join(pasta_download, nome_parquet)
-    
-    print(Fore.YELLOW + f"\n⚙️  CONVERTENDO (streaming pyarrow)...")
-    print(Fore.WHITE + f"   Arquivo: {os.path.basename(caminho_csv)}")
-    print(Fore.WHITE + f"   Tamanho: {os.path.getsize(caminho_csv) / 1024**3:.2f} GB")
-    
-    # 1. Descobrir o esquema do CSV (lendo só as primeiras linhas)
-    print(Fore.YELLOW + f"\n📊 ANALISANDO TIPOS DAS COLUNAS...")
-    
-    # Lê só 1000 linhas para inferir tipos
-    df_amostra = pd.read_csv(
-        caminho_csv,
-        sep=sep,
-        encoding='utf-8-sig',
-        nrows=1000,
-        low_memory=False
-    )
-    
-    # Força TUDO como string (evita qualquer erro de tipo)
-    column_types = {col: pa.string() for col in df_amostra.columns}
-    
-    print(Fore.WHITE + f"   Colunas analisadas: {len(column_types)}")
-    print(Fore.WHITE + f"   Colunas como string: {sum(1 for v in column_types.values() if v == pa.string())}")
-    print(Fore.WHITE + f"   Colunas como int64:  {sum(1 for v in column_types.values() if v == pa.int64())}")
-    print(Fore.WHITE + f"   Colunas como float64: {sum(1 for v in column_types.values() if v == pa.float64())}")
-    
-    # 3. Opções de leitura
-    read_options = pv.ReadOptions(block_size=100 * 1024 * 1024)  # 100 MB por bloco
-    parse_options = pv.ParseOptions(delimiter=sep)
-    convert_options = pv.ConvertOptions(
-        column_types=column_types,       # ← Força os tipos
-        strings_can_be_null=True         # ← Trata strings vazias como nulo
-    )
-    
-    # 4. Streaming
-    print(Fore.YELLOW + f"\n⚙️  CONVERTENDO...")
-    
-    with pv.open_csv(
-        caminho_csv,
-        read_options=read_options,
-        parse_options=parse_options,
-        convert_options=convert_options
-    ) as reader:
-        writer = None
-        total_linhas = 0
-        
-        with tqdm(desc="Convertendo", unit=" linhas") as pbar:
-            for batch in reader:
-                table = pa.Table.from_batches([batch])
-                
-                if writer is None:
-                    writer = pq.ParquetWriter(caminho_saida, table.schema)
-                
-                writer.write_table(table)
-                total_linhas += len(table)
-                pbar.update(len(table))
-        
-        if writer:
-            writer.close()
-    
-    print(Fore.GREEN + f"\n✅ CONVERTIDO:")
-    print(Fore.WHITE + f"   Parquet: {nome_parquet}")
-    print(Fore.WHITE + f"   Linhas:  {total_linhas:,}")
-    
-    return caminho_saida
-
-# CHAMAR conv_csv_to_parquet
-if converter_csv_to_parquet == '1':
-    conv_csv_to_parquet(os.path.join(pasta_destino, arquivo_csv))
-else:
-    print(Fore.RED + Style.BRIGHT + f"conv_csv_to_parquet não chamada")
-
-# ============================================================================
-# VERIFICAR PARQUET (máximo de informações)
-# ============================================================================
-
-def verificar_parquet(caminho_parquet):
-    # 1. Verifica se existe
-    if not os.path.exists(caminho_parquet):
-        print(Fore.RED + f"❌ Parquet não encontrado: {caminho_parquet}")
-        return None
-    
-    print(Fore.GREEN + "\n" + "="*70)
-    print(Fore.GREEN + "📊 VERIFICAÇÃO COMPLETA DO PARQUET")
-    print(Fore.GREEN + "="*70)
-    
-    # =========================================================================
-    # 1. INFORMAÇÕES DO ARQUIVO
-    # =========================================================================
-    tamanho_bytes = os.path.getsize(caminho_parquet)
-    tamanho_kb = tamanho_bytes / 1024
-    tamanho_mb = tamanho_kb / 1024
-    
-    print(Fore.YELLOW + "\n📁 ARQUIVO:")
-    print(Fore.WHITE + f"   Nome:     {os.path.basename(caminho_parquet)}")
-    print(Fore.WHITE + f"   Pasta:    {os.path.dirname(caminho_parquet)}")
-    print(Fore.WHITE + f"   Tamanho:  {tamanho_kb:,.2f} KB ({tamanho_mb:.4f} MB)")
-    
-    # =========================================================================
-    # 2. METADADOS (sem carregar dados)
-    # =========================================================================
-    import pyarrow.parquet as pq
-    parquet_file = pq.ParquetFile(caminho_parquet)
-    
-    print(Fore.YELLOW + "\n📋 METADADOS:")
-    print(Fore.WHITE + f"   Linhas:     {parquet_file.metadata.num_rows:,}")
-    print(Fore.WHITE + f"   Colunas:    {parquet_file.metadata.num_columns}")
-    print(Fore.WHITE + f"   Blocos internos de armazenamento: {parquet_file.metadata.num_row_groups}")
-    print(Fore.WHITE + f"   Criado por: {parquet_file.metadata.created_by}")
-    
-    # =========================================================================
-    # 3. CARREGAR O DATAFRAME
-    # =========================================================================
-    print(Fore.YELLOW + "\n📖 CARREGANDO DATAFRAME...")
-    df = pd.read_parquet(caminho_parquet)
-    
-    # =========================================================================
-    # 4. ESTRUTURA
-    # =========================================================================
-    memoria_bytes = df.memory_usage(deep=True).sum()
-    memoria_mb = memoria_bytes / 1024 / 1024
-    
-    print(Fore.YELLOW + "\n📊 ESTRUTURA:")
-    print(Fore.WHITE + f"   Linhas:           {len(df):,}")
-    print(Fore.WHITE + f"   Colunas:          {len(df.columns)}")
-    print(Fore.WHITE + f"   Células totais:   {df.size:,}")
-    print(Fore.WHITE + f"   Memória (RAM):    {memoria_mb:.4f} MB")
-    
-    # =========================================================================
-    # 5. NULOS
-    # =========================================================================
-    total_nulos = df.isna().sum().sum()
-    pct_nulos = (total_nulos / df.size * 100) if df.size > 0 else 0
-    
-    print(Fore.YELLOW + "\n📊 NULOS:")
-    print(Fore.WHITE + f"   Total de nulos:   {total_nulos:,}")
-    print(Fore.WHITE + f"   Percentual:       {pct_nulos:.2f}%")
-    print(Fore.WHITE + f"   Colunas c/ nulos: {(df.isna().sum() > 0).sum()} de {len(df.columns)}")
-    
-    # =========================================================================
-    # 6. CABEÇALHO COM DETALHES
-    # =========================================================================
-    print(Fore.YELLOW + "\n📋 CABEÇALHO DETALHADO:")
-    print(Fore.WHITE + f"   {'#':<4} {'Coluna':<30} {'Tipo':<12} {'Nulos':<10} {'%':<8} {'Únicos':<8}")
-    print(Fore.WHITE + "   " + "-"*80)
-    
-    for i, col in enumerate(df.columns, 1):
-        dtype = str(df[col].dtype)
-        nulos = df[col].isna().sum()
-        pct = (nulos / len(df) * 100) if len(df) > 0 else 0
-        unicos = df[col].nunique()
-        
-        # Cor baseada em nulos
-        if pct > 50:
-            cor = Fore.RED
-        elif pct > 10:
-            cor = Fore.YELLOW
-        else:
-            cor = Fore.CYAN
-        
-        print(cor + f"   {i:<4} {col:<30} {dtype:<12} {nulos:<10,} {pct:>6.1f}% {unicos:<8,}")
-    
-    # =========================================================================
-    # 7. TIPOS DE DADOS (resumo)
-    # =========================================================================
-    print(Fore.YELLOW + "\n📊 TIPOS DE DADOS:")
-    tipos = df.dtypes.value_counts()
-    for tipo, qtd in tipos.items():
-        print(Fore.CYAN + f"   {str(tipo):<15} → {qtd} coluna(s)")
-    
-    # =========================================================================
-    # 8. DUPLICATAS
-    # =========================================================================
-    duplicatas_linhas = df.duplicated().sum()
-    duplicatas_colunas = df.columns[df.columns.duplicated()].tolist()
-    
-    print(Fore.YELLOW + "\n📊 DUPLICATAS:")
-    print(Fore.WHITE + f"   Linhas duplicadas:  {duplicatas_linhas:,}")
-    if duplicatas_colunas:
-        print(Fore.RED + f"   Colunas duplicadas: {duplicatas_colunas}")
-    else:
-        print(Fore.GREEN + f"   Colunas duplicadas: Nenhuma")
-    
-    # =========================================================================
-    # 9. COLUNAS COM PROBLEMAS
-    # =========================================================================
-    print(Fore.YELLOW + "\n⚠️  COLUNAS COM PROBLEMAS:")
-    
-    problemas = []
-    
-    # 9.1 Colunas 100% vazias
-    vazias = [col for col in df.columns if df[col].isna().all()]
-    if vazias:
-        problemas.append(f"   100% vazias: {vazias}")
-    
-    # 9.2 Colunas com valor único (constantes)
-    constantes = [col for col in df.columns if df[col].nunique() == 1]
-    if constantes:
-        problemas.append(f"   Valor único: {constantes}")
-    
-    # 9.3 Colunas com muitos nulos (>50%)
-    muitos_nulos = [col for col in df.columns if (df[col].isna().sum() / len(df) * 100) > 50]
-    if muitos_nulos:
-        problemas.append(f"   +50% nulos: {muitos_nulos}")
-    
-    if problemas:
-        for p in problemas:
-            print(Fore.YELLOW + p)
-    else:
-        print(Fore.GREEN + "   ✅ Nenhum problema detectado")
-    
-    # =========================================================================
-    # 10. PRIMEIRAS LINHAS
-    # =========================================================================
-    print(Fore.YELLOW + "\n📊 PRIMEIRAS 5 LINHAS:")
-    print(Fore.CYAN + f"\n{df.head()}")
-    
-    # =========================================================================
-    # 11. RESUMO FINAL
-    # =========================================================================
-    print(Fore.GREEN + "\n" + "="*70)
-    print(Fore.GREEN + "✅ VERIFICAÇÃO CONCLUÍDA")
-    print(Fore.GREEN + "="*70)
-    
-    return df
-
-# CHAMAR verificar_parquet
-if parquet_info == '1':
-    nome_parquet = os.path.splitext(arquivo_csv)[0] + '.parquet'
-    caminho_parquet = os.path.join(pasta_download, nome_parquet)
-    df = verificar_parquet(caminho_parquet)
-else:
-    print(Fore.RED + Style.BRIGHT + f"verificar_parquet não chamada")
-
-def funcao_ler_pasta_parquet():
-    print(Fore.YELLOW + Style.BRIGHT + '\n' + f'  PASTA EXAMINADA: {pasta_download}')
-    with os.scandir(pasta_download) as entradas:  # scandir já traz info de tipo, mais rápido que listdir+isdir
-        for entrada in entradas:
-            if entrada.is_dir():  # já sabe se é pasta, sem precisar juntar caminho
-                print(Fore.WHITE + Style.BRIGHT + f'  SUBPASTA: {entrada.name}')
-            else:
-                print(Fore.BLUE + Style.BRIGHT + f'  ARQUIVO: {entrada.name}')
-    pass
-  
-# CHAMAR funcao_ler_pasta
-if ler_pasta_parquet == '1':
-    funcao_ler_pasta_parquet()
-else:
-    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_parquet não chamada")
-
-
-******************************************************************** query.py ************************************************************************************************
-
-# python -m venv venv (cria venv se necessário)
-# .\venv\Scripts\activate (ativa a venv)
-# deactivate (desativa venv)
-# pip install -r requirements.txt
-# python -m pip install --force-reinstall --no-cache-dir -r requirements.txt
-# se não der certo, use python -m pip install -r requirements.txt
 # cd (endereço do programa)
 # python (nome_do_programa.py)
 
@@ -460,36 +54,318 @@ import time
 init(autoreset=True) # reseta a cor no próximo print
 
 # variáveis
-parquet = '1' # 1 = CEPEA_PARQUET, 2 = CONTAGEH_PARQUET, 3 = SAS_PARQUET
+pasta_origem = '1' # 1 = CEPEA, 2 = CONTAGEH, 3 = SAS
+arquivo_origem = '1' # dicionario_arquivos_origem
+top = 5
+pasta_saida = '1'
 
-# funções
-ler_pasta = '1'
+# funções 
+ler_pasta_origem =     '1'
+ler_pasta_saida =      '0'  
+top_n =                '0'
+teste_arquivo =        '0'
+converter_parquet =    '0'  
 
-#lógica
-if parquet == '1':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CEPEA_PARQUET'
-elif parquet == '2':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CONTAGEH_PARQUET'
-elif parquet == '2':
-    pasta_destino = r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\SAS_PARQUET'
+# dicionários
+dicionario_pastas_origem = {
+    '1': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\CEPEA',
+    '2': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\CONTAGEH',
+    '3': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_CSV\SAS',
+}
+# dicionário de arquivos da origem CEPEA (pasta_origem = '1')
+dicionario_arquivos_origem = {
+    # chave = pasta_origem '1' (CEPEA)
+    '1': {                                
+        '1':          'ARQDEUA0826.csv',                            
+        '2':              'BFE0726.csv',                                
+        '3':   'CHOR_SALA_AULA0826.csv',                     
+        '4':              'CTG0826.csv',                         
+        '5':         'ESCOLAS0826.xlsx',                         
+        '6':   'NIVEL_FORMACAO0826.csv',                     
+        '7':           'QUALIF0826.csv',                             
+        '8':        'TAB_CARGO0826.csv',                          
+        '9':           'TAB_CODBFE.csv',                            
+       '10':   'TB_ID_INTERNO_SERV.csv',                    
+    },
+    # chave = pasta_origem '2' (CONTAGEH)
+     '2': {                                     
+        '1': 'CONTAGEH.dbo.TB_ATRIB_EVENTO.csv',                           
+        '2': 'CONTAGEH.dbo.TB_EVENTO.csv',                                 
+        '3': 'CONTAGEH.[dbo].[TB_FUNCIONAL].csv',                          
+        '4': 'CONTAGEH.[dbo].[TB_FUNCIONARIO].csv',                        
+    },
+    # chave = pasta_origem '3' (SAS)
+    '3': {                                                           
+        '1': 'CGRH_APOIO.DBO.BASE_SERVIDORES_ATIVOS_FINAL_0826.csv',        
+        '2': 'SAS.[082026].EDUCA_PESSOAL.csv',                              
+        '3': 'SAS.[082026].TB_FUNCIONAL.csv',                               
+        '4': 'SAS.[082026].TB_PESSOAL.csv',                                 
+        '5': 'SAS.[082026].[TB_UA_ALOCACAO].csv',                           
+    },
+}
+
+dicionario_pastas_saida = {
+    '1': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CEPEA_PARQUET',
+    '2': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\CONTAGEH_PARQUET',
+    '3': r'C:\Users\marcus.silva05\Desktop\DADOS\BASES_PARQUET\SAS_PARQUET',
+}
+
+def resolver_caminho_origem(pasta_origem, arquivo_origem):                     # helper reutilizável
+    pasta_base          = dicionario_pastas_origem.get(pasta_origem, None)                                # resolve pasta
+    arquivo_selecionado = dicionario_arquivos_origem.get(pasta_origem, {}).get(arquivo_origem, None)      # resolve arquivo
+    if pasta_base and arquivo_selecionado:                                                                # ambos existem
+        return os.path.join(pasta_base, arquivo_selecionado)                                              # caminho montado
+    return None                                                                                        # senão None
+
+def resolver_caminho_saida(pasta_origem, nome_arquivo):                        # helper reutilizável p/ saída
+    pasta_saida = dicionario_pastas_saida.get(pasta_origem, None)              # resolve pasta de saída
+    if pasta_saida and nome_arquivo:                                           # ambos existem
+        return os.path.join(pasta_saida, nome_arquivo)                         # caminho montado
+    return None                                                                # senão None
+
+# lógica
+pasta_base = dicionario_pastas_origem.get(pasta_origem, None)
+if pasta_base is None:
+    print(Fore.RED + Style.BRIGHT + "pasta_origem não selecionada")
 else:
-    print(Fore.RED + Style.BRIGHT + f"pasta não selecionada")
+    print(Fore.YELLOW + f"✅ Pasta selecionada: '{pasta_base}'")
 
-def funcao_ler_pasta():
-    print(Fore.YELLOW + Style.BRIGHT + f'  PASTA EXAMINADA: {pasta_destino}' , '\n')
-    with os.scandir(pasta_destino) as entradas:  # scandir já traz info de tipo, mais rápido que listdir+isdir
-        for entrada in entradas:
-            if entrada.is_dir():  # já sabe se é pasta, sem precisar juntar caminho
-                print(Fore.WHITE + Style.BRIGHT + f'  SUBPASTA: {entrada.name}')
-            else:
-                print(Fore.BLUE + Style.BRIGHT + f'  ARQUIVO: {entrada.name}')
-    pass
-  
-# CHAMAR funcao_ler_pasta
-if ler_pasta == '1':
-    funcao_ler_pasta()
+def funcao_ler_pasta_origem():  # verifique o comando çlogica
+    arquivos = os.listdir(pasta_base)                                          # lista todos os itens da pasta_base
+    print(Fore.YELLOW + Style.BRIGHT + f"Total de itens em '{os.path.basename(pasta_base)}' = {len(arquivos)} itens") # exibe quantidade
+    for arq in arquivos:                                                        # percorre cada item
+        caminho_completo = os.path.join(pasta_base, arq)   
+        if os.path.isfile(caminho_completo):                                    # verifica se é arquivo
+            print(Fore.BLUE + f"  ARQUIVO: {os.path.basename(caminho_completo)}")   # exibe só nome+extensão                           
+        else:                                                                   # caso contrário é pasta
+            print(Fore.YELLOW + f"  SUBPASTA: {os.path.basename(caminho_completo)}")  # exibe só nome da pasta
+    return arquivos                                                             # retorna lista de arquivos
+
+# CHAMAR FUNÇÃO funcao_ler_pasta_origem
+if ler_pasta_origem == '1':
+    funcao_ler_pasta_origem()
 else:
-    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta não chamada")
+    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_origem não chamada")
+
+def funcao_top_n(n=top):
+    # resolve pasta e arquivo pelos dicionários (2 níveis, seguro contra chave inexistente)
+    pasta_base = dicionario_pastas_origem.get(pasta_origem, None)                                   # resolve pasta
+    arquivo_selecionado = dicionario_arquivos_origem.get(pasta_origem, {}).get(arquivo_origem, None) # resolve arquivo
+    if pasta_base is None or arquivo_selecionado is None:                                    # valida seleção
+        print(Fore.RED + Style.BRIGHT + "pasta_origem ou arquivo_origem não selecionado")    # aviso vermelho
+        return None                                                                          # sai da função
+    caminho_arquivo = os.path.join(pasta_base, arquivo_selecionado)                          # monta caminho completo
+    if not os.path.isfile(caminho_arquivo):                                                  # valida existência física
+        print(Fore.RED + Style.BRIGHT + f"arquivo não encontrado: '{caminho_arquivo}'")      # aviso vermelho
+        return None                                                                          # sai da função
+    extensao = os.path.splitext(arquivo_selecionado)[1].lower()                              # pega extensão em minúsculo
+
+    if extensao == '.csv':                                                                           # caminho CSV
+        df = pd.read_csv(caminho_arquivo, nrows=n, sep=None, engine='python', dtype=str, encoding='utf-8-sig')  # lê só n linhas
+    elif extensao == '.xlsx':                                                                        # caminho XLSX
+        df = pd.read_excel(caminho_arquivo, nrows=n, dtype=str, engine='openpyxl')                    # lê só n linhas
+    elif extensao == '.parquet': 
+        pf = pq.ParquetFile(caminho_arquivo)          # abre arquivo sem ler tudo
+        df = pf.read_row_group(0).to_pandas().head(n) # lê 1º row group e corta
+    else:                                                                           # extensão não suportada
+        print(Fore.RED + Style.BRIGHT + f"extensão não suportada: '{extensao}'")    # aviso vermelho
+        return None                                                                 # sai da função
+
+    print(Fore.GREEN + Style.BRIGHT + f"TOP {n} de '{arquivo_selecionado}' ({len(df)} linhas lidas)")  # cabeçalho
+    print(Fore.CYAN + df.to_string(index=False))      # imprime sem índice
+    return df                                         # retorna DataFrame
+
+# CHAMAR FUNÇÃO funcao_top_n_arquivo_origem
+if top_n == '1':
+    funcao_top_n(n=top) 
+else:
+    print(Fore.RED + Style.BRIGHT + f"funcao_top_n não chamada")
+
+caminho_teste_arquivo = resolver_caminho_origem(pasta_origem, arquivo_origem)  # resolve via helper
+
+def testar_arquivo(caminho_teste_arquivo, sep=None, encoding='utf-8-sig'):     # aceita CSV/XLSX/PARQUET
+    # 1. Existe?
+    if not caminho_teste_arquivo or not os.path.exists(caminho_teste_arquivo): # valida caminho e existência
+        print(Fore.RED + f"❌ Arquivo não encontrado: {caminho_teste_arquivo}") # aviso vermelho
+        return None                                                            # sai
+    extensao = os.path.splitext(caminho_teste_arquivo)[1].lower()              # pega extensão minúscula
+    # 2. Tenta ler conforme extensão
+    try:                                                                       # bloco protegido
+        if extensao == '.csv':                                                 # ramo CSV
+            df = pd.read_csv(caminho_teste_arquivo, sep=sep, engine='python', encoding=encoding)  # lê CSV
+        elif extensao == '.xlsx':                                              # ramo XLSX
+            df = pd.read_excel(caminho_teste_arquivo, engine='openpyxl')       # lê XLSX
+        elif extensao == '.parquet':                                           # ramo PARQUET
+            df = pd.read_parquet(caminho_teste_arquivo, engine='pyarrow')      # lê PARQUET
+        else:                                                                  # extensão não suportada
+            print(Fore.RED + f"❌ Extensão não suportada: {extensao}")         # aviso vermelho
+            return None                                                        # sai
+    except UnicodeDecodeError as e:                                            # falha de encoding (só CSV)
+        print(Fore.YELLOW + f"⚠️  {encoding} falhou ({e}), tentando latin-1...")  # avisa fallback
+        df = pd.read_csv(caminho_teste_arquivo, sep=sep, engine='python', encoding='latin-1')  # fallback
+    except pd.errors.ParserError as e:                                         # falha de parser (só CSV)
+        print(Fore.RED + f"❌ Erro no parser: {e}")                             # aviso vermelho
+        return None                                                            # sai
+    except Exception as e:                                                     # qualquer outro erro (XLSX/Parquet)
+        print(Fore.RED + f"❌ Erro inesperado: {e}")                            # aviso vermelho
+        return None                                                            # sai
+    # 3. Mostra info
+    print(Fore.GREEN + f"\n📊 ARQUIVO VALIDADO:")                              # título verde
+    print(Fore.WHITE + f"   Arquivo:  {os.path.basename(caminho_teste_arquivo)}")  # nome do arquivo
+    print(Fore.WHITE + f"   Linhas:   {len(df):,}")                            # total de linhas
+    print(Fore.WHITE + f"   Colunas:  {len(df.columns)}")                      # total de colunas
+    print(Fore.WHITE + f"   Nulos:    {df.isna().sum().sum():,}")              # total de nulos
+    # 4. Nulos por coluna
+    print(Fore.GREEN + f"\n📊 NULOS POR COLUNA:")                              # título verde
+    for i, col in enumerate(df.columns, 1):                                    # percorre colunas
+        nulos = df[col].isna().sum()                                           # nulos da coluna
+        pct = (nulos / len(df) * 100) if len(df) > 0 else 0                    # % de nulos
+        cor = Fore.RED if pct > 50 else Fore.YELLOW if pct > 10 else Fore.CYAN # cor dinâmica
+        print(cor + f"   {i:3d}. {col:30s} | Nulos: {nulos:6,} ({pct:5.1f}%)") # linha formatada
+    return df                                                                  # retorna DataFrame
+
+# CHAMAR testar_arquivo
+if teste_arquivo == '1':                                                       # seletor
+    df = testar_arquivo(caminho_teste_arquivo, sep=None, encoding='utf-8-sig') # chama função
+else:                                                                          # seletor desligado
+    print(Fore.RED + Style.BRIGHT + f"testar_arquivo não chamada")             # aviso vermelho
+
+
+def conv_para_parquet(caminho_entrada, pasta_saida, sep=None, encoding='utf-8-sig'):  # aceita CSV e XLSX
+    # 0. Valida entrada
+    if not caminho_entrada or not os.path.isfile(caminho_entrada):                    # valida existência
+        print(Fore.RED + Style.BRIGHT + f"❌ arquivo não encontrado: '{caminho_entrada}'")  # aviso
+        return None                                                                   # sai
+    if not pasta_saida or not os.path.isdir(pasta_saida):                             # valida pasta de saída
+        print(Fore.RED + Style.BRIGHT + f"❌ pasta de saída não existe: '{pasta_saida}'")   # aviso
+        return None                                                                   # sai
+
+    extensao = os.path.splitext(caminho_entrada)[1].lower()                           # extensão minúscula
+    nome_base = os.path.splitext(os.path.basename(caminho_entrada))[0]                # nome sem extensão
+    nome_parquet = nome_base + '.parquet'                                             # nome do parquet
+    caminho_saida = os.path.join(pasta_saida, nome_parquet)                           # caminho final
+
+    print(Fore.YELLOW + f"\n⚙️  CONVERTENDO → PARQUET (streaming pyarrow)...")        # título
+    print(Fore.WHITE + f"   Arquivo:  {os.path.basename(caminho_entrada)}")           # nome entrada
+    print(Fore.WHITE + f"   Tamanho:  {os.path.getsize(caminho_entrada) / 1024**3:.2f} GB")  # tamanho GB
+    print(Fore.WHITE + f"   Extensão: {extensao}")                                    # extensão detectada
+
+    # 1. Se for XLSX → converte para CSV temporário primeiro
+    if extensao == '.xlsx':                                                           # ramo XLSX
+        print(Fore.YELLOW + f"\n📊 XLSX detectado → convertendo para CSV temporário...")  # aviso
+        caminho_csv_temp = os.path.join(pasta_saida, nome_base + '_TEMP.csv')         # caminho do CSV temp
+        try:                                                                          # bloco protegido
+            df = pd.read_excel(caminho_entrada, dtype=str, engine='openpyxl')         # lê XLSX como string
+            df.to_csv(caminho_csv_temp, sep=';', index=False, encoding='utf-8-sig')   # grava CSV temporário
+            caminho_entrada = caminho_csv_temp                                        # aponta para o CSV temp
+            extensao = '.csv'                                                         # passa a tratar como CSV
+            print(Fore.GREEN + f"   ✅ CSV temporário criado: {os.path.basename(caminho_csv_temp)}")  # confirma
+        except Exception as e:                                                        # qualquer erro
+            print(Fore.RED + f"❌ Erro ao converter XLSX → CSV: {e}")                  # aviso
+            return None                                                               # sai
+    elif extensao != '.csv':                                                          # não suportado
+        print(Fore.RED + Style.BRIGHT + f"❌ extensão não suportada: '{extensao}'")    # aviso
+        return None                                                                   # sai
+
+    # 2. Descobre esquema do CSV (amostra de 1000 linhas)
+    print(Fore.YELLOW + f"\n📊 ANALISANDO TIPOS DAS COLUNAS...")                     # título
+    df_amostra = pd.read_csv(                                                        # lê amostra
+        caminho_entrada,                                                             # caminho CSV
+        sep=sep,                                                                     # separador (None = auto)
+        engine='python',                                                             # necessário p/ sep=None
+        encoding=encoding,                                                           # encoding
+        nrows=1000,                                                                  # só 1000 linhas
+        dtype=str                                                                    # força string
+    )
+    column_types = {col: pa.string() for col in df_amostra.columns}                  # tudo string (seguro)
+    # detecta o separador efetivo via csv.Sniffer (funciona com sep=None)
+    if sep is None:                                                                  # se não foi passado
+        with open(caminho_entrada, 'r', encoding=encoding, errors='ignore') as f:    # abre amostra
+            primeira_linha = f.readline()                                            # lê 1ª linha
+        sep_efetivo = csv.Sniffer().sniff(primeira_linha, delimiters=';,\t|').delimiter  # detecta
+    else:                                                                            # se foi passado
+        sep_efetivo = sep                                                            # usa o informado
+    print(Fore.WHITE + f"   Separador detectado: '{sep_efetivo}'")                    # informa separador
+    print(Fore.WHITE + f"   Colunas analisadas: {len(column_types)}")                 # total colunas
+    print(Fore.WHITE + f"   Colunas como string: {len(column_types)}")                # todas string
+
+    # 3. Opções de leitura pyarrow
+    read_options = pv.ReadOptions(block_size=100 * 1024 * 1024)                       # 100 MB por bloco
+    parse_options = pv.ParseOptions(delimiter=sep_efetivo)                            # delimitador efetivo
+    convert_options = pv.ConvertOptions(                                              # opções de conversão
+        column_types=column_types,                                                    # força tipos
+        strings_can_be_null=True                                                      # "" vira nulo
+    )
+
+    # 4. Streaming CSV → Parquet
+    print(Fore.YELLOW + f"\n⚙️  CONVERTENDO...")                                      # título
+    with pv.open_csv(                                                                 # abre CSV em streaming
+        caminho_entrada,                                                              # CSV de entrada
+        read_options=read_options,                                                    # opções de leitura
+        parse_options=parse_options,                                                  # opções de parsing
+        convert_options=convert_options                                               # opções de conversão
+    ) as reader:                                                                      # reader pyarrow
+        writer = None                                                                 # writer lazy
+        total_linhas = 0                                                              # contador
+        with tqdm(desc="Convertendo", unit=" linhas") as pbar:                        # barra de progresso
+            for batch in reader:                                                      # percorre batches
+                table = pa.Table.from_batches([batch])                                # batch → table
+                if writer is None:                                                    # primeira vez
+                    writer = pq.ParquetWriter(caminho_saida, table.schema)            # cria writer
+                writer.write_table(table)                                             # grava table
+                total_linhas += len(table)                                            # soma linhas
+                pbar.update(len(table))                                               # atualiza barra
+        if writer:                                                                    # se writer criado
+            writer.close()                                                            # fecha writer
+
+    # 5. Remove CSV temporário (se veio de XLSX)
+    if caminho_entrada.endswith('_TEMP.csv') and os.path.isfile(caminho_entrada):
+        removido = False
+        for tentativa in range(3):  # ← Tenta 3 vezes
+            try:
+                time.sleep(0.5)  # ← Aguarda entre tentativas
+                os.remove(caminho_entrada)
+                print(Fore.YELLOW + f"   🧹 CSV temporário removido")
+                removido = True
+                break
+            except PermissionError:
+                if tentativa < 2:
+                    print(Fore.YELLOW + f"   ⏳ Tentativa {tentativa+1}/3...")
+                else:
+                    print(Fore.YELLOW + f"   ⚠️ Não foi possível remover temp")
+                    print(Fore.WHITE + f"   💡 Remova manualmente: {caminho_entrada}")
+
+# CHAMAR conv_para_parquet
+if converter_parquet == '1':                                                      # seletor ligado
+    caminho_entrada = resolver_caminho_origem(pasta_origem, arquivo_origem)       # resolve entrada
+    pasta_saida     = dicionario_pastas_saida.get(pasta_origem, None)             # resolve pasta saída
+    conv_para_parquet(caminho_entrada, pasta_saida)                               # executa conversão
+else:                                                                             # seletor desligado
+    print(Fore.RED + Style.BRIGHT + f"conv_para_parquet não chamada")             # aviso
+   
+def funcao_ler_pasta_saida():                                                     # lista conteúdo da pasta de saída
+    pasta_saida = dicionario_pastas_saida.get(pasta_origem, None)                 # resolve pasta de saída
+    if not pasta_saida or not os.path.isdir(pasta_saida):                         # valida existência
+        print(Fore.RED + Style.BRIGHT + f"❌ pasta de saída não existe: '{pasta_saida}'")  # aviso
+        return None                                                               # sai
+    arquivos = os.listdir(pasta_saida)                                            # lista itens
+    print(Fore.YELLOW + Style.BRIGHT + f"Total de itens em '{os.path.basename(pasta_saida)}' = {len(arquivos)} itens")  # total
+    for arq in arquivos:                                                          # percorre itens
+        caminho_completo = os.path.join(pasta_saida, arq)                         # caminho completo
+        if os.path.isfile(caminho_completo):                                      # é arquivo
+            tamanho_mb = os.path.getsize(caminho_completo) / 1024**2              # tamanho em MB
+            print(Fore.BLUE + f"  ARQUIVO: {os.path.basename(caminho_completo)} ({tamanho_mb:.1f} MB)")  # nome + MB
+        else:                                                                     # é pasta
+            print(Fore.YELLOW + f"  SUBPASTA: {os.path.basename(caminho_completo)}")  # nome da pasta
+    return arquivos   
+
+# CHAMAR funcao_ler_pasta_saida
+if ler_pasta_saida == '1':                                                        # ligado
+    funcao_ler_pasta_saida()                                                      # executa
+else:                                                                             # desligado
+    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_saida não chamada")        # aviso
+
+                      
 
 
 
