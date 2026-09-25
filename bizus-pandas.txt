@@ -366,6 +366,210 @@ else:                                                                           
     print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_saida não chamada")        # aviso
 
                       
+******************************************************************** SIC ************************************************************************************************
+
+# Se SIC, então deve ligar venv a seguir:
+# cd C:\Users\marcus.silva05\Desktop\DADOS\PROGRAMAS
+# .\venv\Scripts\activate (ativa a venv)
+# endereco z sic
+
+# Se pas PROGRAMAS, então:
+# .\venv\Scripts\activate (ativa a venv)
+# python -m venv venv (cria venv se necessário)
+# .\venv\Scripts\activate (ativa a venv)
+# deactivate (desativa venv)
+# pip install -r requirements.txt
+# python -m pip install --force-reinstall --no-cache-dir -r requirements.txt
+# se não der certo, use python -m pip install -r requirements.txt
+# cd C:\Users\marcus.silva05\Desktop\DADOS\sic\SIC_2026091117121611
+# python SIC_2026091117121611.py
+
+# sys
+from colorama import init, Fore, Back, Style
+from datetime import datetime
+import datetime
+import os
+import platform
+import pkgutil
+import psutil
+import requests
+import shutil
+import socket
+import subprocess
+import sys
+
+# leitura
+from docx import Document
+from openpyxl import load_workbook
+from tqdm import tqdm
+import csv
+import json
+import pandas as pd
+import pyarrow as pa
+import pyarrow.csv as pv
+import pyarrow.parquet as pq
+import re
+import unicodedata
+import tarfile
+import zipfile
+
+# debug
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+import pyautogui
+import pygetwindow as gw
+import uiautomation as auto
+import time
+
+init(autoreset=True) # reseta a cor no próximo print
+
+# variáveis
+pasta_origem =       '1' # 1 = CEPEA, 2 = CONTAGEH, 3 = SAS
+arquivo_origem =     '1' # 3 : 1 : 2 
+top =                10
+pasta_saida =        '1'
+detectar_cabecalho = '1'  
+
+# funções 
+ler_pasta_origem =     '1'
+ler_pasta_saida =      '1'  
+top_n =                '1'
+
+# dicionários
+dicionario_pastas_origem = {
+    '1': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\1ª Etapa_parquets',     
+    '2': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\2ª Etapa_parquets',  
+    '3': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\Base Nomeados Atualizada - 17-09-26_parquets',
+}
+# dicionário de arquivos da origem CEPEA (pasta_origem = '1')
+dicionario_arquivos_origem = {
+    # chave = pasta_origem '1' (CEPEA)
+    '1': {                                
+        '1':   '1-ListaEscolhas - Candidatos Nomeados.parquet',                            
+        '2':   '1-Nomeação_Primeira_Etapa.parquet',                                
+        '3':   'ListaEscolhas - Candidatos Nomeados.parquet',                     
+   #    '4':   'CTG0826.csv',                         
+   #    '5':   'ESCOLAS0826.xlsx',                         
+   #    '6':   'NIVEL_FORMACAO0826.csv',                     
+   #    '7':   'QUALIF0826.csv',                             
+   #    '8':   'TAB_CARGO0826.csv',                          
+   #    '9':   'TAB_CODBFE.csv',                            
+   #   '10':   'TB_ID_INTERNO_SERV.csv',                    
+    },
+    # chave = pasta_origem '2' (CONTAGEH)
+     '2': {                                     
+        '1': 'Segunda Etapa - Nomeados.parquet',                           
+    #   '2': 'CONTAGEH.dbo.TB_EVENTO.csv',                                 
+    #   '3': 'CONTAGEH.[dbo].[TB_FUNCIONAL].csv',                          
+    #   '4': 'CONTAGEH.[dbo].[TB_FUNCIONARIO].csv',                        
+    },
+    # chave = pasta_origem '3' (SAS)
+    '3': {                                                           
+        '1': 'NOMEADOS 2024 1.parquet',        
+        '2': 'NOMEADOS 2025 1.parquet',                              
+   #    '3': 'SAS.[082026].TB_FUNCIONAL.csv',                               
+   #    '4': 'SAS.[082026].TB_PESSOAL.csv',                                 
+   #    '5': 'SAS.[082026].[TB_UA_ALOCACAO].csv',                           
+    },
+}
+
+# dicionario_pastas_saida = {
+#     '1': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\1ª Etapa_parquets',
+#     '2': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\2ª Etapa_parquets',
+#     '3': r'C:\Users\marcus.silva05\Desktop\DADOS\SIC\SIC_2026091117121611\Base Nomeados Atualizada - 17-09-26_parquets',
+# }
+
+def resolver_caminho_origem(pasta_origem, arquivo_origem):                     # helper reutilizável
+    pasta_base          = dicionario_pastas_origem.get(pasta_origem, None)                                # resolve pasta
+    arquivo_selecionado = dicionario_arquivos_origem.get(pasta_origem, {}).get(arquivo_origem, None)      # resolve arquivo
+    if pasta_base and arquivo_selecionado:                                                                # ambos existem
+        return os.path.join(pasta_base, arquivo_selecionado)                                              # caminho montado
+    return None                                                                                        # senão None
+
+def resolver_caminho_saida(pasta_origem, nome_arquivo):                        # helper reutilizável p/ saída
+    pasta_saida = dicionario_pastas_saida.get(pasta_origem, None)              # resolve pasta de saída
+    if pasta_saida and nome_arquivo:                                           # ambos existem
+        return os.path.join(pasta_saida, nome_arquivo)                         # caminho montado
+    return None                                                                # senão None
+
+# lógica
+pasta_base = dicionario_pastas_origem.get(pasta_origem, None)
+if pasta_base is None:
+    print(Fore.RED + Style.BRIGHT + "pasta_origem não selecionada")
+else:
+    print(Fore.YELLOW + f"✅ Pasta selecionada: '{pasta_base}'")
+
+def funcao_ler_pasta_origem():  # verifique o comando çlogica
+    arquivos = os.listdir(pasta_base)                                          # lista todos os itens da pasta_base
+    print(Fore.YELLOW + Style.BRIGHT + f"Total de itens em '{os.path.basename(pasta_base)}' = {len(arquivos)} itens") # exibe quantidade
+    for arq in arquivos:                                                        # percorre cada item
+        caminho_completo = os.path.join(pasta_base, arq)   
+        if os.path.isfile(caminho_completo):                                    # verifica se é arquivo
+            print(Fore.BLUE + f"  ARQUIVO: {os.path.basename(caminho_completo)}")   # exibe só nome+extensão                           
+        else:                                                                   # caso contrário é pasta
+            print(Fore.YELLOW + f"  SUBPASTA: {os.path.basename(caminho_completo)}")  # exibe só nome da pasta
+    return arquivos                                                             # retorna lista de arquivos
+
+# CHAMAR FUNÇÃO funcao_ler_pasta_origem
+if ler_pasta_origem == '1':
+    funcao_ler_pasta_origem()
+else:
+    print(Fore.RED + Style.BRIGHT + f"funcao_ler_pasta_origem não chamada")
+
+def _detectar_linha_cabecalho(df_bruto, max_linhas=10):                 # helper existente
+    for i in range(min(max_linhas, len(df_bruto))):                     # percorre as primeiras linhas
+        linha = df_bruto.iloc[i]                                        # linha atual
+        nao_nulos = linha.notna().sum()                                 # conta não-nulos
+        if nao_nulos >= len(df_bruto.columns) * 0.5:                    # maioria preenchida
+            return i                                                    # achou cabeçalho
+    return 0                                                            # fallback: 1ª linha
+
+def ler_e_normalizar(caminho_arquivo, detectar=True):                   # ← NOVO: normalizador
+    ext = os.path.splitext(caminho_arquivo)[1].lower()                  # extensão minúscula
+    if ext == '.csv':                                                   # ramo CSV
+        df_bruto = pd.read_csv(caminho_arquivo, sep=None,
+                               engine='python', dtype=str,
+                               encoding='utf-8-sig')                    # CSV cru
+    elif ext == '.xlsx':                                                # ramo XLSX
+        df_bruto = pd.read_excel(caminho_arquivo, dtype=str,
+                                 engine='openpyxl')                     # XLSX cru
+    elif ext == '.parquet':                                             # ramo PARQUET
+        df_bruto = pd.read_parquet(caminho_arquivo,
+                                   engine='pyarrow')                    # Parquet cru
+    else:                                                               # não suportado
+        print(Fore.RED + Style.BRIGHT + f"extensão não suportada: '{ext}'")  # aviso
+        return None                                                     # sai
+    if detectar:                                                        # seletor de cabeçalho
+        idx_cab = _detectar_linha_cabecalho(df_bruto)                   # detecta linha do cabeçalho
+        df = df_bruto.iloc[idx_cab + 1:].reset_index(drop=True)         # dados abaixo do cabeçalho
+        df.columns = [str(c).replace('\n', ' ').strip() if pd.notna(c)
+                      else f'COLUNA_{i}'
+                      for i, c in enumerate(df_bruto.iloc[idx_cab])]    # nomes limpos
+        return df                                                       # DataFrame normalizado
+    return df_bruto                                                     # senão, DataFrame cru
+
+def funcao_top_n(n=top, detectar=True):                                 # ← usa o normalizador
+    caminho_arquivo = resolver_caminho_origem(pasta_origem, arquivo_origem)  # resolve via helper
+    if not caminho_arquivo or not os.path.isfile(caminho_arquivo):      # valida existência
+        print(Fore.RED + Style.BRIGHT + f"arquivo não encontrado: '{caminho_arquivo}'")  # aviso
+        return None                                                     # sai
+    df = ler_e_normalizar(caminho_arquivo, detectar=detectar)           # lê + normaliza
+    if df is None:                                                      # se falhou
+        return None                                                     # sai
+    df = df.head(n)                                                     # corta TOP N
+    print(Fore.GREEN + Style.BRIGHT + f"TOP {n} de '{os.path.basename(caminho_arquivo)}' ({len(df)} linhas lidas)")  # cabeçalho
+    print(Fore.CYAN + df.to_string(index=False))                        # imprime sem índice
+    return df                                                           # retorna DataFrame
+
+# CHAMAR FUNÇÃO funcao_top_n_arquivo_origem
+if top_n == '1':
+    funcao_top_n(n=top, detectar=(detectar_cabecalho == '1'))       # converte seletor em bool
+else:
+    print(Fore.RED + Style.BRIGHT + f"funcao_top_n não chamada")
 
 
 
