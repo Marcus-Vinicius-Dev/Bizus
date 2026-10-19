@@ -15,6 +15,10 @@ CMake
 Cmake Tools
 CodeLLDB
 CS-Script
+Databricks
+Databricks Power Tools
+Databricks Driver for SQLTools
+Databricks Notebook
 Doxygen Documentation Generator
 Git History
 GitLens - Git supercharged
